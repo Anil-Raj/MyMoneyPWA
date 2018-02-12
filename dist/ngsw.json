@@ -1,18 +1,18 @@
 {
   "configVersion": 1,
-  "index": "/index.html",
+  "index": "/MyMoneyPWA/dist/index.html",
   "assetGroups": [
     {
       "name": "app",
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/favicon.ico",
-        "/index.html",
-        "/inline.da30ef1fa41142b4dd45.bundle.js",
-        "/main.b7502af7c247c3a7bef7.bundle.js",
-        "/polyfills.bf95165a1d5098766b92.bundle.js",
-        "/styles.ac89bfdd6de82636b768.bundle.css"
+        "/MyMoneyPWA/dist/favicon.ico",
+        "/MyMoneyPWA/dist/index.html",
+        "/MyMoneyPWA/dist/inline.13a7508b83330e605e41.bundle.js",
+        "/MyMoneyPWA/dist/main.ad55a42a8c51f53a24ba.bundle.js",
+        "/MyMoneyPWA/dist/polyfills.bf95165a1d5098766b92.bundle.js",
+        "/MyMoneyPWA/dist/styles.ac89bfdd6de82636b768.bundle.css"
       ],
       "patterns": []
     },
@@ -26,11 +26,11 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/inline.da30ef1fa41142b4dd45.bundle.js": "3783ae345dec25bc7c8b2aa673ba02eed64534f6",
-    "/main.b7502af7c247c3a7bef7.bundle.js": "5e22fbf8b76950d830ced824a78208cbba558f3a",
-    "/polyfills.bf95165a1d5098766b92.bundle.js": "a6f53dc740620bba65b667af8e65beda02dff88a",
-    "/styles.ac89bfdd6de82636b768.bundle.css": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-    "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/index.html": "9bb6975e919b35bed9889ca9e8b4ea8e81456a25"
+    "/MyMoneyPWA/dist/inline.13a7508b83330e605e41.bundle.js": "f514a8454e4215a997ca171db6e5b1f2a566b732",
+    "/MyMoneyPWA/dist/main.ad55a42a8c51f53a24ba.bundle.js": "e30df3f4fbdcbf1d214d187fa827fc1525177a30",
+    "/MyMoneyPWA/dist/polyfills.bf95165a1d5098766b92.bundle.js": "a6f53dc740620bba65b667af8e65beda02dff88a",
+    "/MyMoneyPWA/dist/styles.ac89bfdd6de82636b768.bundle.css": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "/MyMoneyPWA/dist/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "/MyMoneyPWA/dist/index.html": "e9ad83db1e227f527c76deb0f91d8fe94f57be24"
   }
 }

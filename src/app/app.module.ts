@@ -11,19 +11,25 @@ import { ServiceService } from './service.service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from './components/components.module';
+import { TransactionModule } from './core/transaction/transaction.module';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
+    CommonModule,
+    FormsModule,
     HttpModule,
     HttpClientModule,
-
+    BrowserModule,
+    AppRoutingModule,
     ComponentsModule,
+    TransactionModule,
 
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],

@@ -2,13 +2,5 @@
   <app-sidebar></app-sidebar>
   <div id="content">
     <app-navbar></app-navbar>
-    <!-- <router-outlet></router-outlet> -->
-    <div (click)="groupByFilter = 'time'">By Transaction</div>
-    <div (click)="groupByFilter = 'categoryId'">By Category</div>
-    <li *ngFor="let hero of transactions">
-      <a routerLink="{{hero.id}}">
-        <span class="badge">{{hero.id}}</span> {{hero.description}}
-      </a>
-    </li>
-  </div>
+    <router-outlet></router-outlet>
 </div>

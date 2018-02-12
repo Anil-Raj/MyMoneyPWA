@@ -10,6 +10,8 @@ import { environment } from '../environments/environment';
 import { ServiceService } from './service.service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { ComponentsModule } from './components/components.module';
+
 
 @NgModule({
   declarations: [
@@ -20,6 +22,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpModule,
     HttpClientModule,
+
+    ComponentsModule,
+
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [ServiceService],

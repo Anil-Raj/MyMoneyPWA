@@ -7,6 +7,7 @@ import { TransactionAddComponent } from './transaction-add/transaction-add.compo
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 import { TransactionEditComponent } from './transaction-edit/transaction-edit.component';
 import { TransactionService } from './services/transaction.service';
+import { GroupByPipe } from '../../pipes/group-by.pipe';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { TransactionService } from './services/transaction.service';
     TransactionListComponent,
     TransactionAddComponent,
     TransactionDetailComponent,
-    TransactionEditComponent
+    TransactionEditComponent,
+    GroupByPipe
   ],
   exports: [
     TransactionListComponent,

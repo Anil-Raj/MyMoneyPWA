@@ -1,8 +1,12 @@
-<div (click)="groupByFilter = 'time'">
-    By Transaction</div>
+<div (click)="groupByFilter = 'time'">By Transaction</div>
 <div (click)="groupByFilter = 'categoryId'">By Category</div>
-<li *ngFor="let hero of transactions">
-    <a routerLink="{{hero.id}}">
+<div *ngFor="let item of transactions | groupBy:groupByFilter">
+ <div >{{getHeader(item.key,item.value)}}</div>
+  <ul class="heroes">
+    <li *ngFor="let hero of item.value">
+      <a routerLink="{{hero.id}}">
         <span class="badge">{{hero.id}}</span> {{hero.description}}
-    </a>
-</li>
+      </a>
+    </li>
+  </ul>
+</div>

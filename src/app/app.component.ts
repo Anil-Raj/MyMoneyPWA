@@ -1,6 +1,5 @@
 
 import { Component} from '@angular/core';
-import { ServiceService } from './service.service';
 import { Transaction } from './Models/Transaction';
 
 @Component({

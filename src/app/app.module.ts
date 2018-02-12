@@ -7,19 +7,19 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
-import { ServiceService } from './service.service';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from './components/components.module';
-import { TransactionModule } from './core/transaction/transaction.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+import { TransactionModule } from './core/transaction/transaction.module';
+import { CategoryModule } from './core/category/category.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
   imports: [
     CommonModule,
@@ -30,10 +30,11 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     ComponentsModule,
     TransactionModule,
+    CategoryModule,
 
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [ServiceService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,8 +9,10 @@
       "urls": [
         "/MyMoneyPWA/dist/favicon.ico",
         "/MyMoneyPWA/dist/index.html",
-        "/MyMoneyPWA/dist/inline.13a7508b83330e605e41.bundle.js",
-        "/MyMoneyPWA/dist/main.ad55a42a8c51f53a24ba.bundle.js",
+        
+        "/MyMoneyPWA/dist/inline.3d14ecb2a0dadf365659.bundle.js",
+        "/MyMoneyPWA/dist/main.1df6d9d279f25a08e6a7.bundle.js",
+
         "/MyMoneyPWA/dist/polyfills.bf95165a1d5098766b92.bundle.js",
         "/MyMoneyPWA/dist/styles.ac89bfdd6de82636b768.bundle.css"
       ],
@@ -26,11 +28,12 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/MyMoneyPWA/dist/inline.13a7508b83330e605e41.bundle.js": "f514a8454e4215a997ca171db6e5b1f2a566b732",
-    "/MyMoneyPWA/dist/main.ad55a42a8c51f53a24ba.bundle.js": "e30df3f4fbdcbf1d214d187fa827fc1525177a30",
+    "/MyMoneyPWA/dist/inline.3d14ecb2a0dadf365659.bundle.js": "6ab5d9631854a94e5816dd31c8f29340854a40fc",
+    "/MyMoneyPWA/dist/main.1df6d9d279f25a08e6a7.bundle.js": "fc78fff234318d4943f84e7c138071e78892b696",
     "/MyMoneyPWA/dist/polyfills.bf95165a1d5098766b92.bundle.js": "a6f53dc740620bba65b667af8e65beda02dff88a",
     "/MyMoneyPWA/dist/styles.ac89bfdd6de82636b768.bundle.css": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
     "/MyMoneyPWA/dist/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/MyMoneyPWA/dist/index.html": "e9ad83db1e227f527c76deb0f91d8fe94f57be24"
+    "/MyMoneyPWA/dist/index.html": "1b2b6147f52d9586357989b99d319fdf6aadc19d"
+
   }
 }

@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "pwa": "ng build --prod && http-server ./dist -p 8081",
+    "pwa": "ng build --prod && http-server ./dist -p 8080",
+
     "gitBuild":"ng build -prod --base-href /MyMoneyPWA/dist --deploy-url /MyMoneyPWA/dist"
   },
   "private": true,

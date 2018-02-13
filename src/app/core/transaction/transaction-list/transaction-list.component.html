@@ -1,12 +1,16 @@
 <div (click)="groupByFilter = 'time'">By Transaction</div>
 <div (click)="groupByFilter = 'categoryId'">By Category</div>
 <div *ngFor="let item of transactions | groupBy:groupByFilter">
- <div >{{getHeader(item.key,item.value)}}</div>
-  <ul class="heroes">
-    <li *ngFor="let hero of item.value">
-      <a routerLink="{{hero.id}}">
-        <span class="badge">{{hero.id}}</span> {{hero.description}}
-      </a>
-    </li>
-  </ul>
+    <div class="card">
+        <div><b>{{getHeader(item.key,item.value)}}</b></div>
+        <div class="container">
+            <ul class="heroes">
+                <div *ngFor="let hero of item.value">
+                    <a routerLink="{{hero.id}}">
+                        <span class="badge">{{hero.id}}</span> {{hero.description}}
+                    </a>
+                  </div>
+            </ul>
+        </div>
+    </div>
 </div>

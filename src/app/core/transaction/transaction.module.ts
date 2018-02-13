@@ -8,6 +8,7 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
 import { TransactionEditComponent } from './transaction-edit/transaction-edit.component';
 import { TransactionService } from './services/transaction.service';
 import { GroupByPipe } from '../../pipes/group-by.pipe';
+import { CategoryService } from '../category/category.service';
 
 @NgModule({
   imports: [
@@ -28,6 +29,9 @@ import { GroupByPipe } from '../../pipes/group-by.pipe';
     TransactionDetailComponent,
     TransactionEditComponent
   ],
-  providers: [TransactionService]
+  providers: [
+    TransactionService,
+    CategoryService
+  ]
 })
 export class TransactionModule { }

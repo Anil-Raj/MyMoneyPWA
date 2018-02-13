@@ -1,0 +1,36 @@
+{
+  "configVersion": 1,
+  "index": "/MyMoneyPWA/dist/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/MyMoneyPWA/dist/favicon.ico",
+        "/MyMoneyPWA/dist/index.html",
+        "/MyMoneyPWA/dist/inline.bfe00637f641d618199e.bundle.js",
+        "/MyMoneyPWA/dist/main.bfc3db7aa4c9e8ce7af7.bundle.js",
+        "/MyMoneyPWA/dist/polyfills.bf95165a1d5098766b92.bundle.js",
+        "/MyMoneyPWA/dist/styles.6d5690131bc36fe34b97.bundle.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/MyMoneyPWA/dist/inline.bfe00637f641d618199e.bundle.js": "dab5f6cd6fdac8b121cb9e2dbdd7310282431129",
+    "/MyMoneyPWA/dist/main.bfc3db7aa4c9e8ce7af7.bundle.js": "b9ef422543a2317f5ef86158cd79414b66dd2885",
+    "/MyMoneyPWA/dist/polyfills.bf95165a1d5098766b92.bundle.js": "a6f53dc740620bba65b667af8e65beda02dff88a",
+    "/MyMoneyPWA/dist/styles.6d5690131bc36fe34b97.bundle.css": "c468f5eecfbba4023c55c1c9684488ca65495f52",
+    "/MyMoneyPWA/dist/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "/MyMoneyPWA/dist/index.html": "a7178c1cc66188415b5a5327ad9d92b1bfeb6cd2"
+  }
+}

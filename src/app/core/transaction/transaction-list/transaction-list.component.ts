@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaction } from '../../../Models/Transaction';
 import { TransactionService } from '../services/transaction.service';
+import { CategoryService } from '../../category/category.service';
 
 @Component({
     selector: 'app-transaction-list',
@@ -12,12 +13,13 @@ export class TransactionListComponent implements OnInit {
     categories: any[];
     transactions: Transaction[];
     groupByFilter = 'categoryId';
-    constructor(private service: TransactionService) {
+    constructor(private service: TransactionService, private catService: CategoryService) {
         this.service.awaitTransactions().subscribe(data => {
             if (data !== void 0) {
-            this.transactions = data;
-        }
-    });
+              this.transactions = data;
+            }
+        });
+        this.catService.awaiCategories();
 }
 
 ngOnInit() {
@@ -29,7 +31,7 @@ getHeader(key, trs: Transaction[]) {
     }
     if (this.groupByFilter === 'categoryId') {
         console.log(key);
-        return 'CategoryName';
+        return this.catService.awaiCategory(parseInt(key)).name;
     }
 }
 

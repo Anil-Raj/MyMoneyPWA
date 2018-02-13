@@ -22,8 +22,6 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
 
-
-
   constructor( public nav: SidebarService ) {}
 
 

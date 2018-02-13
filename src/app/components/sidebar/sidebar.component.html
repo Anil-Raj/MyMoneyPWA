@@ -1,5 +1,6 @@
 
-<nav id="sidebar" [ngClass]="{'active':!nav.visible}">
+<nav id="sidebar" class="sidenav" [ngClass]="{'active':!nav.visible}">
+  <div (click)="closeSidebar()" style="float:right;">x </div>
   <div class="sidebar-header">
     <h3>Bootstrap Sidebar</h3>
   </div>
@@ -8,7 +9,7 @@
       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
         <a [routerLink]="[menuItem.path]">
           <i class="material-icons">{{menuItem.icon}}</i>
-          <p>{{menuItem.title}}</p>
+          <p class="menu-title">{{menuItem.title}}</p>
         </a>
       </li>
     </ul>

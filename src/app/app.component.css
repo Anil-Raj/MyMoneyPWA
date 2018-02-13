@@ -4,3 +4,17 @@
   display: flex;
   align-items: stretch;
 }
+#content[_ngcontent-c0] {
+  font-size: 28px;
+  padding: 0px 10vw;
+  width: 100vw;
+}
+@media (max-width: 400px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+  #content  {
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 0px !important;
+    width: 100vw;
+  }
+}

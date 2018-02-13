@@ -31,7 +31,7 @@ getHeader(key, trs: Transaction[]) {
     }
     if (this.groupByFilter === 'categoryId') {
         console.log(key);
-        return this.catService.awaiCategory(parseInt(key)).name;
+        return this.catService.awaiCategory(parseInt(key, 10)).name;
     }
 }
 

@@ -12,6 +12,10 @@ export const ROUTES: RouteInfo[] = [
   { path: 'transaction', title: 'Transactions', icon: 'account_balance_wallet', class: '' },
   { path: 'debt', title: 'Debts', icon: 'dock', class: '' },
   { path: 'trend', title: 'Trends', icon: 'trending_up', class: '' },
+  { path: 'category', title: 'Categories', icon: 'category', class: '' },
+  { path: 'transaction', title: 'Transactions', icon: 'account_balance_wallet', class: '' },
+  { path: 'debt', title: 'Debts', icon: 'dock', class: '' },
+  { path: 'trend', title: 'Trends', icon: 'trending_up', class: '' },
   { path: 'category', title: 'Categories', icon: 'category', class: '' }
 ];
 
@@ -35,5 +39,8 @@ export class SidebarComponent implements OnInit {
     //   return false;
     // }
     return false;
+  }
+  closeSidebar() {
+    this.nav.hide();
   }
 }

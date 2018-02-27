@@ -5,6 +5,7 @@ import { CategoryDetailComponent } from './category-detail/category-detail.compo
 import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryService } from './category.service';
+import { CategorySelectComponent } from './category-select/category-select.component';
 
 @NgModule({
   imports: [
@@ -14,8 +15,18 @@ import { CategoryService } from './category.service';
     CategoryAddComponent,
     CategoryDetailComponent,
     CategoryEditComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    CategorySelectComponent
   ],
-  providers: [CategoryService]
+  exports: [
+    CategoryAddComponent,
+    CategoryDetailComponent,
+    CategoryEditComponent,
+    CategoryListComponent,
+    CategorySelectComponent
+  ],
+  providers: [
+    CategoryService
+  ]
 })
 export class CategoryModule { }

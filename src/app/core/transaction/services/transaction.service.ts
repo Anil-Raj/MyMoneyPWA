@@ -13,46 +13,105 @@ export class TransactionService {
 
 
     private transactionsSubject = new BehaviorSubject(undefined);
+    private transactionSubject = new BehaviorSubject(undefined);
     private fetching: boolean;
 
     constructor(private http: HttpClient) { }
 
-    private getTransactions() {
-        return this.transactionsSubject.asObservable();
-    }
-    isDef(val) {
-        return val !== void 0;
-    }
-    awaitTransactions() {
-        if (!this.transactionsSubject.value && !this.fetching) {
-            this.refreshTransactions();
-        }
-        return this.getTransactions();
-    }
+    // isDef(val) {
+    //     return val !== void 0;
+    // }
+    // private getTransactions() {
+    //     return this.transactionsSubject.asObservable();
+    // }
+
+    // awaitTransactions() {
+    //     if (!this.transactionsSubject.value && !this.fetching) {
+    //         this.refreshTransactions();
+    //     }
+    //     return this.getTransactions();
+    // }
 
     /* GET transactions from server */
-    refreshTransactions() {
-        this.fetching = true;
-        return this.http.get<Transaction[]>(this.transactionUrl).subscribe(data => {
-            this.fetching = false;
-            this.transactionsSubject.next(data);
-        }, err => {
-            this.fetching = false;
-            this.transactionsSubject.error(err);
-        });
-    }
+    //   refreshTransactions() {
+    //       this.fetching = true;
+    //       return this.http.get<Transaction[]>(this.transactionUrl).subscribe(data => {
+    //           this.fetching = false;
+    //           this.transactionsSubject.next(data);
+    //       }, err => {
+    //           this.fetching = false;
+    //           this.transactionsSubject.error(err);
+    //       });
+    //   }
+
+    //    getTransaction(id) {
+    //      if(!this.transactionsSubject.value){
+    //        console.log('ajds');
+    //        return this.refreshTransaction(id);
+    //      }
+    //      console.log(this.transactionsSubject.value.filter(a => a.id === id)[0]);
+    //     return this.transactionsSubject.value.filter(a => a.id === id)[0];
+    //   }
+
+    //   awaitTransaction(id): Observable<Transaction>  {
+    //       if (!this.transactionSubject.value ) {
+    //         // console.log('refresh');
+    //         return this.refreshTransaction(id);
+    //           // return this.refreshTransaction(id);
+    //       }
+    //       // return this.getTransaction(id);
+    //   }
+
+    //   /* GET transactions from server */
+    //   refreshTransaction(id):  Observable<Transaction> {
+    //     const url = `${this.transactionUrl}/${id}`;
+    //         return this.http.get<Transaction>(url);
+    //   }
 
 
 
-    getTransaction1(id: number): Observable<Transaction> {
+
+    //     /** PUT: update the transaction on the server */
+    // updateTransaction (transaction: Transaction) {
+    //   const url = `${this.transactionUrl}/${transaction.id}`;
+    //   this.http.put(url, transaction).subscribe(a=> {
+    //     console.log(a);
+    //     return 'adfasdf';
+
+    //   });
+    // }
+
+
+    // getCategories(): Observable<Category[]> {
+    //     return this.http.get<Category[]>(this.transactionUrl);
+    // }
+    // getCategoryById(id: number): Observable<Category> {
+    //     const url = `${this.categoryUrl}/${id}`;
+    //     return this.http.get<Category>(url);
+    // }
+
+    getTransaction(id: number): Observable<Transaction> {
         const url = `${this.transactionUrl}/${id}`;
         return this.http.get<Transaction>(url);
     }
-    getCategories(): Observable<Category[]> {
-        return this.http.get<Category[]>(this.transactionUrl);
+    getTransactions(): Observable<Transaction[]> {
+        return this.http.get<Transaction[]>(this.transactionUrl);
     }
-    getCategoryById(id: number): Observable<Category> {
-        const url = `${this.categoryUrl}/${id}`;
-        return this.http.get<Category>(url);
+
+    updateTransaction (transaction: Transaction) {
+      const url = `${this.transactionUrl}/${transaction.id}`;
+      this.http.put(url, transaction).subscribe(a => {
+        console.log(a);
+      });
     }
+
+    newTransaction (transaction: any) {
+      const header = {'Content-Type': 'application/json'};
+      this.http.post(this.transactionUrl, JSON.stringify(transaction), {headers: header}
+      ).subscribe(a => {
+        console.log(a);
+      });
+    }
+
+
 }

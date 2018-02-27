@@ -1,3 +1,26 @@
-<p>
-  transaction-edit works!
-</p>
+<div *ngIf="!isSelectCategoryVisible">
+<div *ngIf="transaction">
+  <h2>{{ transaction.description | uppercase }} Details</h2>
+  <div>
+    <span>id: </span>
+    <input [(ngModel)]="transaction.id" />
+  </div>
+  <div>
+    <label>name:</label>
+    <label placeholder="name">
+      <input [(ngModel)]="transaction.description" />
+    </label>
+  </div>
+  <div>
+      <label>Category:</label>
+      <label placeholder="category">
+        <div (click)="selectCategoryWindow()" >{{transaction.categoryName}}</div>
+      </label>
+    </div>
+
+  <button (click)="update()">Submit</button>
+</div>
+</div>
+<div *ngIf="isSelectCategoryVisible">
+    <app-category-select (change)="selectCategory($event)"></app-category-select>
+  </div>

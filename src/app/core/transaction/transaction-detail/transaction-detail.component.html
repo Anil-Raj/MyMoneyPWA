@@ -1,5 +1,5 @@
-<p>
-    <button >editk</button>
+<p  *ngIf="transaction">
+    <button routerLink="/transaction/edit/{{transaction.id}}" >edit</button>
 </p>
 <div *ngIf="transaction">
     <h2>{{ transaction.description | uppercase }} Details</h2>
@@ -8,6 +8,11 @@
     <div>
         <label>name:</label>
         <label placeholder="name">{{transaction.description}}</label>
+
+    </div>
+    <div>
+        <label>category:</label>
+        <label placeholder="name">{{transaction.categoryName}}</label>
 
     </div>
 

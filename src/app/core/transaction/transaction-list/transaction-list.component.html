@@ -1,16 +1,46 @@
 <div (click)="groupByFilter = 'time'">By Transaction</div>
-<div (click)="groupByFilter = 'categoryId'">By Category</div>
+<div (click)="groupByFilter = 'categoryName'">By Category</div>
 <div *ngFor="let item of transactions | groupBy:groupByFilter">
-  <div class="card">
-    <div class="trans-group-header">
-      <b>{{getHeader(item.key,item.value)}}</b>
+    <div class="card">
+        <div class="trans-group-header">
+            <div *ngIf="groupByFilter == 'categoryName'">
+                <div>
+                    <mat-list>
+                        <mat-list-item>
+                            <img mat-list-avatar src="https://www.w3schools.com/howto/img_avatar.png" >
+                            <h3 mat-line>
+                                {{getHeader(item.key,item.value)}}
+                            </h3>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+
+                <mat-list>
+                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero.id}}">
+
+                        <h3 mat-line>
+                            {{hero.description}}
+                        </h3>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <div *ngIf="groupByFilter == 'time'">
+                <div>
+                    <b>{{getHeader(item.key,item.value)}}</b>
+                </div>
+
+                <mat-list>
+                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero.id}}">
+                        <img mat-list-avatar src="https://www.w3schools.com/howto/img_avatar.png" alt="aasdf">
+                        <h3 mat-line>
+                            {{hero.description}}
+                        </h3>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+
+        </div>
     </div>
-    <div >
-      <div *ngFor="let hero of item.value" class="trans">
-        <a routerLink="{{hero.id}}">
-          <span> {{hero.description}}</span>
-        </a>
-      </div>
-    </div>
-  </div>
 </div>
+
+<a routerLink="/transaction-add">New</a>

@@ -11,10 +11,11 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentsModule } from './components/components.module';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TransactionModule } from './core/transaction/transaction.module';
 import { CategoryModule } from './core/category/category.module';
+import { MatButtonModule, MatListModule, MatToolbarModule } from '@angular/material';
 
 
 @NgModule({
@@ -23,14 +24,16 @@ import { CategoryModule } from './core/category/category.module';
   ],
   imports: [
     CommonModule,
-    FormsModule,
     HttpModule,
     HttpClientModule,
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     ComponentsModule,
     TransactionModule,
     CategoryModule,
+    MatButtonModule, MatListModule, MatToolbarModule,
 
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],

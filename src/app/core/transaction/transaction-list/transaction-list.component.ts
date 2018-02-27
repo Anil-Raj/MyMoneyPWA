@@ -12,14 +12,15 @@ export class TransactionListComponent implements OnInit {
 
     categories: any[];
     transactions: Transaction[];
-    groupByFilter = 'categoryId';
+    groupByFilter = 'categoryName';
     constructor(private service: TransactionService, private catService: CategoryService) {
-        this.service.awaitTransactions().subscribe(data => {
+        this.service.getTransactions().subscribe(data => {
             if (data !== void 0) {
               this.transactions = data;
+              console.log(data);
+
             }
         });
-        this.catService.awaiCategories();
 }
 
 ngOnInit() {
@@ -29,9 +30,9 @@ getHeader(key, trs: Transaction[]) {
     if (this.groupByFilter === 'time') {
         return trs[0].time;
     }
-    if (this.groupByFilter === 'categoryId') {
+    if (this.groupByFilter === 'categoryName') {
         console.log(key);
-        return this.catService.awaiCategory(parseInt(key, 10)).name;
+        return trs[0].categoryName;
     }
 }
 

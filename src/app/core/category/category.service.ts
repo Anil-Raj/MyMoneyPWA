@@ -19,22 +19,11 @@ export class CategoryService {
     private getCategories() {
         return this.categoriesSubject.asObservable();
     }
-    private getCategory(id) {
-      const data = this.categoriesSubject.value;
-      return data ? data.filter(c => c.id === id)[0] : '';
-    }
-
     awaiCategories() {
         if (!this.categoriesSubject.value && !this.fetching) {
             this.refreshCategories();
         }
         return this.getCategories();
-    }
-    awaiCategory(id) {
-      if (!this.categoriesSubject.value && !this.fetching) {
-          this.refreshCategories();
-      }
-      return this.getCategory(id);
     }
 
     /* GET categories from server */
@@ -48,6 +37,31 @@ export class CategoryService {
             this.categoriesSubject.error(err);
         });
     }
+    getCategory(id) {
+      if (!this.categoriesSubject.value) {
+        return this.refreshCategory(id);
+      }
+     return this.categoriesSubject.value.filter(a => a.id === id)[0];
+   }
+
+   awaitCategory(id): Observable<Category>  {
+       if (!this.categoriesSubject.value ) {
+         // console.log('refresh');
+         return this.refreshCategory(id);
+           // return this.refreshCategory(id);
+       }
+       return this.getCategory(id);
+   }
+
+   /* GET transactions from server */
+   refreshCategory(id):  Observable<Category> {
+     const url = `${this.categoryUrl}/${id}`;
+         return this.http.get<Category>(url);
+   }
+
+
+
+
     isDef(val) {
       return val !== void 0;
   }

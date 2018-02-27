@@ -1,0 +1,12 @@
+<!-- <div class="counter">
+    <button (click)="select(1)">
+      Select 1
+    </button>
+    <button (click)="select(2)">
+      Select 2
+    </button>
+  </div> -->
+
+  <div>
+        <div *ngFor="let category of categories " (click)="select(category)">{{category.name}}</div>
+  </div>

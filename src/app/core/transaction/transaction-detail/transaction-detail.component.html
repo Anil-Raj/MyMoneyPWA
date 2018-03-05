@@ -1,6 +1,6 @@
-<p  *ngIf="transaction">
-    <button routerLink="/transaction/edit/{{transaction.id}}" >edit</button>
-</p>
+<span *ngIf="transaction">
+    <i class="material-icons" routerLink="/transaction/edit/{{transaction.id}}">mode edit</i>
+</span>
 <div *ngIf="transaction">
     <h2>{{ transaction.description | uppercase }} Details</h2>
     <div>

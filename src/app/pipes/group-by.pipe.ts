@@ -6,6 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class GroupByPipe implements PipeTransform {
 
   transform(value: Array<any>, field: string): Array<any> {
+      console.log(value);
+
     const groupedObj = value.reduce((prev, cur) => {
       if (!prev[cur[field]]) {
         prev[cur[field]] = [cur];

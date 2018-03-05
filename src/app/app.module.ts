@@ -16,11 +16,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TransactionModule } from './core/transaction/transaction.module';
 import { CategoryModule } from './core/category/category.module';
 import { MatButtonModule, MatListModule, MatToolbarModule } from '@angular/material';
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { DebtComponent } from './core/debt/debt.component';
+import { TrendComponent } from './core/trend/trend.component';
+import { SettingComponent } from './core/setting/setting.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DebtComponent,
+    TrendComponent,
+    SettingComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +43,7 @@ import { MatButtonModule, MatListModule, MatToolbarModule } from '@angular/mater
 
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

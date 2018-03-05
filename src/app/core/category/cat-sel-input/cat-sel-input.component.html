@@ -1,0 +1,6 @@
+<div *ngIf="!isSelectCategory" (click)="displaySelectCategory()">
+    <input [(ngModel)]="selectedCategory" placeholder="{{selectedCategory}}" (focus)="displaySelectCategory()">
+</div>
+<!-- <div *ngIf="isSelectCategory" class="category-list" > -->
+    <div *ngFor="let category of categories " (click)="select(category.name)">{{category.name}}</div>
+<!-- </div> -->

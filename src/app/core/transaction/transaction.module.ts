@@ -1,5 +1,6 @@
+
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
@@ -10,8 +11,14 @@ import { TransactionService } from './services/transaction.service';
 import { GroupByPipe } from '../../pipes/group-by.pipe';
 import { CategoryService } from '../category/category.service';
 import { CategoryModule } from '../category/category.module';
-import { MatButtonModule, MatListModule, MatToolbarModule } from '@angular/material';
-
+import { CatSelInputComponent } from '../category/cat-sel-input/cat-sel-input.component';
+import { MatButtonModule, MatListModule, MatToolbarModule, MatInputModule } from '@angular/material';
+import { DatePipe } from '../../pipes/date.pipe';
+import { DayPipe } from '../../pipes/day.pipe';
+import { MonthPipe } from '../../pipes/month.pipe';
+import { YearPipe } from '../../pipes/year.pipe';
+import { FormFieldComponent } from './form-field/form-field.component';
+import { PouchDBService } from './services/pouchdb.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,14 +26,19 @@ import { MatButtonModule, MatListModule, MatToolbarModule } from '@angular/mater
     ReactiveFormsModule,
     RouterModule,
     CategoryModule,
-    MatButtonModule, MatListModule, MatToolbarModule
+    MatButtonModule, MatListModule, MatToolbarModule, MatInputModule
   ],
   declarations: [
     TransactionListComponent,
     TransactionAddComponent,
     TransactionDetailComponent,
     TransactionEditComponent,
-    GroupByPipe
+    GroupByPipe,
+    DatePipe,
+    DayPipe,
+    MonthPipe,
+    YearPipe,
+    FormFieldComponent
   ],
   exports: [
     TransactionListComponent,
@@ -36,7 +48,8 @@ import { MatButtonModule, MatListModule, MatToolbarModule } from '@angular/mater
   ],
   providers: [
     TransactionService,
-    CategoryService
+    CategoryService,
+    PouchDBService
   ]
 })
 export class TransactionModule { }

@@ -1,0 +1,9 @@
+.category-list{
+    position: fixed;
+    top:0;
+    right: 0;
+    z-index: 400;
+    width: 100%;
+    background: white;
+
+}

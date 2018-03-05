@@ -1,28 +1,20 @@
-<p>
-  transaction-edit works!
-</p>
 <form [formGroup]="addTransactionForm" (ngSubmit)="onSubmit(addTransactionForm)">
-  <div>
-    <label>name:</label>
-    <label placeholder="name">
-      <input formControlName="Description" />
-    </label>
     <div>
-      <label>amount:</label>
-      <label placeholder="amount">
-        <input  formControlName="Amount" />
-      </label>
-    </div>
-<!-- Category Block -->
-    <div class="form-group">
-      <label for="select">Category</label>
-      <select id="select" formControlName="CategoryName">
+        <!-- <app-form-field>
+            <input matInput formControlName="Amount" required>
+        </app-form-field> -->
+        <mat-form-field>
+            <input matInput formControlName="Amount" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="Description">
+        </mat-form-field>
 
-        <option *ngFor="let g of categoryList" [value]="g.name"> {{g.name}}
-        </option>
-      </select>
-    </div>
+        <app-cat-sel-input formControlName="categoryName" required></app-cat-sel-input>
+        <mat-form-field>
+            <input matInput  type="date" formControlName="time">
+        </mat-form-field>
 
-    <button type="submit" class="btn btn-success" [disabled]="!addTransactionForm.valid">Submit</button>
-  </div>
+        <button type="submit" class="btn btn-success" [disabled]="!addTransactionForm.valid">Submit</button>
+    </div>
 </form>

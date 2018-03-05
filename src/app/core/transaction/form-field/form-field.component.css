@@ -1,0 +1,21 @@
+:host { background: red; }
+
+:host ::ng-deep parent {
+  color:blue;
+}
+:host ::ng-deep input{
+  color:orange;
+  background: blue;
+}
+:host ::ng-deep child.class1 {
+  color:yellow;
+}
+:host ::ng-deep child.class2{
+  color:pink;
+}
+
+.app-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+}

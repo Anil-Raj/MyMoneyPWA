@@ -1,3 +1,16 @@
 <p>
   category-add works!
 </p>
+<form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit(addCategoryForm)">
+    <div>
+        <!-- <app-form-field>
+            <input matInput formControlName="Amount" required>
+        </app-form-field> -->
+            <input matInput formControlName="Name" required>
+            <input matInput formControlName="Description">
+
+            <input matInput   formControlName="Type">
+
+        <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid">Submit</button>
+    </div>
+</form>

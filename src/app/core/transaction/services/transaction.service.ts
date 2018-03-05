@@ -16,7 +16,9 @@ export class TransactionService {
     private transactionSubject = new BehaviorSubject(undefined);
     private fetching: boolean;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+
+    }
 
     // isDef(val) {
     //     return val !== void 0;
@@ -91,6 +93,11 @@ export class TransactionService {
     // }
 
     getTransaction(id: number): Observable<Transaction> {
+        // if("indexedDB" in window) {
+        //     console.log("YES!!! I CAN DO IT!!! WOOT!!!");
+        // } else {
+        //     console.log("I has a sad.");
+        // }
         const url = `${this.transactionUrl}/${id}`;
         return this.http.get<Transaction>(url);
     }

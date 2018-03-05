@@ -6,24 +6,32 @@ import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryService } from './category.service';
 import { CategorySelectComponent } from './category-select/category-select.component';
+import { CatSelInputComponent } from './cat-sel-input/cat-sel-input.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     CategoryAddComponent,
     CategoryDetailComponent,
     CategoryEditComponent,
     CategoryListComponent,
-    CategorySelectComponent
+    CategorySelectComponent,
+    CatSelInputComponent
   ],
   exports: [
     CategoryAddComponent,
     CategoryDetailComponent,
     CategoryEditComponent,
     CategoryListComponent,
-    CategorySelectComponent
+    CategorySelectComponent,
+    CatSelInputComponent
   ],
   providers: [
     CategoryService

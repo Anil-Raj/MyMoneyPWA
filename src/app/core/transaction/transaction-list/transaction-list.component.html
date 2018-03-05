@@ -1,39 +1,60 @@
 <div (click)="groupByFilter = 'time'">By Transaction</div>
 <div (click)="groupByFilter = 'categoryName'">By Category</div>
-<div *ngFor="let item of transactions | groupBy:groupByFilter">
+<div *ngFor="let item of people | groupBy:groupByFilter">
     <div class="card">
         <div class="trans-group-header">
             <div *ngIf="groupByFilter == 'categoryName'">
                 <div>
                     <mat-list>
                         <mat-list-item>
-                            <img mat-list-avatar src="https://www.w3schools.com/howto/img_avatar.png" >
+                            <img mat-list-avatar src="/assets/myicons/img_avatar.png">
                             <h3 mat-line>
                                 {{getHeader(item.key,item.value)}}
                             </h3>
                         </mat-list-item>
                     </mat-list>
                 </div>
-
+                <mat-divider></mat-divider>
                 <mat-list>
                     <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero.id}}">
 
-                        <h3 mat-line>
-                            {{hero.description}}
-                        </h3>
+                        <div>
+                            <div class="date">{{hero.time | date}}</div>
+                            <div mat-line class="day">
+                                <div>{{hero.time | day }}</div>
+                                <div>{{hero.time | month }} {{hero.time | year }}</div>
+                            </div>
+                        </div>
                     </mat-list-item>
                 </mat-list>
             </div>
             <div *ngIf="groupByFilter == 'time'">
-                <div>
-                    <b>{{getHeader(item.key,item.value)}}</b>
-                </div>
+                <!-- <mat-list>
+                    <mat-list-item> -->
+                <mat-list>
+                    <mat-list-item>
+                        <div>
+                            <div class="date">{{item.value[0].time | date}}</div>
+                            <div mat-line class="day">
+                                <div>{{item.value[0].time | day }}</div>
+                                <div>{{item.value[0].time | month }} {{item.value[0].time | year }}</div>
+                            </div>
+                        </div>
+                    </mat-list-item>
 
+                </mat-list>
+                <!-- </mat-list-item>
+                </mat-list> -->
+                <!-- <div>
+                    <b>{{getHeader(item.key,item.value)}}</b>
+                </div> -->
+                <div id="div-1c"></div>
+                <mat-divider></mat-divider>
                 <mat-list>
                     <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero.id}}">
-                        <img mat-list-avatar src="https://www.w3schools.com/howto/img_avatar.png" alt="aasdf">
+                        <img mat-list-avatar src="/assets/myicons/img_avatar.png" alt="aasdf">
                         <h3 mat-line>
-                            {{hero.description}}
+                            {{hero.categoryName}}
                         </h3>
                     </mat-list-item>
                 </mat-list>
@@ -43,4 +64,15 @@
     </div>
 </div>
 
-<a routerLink="/transaction-add">New</a>
+<div class="featured-image">
+    <div class="round-button">
+        <div class="round-button-circle">
+            <a routerLink="/transaction-add" class="round-button">
+                <!-- <i class="material-icons md-48">add</i> -->
+                <img src="/assets/myicons/add.png" alt="">
+            </a>
+        </div>
+    </div>
+</div>
+
+

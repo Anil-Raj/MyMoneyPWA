@@ -13,10 +13,6 @@ export const ROUTES: RouteInfo[] = [
   { path: 'debt', title: 'Debts', icon: 'dock', class: '' },
   { path: 'trend', title: 'Trends', icon: 'trending_up', class: '' },
   { path: 'category', title: 'Categories', icon: 'category', class: '' },
-  { path: 'transaction', title: 'Transactions', icon: 'account_balance_wallet', class: '' },
-  { path: 'debt', title: 'Debts', icon: 'dock', class: '' },
-  { path: 'trend', title: 'Trends', icon: 'trending_up', class: '' },
-  { path: 'category', title: 'Categories', icon: 'category', class: '' }
 ];
 
 @Component({
@@ -27,8 +23,6 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
 
   constructor( public nav: SidebarService ) {}
-
-
   menuItems: any[];
 
   ngOnInit() {
@@ -43,4 +37,5 @@ export class SidebarComponent implements OnInit {
   closeSidebar() {
     this.nav.hide();
   }
+
 }

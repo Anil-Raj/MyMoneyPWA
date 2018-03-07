@@ -24,29 +24,5 @@
 
       ]
     }
-  }],
-  "dataGroups": [
-    {
-      "name": "local-api",
-      "urls": [
-        "http://localhost:5000/**"
-      ],
-      "cacheConfig": {
-        "maxSize": 100,
-        "maxAge": "1d",
-        "strategy": "freshness"
-      }
-    },
-    {
-      "name": "giphy-api",
-      "urls": [
-        "http://api.giphy.com/**"
-      ],
-      "cacheConfig": {
-        "maxSize": 100,
-        "maxAge": "1d",
-        "strategy": "performance"
-      }
-    }
-  ]
+  }]
 }

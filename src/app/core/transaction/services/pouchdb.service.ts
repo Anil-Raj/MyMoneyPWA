@@ -3,6 +3,7 @@ import PouchDB from 'pouchdb';
 import { Transaction } from '../../../Models/Transaction';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class PouchDBService {
@@ -10,14 +11,15 @@ export class PouchDBService {
     private isInstantiated: boolean;
     private database: any;
     private listener: EventEmitter<any> = new EventEmitter();
-
+    isTransactionsModified = new BehaviorSubject<boolean>(false);
     public constructor() {
         if (!this.isInstantiated) {
             this.database = new PouchDB('dman');
             this.isInstantiated = true;
             this.database.bulkDocs([
-                { title: 'Lisa Says', _id: 'doc1' },
-                { title: 'Space Oddity', _id: 'doc2' }
+                { Name: 'Salary', Type: 'Income', _id: 'category_income_1' },
+                { Name: 'Internet Bill', Type: 'Expense', _id: 'category_expense_2' },
+                { Name: 'TV Bill', Type: 'Expense', _id: 'category_expense_3' }
             ]).then(function (result) {
                 // handle result
             }).catch(function (err) {
@@ -31,15 +33,16 @@ export class PouchDBService {
     }
 
     public get(id: string) {
-        return this.database.get(id);
+        return Observable.from(this.database.get(id));
     }
 
     public put(id: string, document: any) {
         document._id = id;
         console.log(document);
-        return this.get(id).then(result => {
+        return this.get(id).subscribe(result => {
             return this.database.put(document);
         }, error => {
+            console.log(error);
             if (error.status == '404') {
                 return this.database.put(document);
             } else {
@@ -49,21 +52,12 @@ export class PouchDBService {
             }
         });
     }
-    public getDoc(id: string) {
-        // return this.database.allDocs(
-        //     {startkey: id , endkey: id + '\uffff' , include_docs: true},
-        //     function(err, docs) {
-        //         if(!err){
-        //             console.log(Array.of(docs.rows));
-
-        //             return Array.of(docs.rows);
-        //         }
-        //     });
-        return Observable.from(this.database.allDocs());
+    public getDoc(id: string): any {
+        return Observable.from(this.database.allDocs({ startkey: id, endkey: id + '\uffff', include_docs: true }));
 
     }
     public sync(remote: string) {
-        let remoteDatabase = new PouchDB(remote);
+        const remoteDatabase = new PouchDB(remote);
         this.database.sync(remoteDatabase, {
             live: true
         }).on('change', change => {
@@ -75,6 +69,9 @@ export class PouchDBService {
 
     public getChangeListener() {
         return this.listener;
+    }
+    transactionsModified(value) {
+        this.isTransactionsModified.next(value);
     }
 
 }

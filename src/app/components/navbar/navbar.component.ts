@@ -4,15 +4,20 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { SidebarService } from '../sidebar/sidebar.service';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
 
-  constructor( public nav: SidebarService ) {}
+    constructor(public nav: SidebarService) { }
     navOpen() {
-      this.nav.toggle();
+        this.nav.toggle();
     }
-
+    groupByTransaction() {
+        this.nav.confirmMission('time');
+    }
+    groupByCategory() {
+        this.nav.confirmMission('categoryName');
+    }
 }

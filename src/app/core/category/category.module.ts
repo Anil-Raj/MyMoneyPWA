@@ -9,13 +9,18 @@ import { CategorySelectComponent } from './category-select/category-select.compo
 import { CatSelInputComponent } from './cat-sel-input/cat-sel-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule, MatRadioModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    RouterModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatRadioModule
   ],
   declarations: [
     CategoryAddComponent,

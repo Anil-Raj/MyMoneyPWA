@@ -1,20 +1,17 @@
-    <!-- <nav class="navbar navbar-default">
-      <div class="container-fluid">
+<mat-toolbar class="nav" color="primary">
+    <div (click)="navOpen()" id="sidebarCollapse">
+        <!-- <i class="glyphicon glyphicon-align-left"></i> -->
+        <i class="material-icons">menu</i>
+    </div>
+    <span class="example-fill-remaining-space"></span>
+    <mat-menu #appMenu="matMenu">
+        <button mat-menu-item  (click)="groupByTransaction()" >View By Transaction   </button>
+        <button mat-menu-item (click)="groupByCategory()"> View By Category    </button>
 
-          <div class="navbar-header">
-              <button type="button"  (click)="navOpen()" id="sidebarCollapse" class="btn btn-info navbar-btn">
-                  <i class="glyphicon glyphicon-align-left"></i>
-                  <span>Toggle Sidebar</span>
-              </button>
-          </div>
+    </mat-menu>
 
-
-      </div>
-  </nav> -->
-  <mat-toolbar class= "nav" color="primary">
-        <div  (click)="navOpen()" id="sidebarCollapse" >
-                <!-- <i class="glyphicon glyphicon-align-left"></i> -->
-                <img src="/assets/icons/ic_menu_black_24dp/android/drawable-hdpi/ic_menu_black_24dp.png" alt="">
-        </div>
-      </mat-toolbar>
-      <mat-toolbar></mat-toolbar>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+</mat-toolbar>
+<mat-toolbar></mat-toolbar>

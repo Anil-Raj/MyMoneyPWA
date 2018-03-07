@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TransactionModule } from './core/transaction/transaction.module';
 import { CategoryModule } from './core/category/category.module';
-import { MatButtonModule, MatListModule, MatToolbarModule } from '@angular/material';
+import { MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule } from '@angular/material';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { DebtComponent } from './core/debt/debt.component';
 import { TrendComponent } from './core/trend/trend.component';
@@ -39,7 +39,7 @@ import { SettingComponent } from './core/setting/setting.component';
     ComponentsModule,
     TransactionModule,
     CategoryModule,
-    MatButtonModule, MatListModule, MatToolbarModule,
+    MatButtonModule, MatListModule, MatToolbarModule,MatMenuModule,
 
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],

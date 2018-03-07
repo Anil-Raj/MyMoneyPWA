@@ -1,13 +1,13 @@
 <span *ngIf="transaction">
-    <i class="material-icons" routerLink="/transaction/edit/{{transaction.id}}">mode edit</i>
+    <i class="material-icons" routerLink="/transaction/edit/{{transaction._id}}">mode edit</i>
 </span>
 <div *ngIf="transaction">
-    <h2>{{ transaction.description | uppercase }} Details</h2>
+    <h2>{{ transaction.Description | uppercase }} Details</h2>
     <div>
-        <span>id: </span>{{transaction.id}}</div>
+        <span>id: </span>{{transaction._id}}</div>
     <div>
         <label>name:</label>
-        <label placeholder="name">{{transaction.description}}</label>
+        <label placeholder="name">{{transaction.Description}}</label>
 
     </div>
     <div>

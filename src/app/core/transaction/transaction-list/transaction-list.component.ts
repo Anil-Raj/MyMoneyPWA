@@ -1,15 +1,17 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, OnChanges } from '@angular/core';
 import { Transaction } from '../../../Models/Transaction';
 import { TransactionService } from '../services/transaction.service';
 import { CategoryService } from '../../category/category.service';
 import { PouchDBService } from '../services/pouchdb.service';
+import { ActivatedRoute } from '@angular/router';
+import { SidebarService } from '../../../components/sidebar/sidebar.service';
 
 @Component({
     selector: 'app-transaction-list',
     templateUrl: './transaction-list.component.html',
     styleUrls: ['./transaction-list.component.css']
 })
-export class TransactionListComponent implements OnInit {
+export class TransactionListComponent implements OnInit, OnChanges {
 
     categories: any[];
     transactions: Transaction[];
@@ -17,56 +19,67 @@ export class TransactionListComponent implements OnInit {
     today = new Date();
     public people: Transaction[];
     public form: any;
-    constructor(private service: TransactionService, private database: PouchDBService,  private zone: NgZone) {
-
-        this.database.fetch().then(result => {
-            console.log(result);
-
-            this.people = [];
-            for(let i = 0; i < result.rows.length; i++) {
-                this.people.push(result.rows[i].doc);
-            }
-            console.log(this.people);
-        }, error => {
-            console.error(error);
+    constructor(private service: TransactionService,
+        private database: PouchDBService,
+        private zone: NgZone, private route: ActivatedRoute,
+        private navService: SidebarService) {
+        this.database.isTransactionsModified.subscribe(() => {
+            this.categories = this.database.getDoc('transaction_').subscribe((categories) => {
+                this.transactions = categories.rows.map(row => {
+                    return row.doc;
+                });
+            });
         });
+        this.navService.groupBy.subscribe(a => this.groupByFilter = a);
 
-        this.service.getTransactions().subscribe(data => {
-            if (data !== void 0) {
-              this.transactions = data;
-              console.log(data);
+    }
 
+    ngOnInit() {
+        this.database.isTransactionsModified.subscribe(() => {
+            console.log('inside majsdhfjhdp');
+            this.categories = this.database.getDoc('transaction_').subscribe((categories) => {
+                this.transactions = categories.rows.map(row => {
+                    console.log(row.doc);
 
-            }
+                    return row.doc;
+                });
+                console.log(this.transactions);
+
+            });
+            console.log('inside m');
         });
-}
+        this.database.transactionsModified(true);
 
-ngOnInit() {
-    // this.database.getChangeListener().subscribe(data => {
-    //     for(let i = 0; i < data.change.docs.length; i++) {
-    //         this.zone.run(() => {
-    //             this.people.push(data.change.docs[i]);
-    //         });
-    //     }
-    // });
-    // this.database.fetch().then(result => {
-    //     this.people = [];
-    //     for(let i = 0; i < result.rows.length; i++) {
-    //         this.people.push(result.rows[i].doc);
-    //     }
-    // }, error => {
-    //     console.error(error);
-    // });
-}
+    }
+    ngOnChanges() {
+        // this.database.isTransactionsModified.subscribe(() => {
+        //     console.log('inside map');
+        //     this.categories = this.database.getDoc('transaction_').subscribe((categories) => {
+        //         this.transactions = categories.rows.map(row => {
 
-getHeader(key, trs: Transaction[]) {
-    if (this.groupByFilter === 'time') {
-        return trs[0].time;
+        //             return row.doc;
+        //         });
+        //     });
+        // });
+        // console.log('inside change');
+
+
     }
-    if (this.groupByFilter === 'categoryName') {
-        // console.log(key);
-        return trs[0].categoryName;
+
+    getHeader(key, trs: Transaction[]) {
+        if (this.groupByFilter === 'time') {
+            return trs[0].time;
+        }
+        if (this.groupByFilter === 'categoryName') {
+            return trs[0].categoryName;
+        }
     }
-}
+    getSum(items) {
+        let sum = 0;
+        items.map(item => {
+            sum += parseInt(item.Amount, 10);
+        });
+        return sum;
+    }
 
 }

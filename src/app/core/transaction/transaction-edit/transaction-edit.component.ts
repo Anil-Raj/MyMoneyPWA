@@ -4,6 +4,7 @@ import { TransactionService } from '../services/transaction.service';
 import { CategoryService } from '../../category/category.service';
 import { Transaction } from '../../../Models/Transaction';
 import { Category } from '../../../Models/Category';
+import { PouchDBService } from '../services/pouchdb.service';
 
 @Component({
   selector: 'app-transaction-edit',
@@ -14,25 +15,26 @@ export class TransactionEditComponent implements OnInit {
 
 
 
-  transaction: Transaction;
+  transaction: any;
   selectedCategory: Category;
   isSelectCategoryVisible = false;
-  constructor(private route: ActivatedRoute, private service: TransactionService) { }
+  constructor(private route: ActivatedRoute, private service: PouchDBService) { }
 
   ngOnInit() {
       this.getTransaction();
   }
 
   getTransaction(): void {
-      const id = +this.route.snapshot.paramMap.get('id');
-      this.service.getTransaction(id).subscribe(a => this.transaction = a );
-
+    const id = this.route.snapshot.paramMap.get('id');
+    this.service.get(id).subscribe(a => {
+      this.transaction = a;
+    });
   }
   update(category) {
     // this.transaction.categoryName = category;
     console.log(this.transaction.categoryName);
 
-    this.service.updateTransaction(this.transaction);
+    this.service.put(this.transaction._id, this.transaction);
   }
   selectCategory(event) {
     console.log(event);

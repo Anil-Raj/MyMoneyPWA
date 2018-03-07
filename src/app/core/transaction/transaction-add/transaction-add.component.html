@@ -1,20 +1,15 @@
 <form [formGroup]="addTransactionForm" (ngSubmit)="onSubmit(addTransactionForm)">
     <div>
-        <!-- <app-form-field>
-            <input matInput formControlName="Amount" required>
-        </app-form-field> -->
         <mat-form-field>
-            <input matInput formControlName="Amount" required>
+            <input matInput formControlName="Amount" placeholder="Amount">
         </mat-form-field>
         <mat-form-field>
-            <input matInput formControlName="Description">
+            <input matInput formControlName="Description" placeholder="Note">
         </mat-form-field>
-
         <app-cat-sel-input formControlName="categoryName" required></app-cat-sel-input>
         <mat-form-field>
             <input matInput  type="date" formControlName="time">
         </mat-form-field>
-
         <button type="submit" class="btn btn-success" [disabled]="!addTransactionForm.valid">Submit</button>
     </div>
 </form>

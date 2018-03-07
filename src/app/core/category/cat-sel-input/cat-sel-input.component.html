@@ -1,6 +1,11 @@
 <div *ngIf="!isSelectCategory" (click)="displaySelectCategory()">
-    <input [(ngModel)]="selectedCategory" placeholder="{{selectedCategory}}" (focus)="displaySelectCategory()">
+    <div *ngIf="selectedCategory">
+        <input [(ngModel)]="selectedCategory" placeholder="{{selectedCategory}}" (focus)="displaySelectCategory()">
+    </div>
+    <div *ngIf="!selectedCategory">
+        <input  placeholder="SelectedCategory" (focus)="displaySelectCategory()">
+    </div>
 </div>
-<!-- <div *ngIf="isSelectCategory" class="category-list" > -->
-    <div *ngFor="let category of categories " (click)="select(category.name)">{{category.name}}</div>
-<!-- </div> -->
+<div *ngIf="isSelectCategory" class="category-list" [@flyInOut]>
+    <div *ngFor="let category of categories " (click)="select(category.Name)">{{category.Name}}</div>
+</div>

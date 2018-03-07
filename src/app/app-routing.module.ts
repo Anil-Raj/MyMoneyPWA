@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'transaction-add', component: TransactionAddComponent },
   { path: 'debt', component: DebtComponent },
   { path: 'trend', component: TrendComponent },
+  { path: 'category', component: CategoryListComponent },
   { path: 'category-add', component: CategoryAddComponent },
   { path: 'settings', component: SettingComponent },
   { path: '', redirectTo: 'transaction', pathMatch: 'full' }

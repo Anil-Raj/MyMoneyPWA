@@ -1,15 +1,18 @@
-<p>
-  category-add works!
-</p>
 <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit(addCategoryForm)">
     <div>
-        <!-- <app-form-field>
-            <input matInput formControlName="Amount" required>
-        </app-form-field> -->
-            <input matInput formControlName="Name" required>
-            <input matInput formControlName="Description">
-
-            <input matInput   formControlName="Type">
+        <mat-form-field>
+            <input matInput formControlName="Name" placeholder="Name">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="Description" placeholder="Description">
+        </mat-form-field>
+        <!-- <mat-form-field>
+                <input matInput formControlName="Type" placeholder="Type">
+            </mat-form-field> -->
+        <mat-radio-group formControlName="Type">
+            <mat-radio-button checked=true value="Income">Income</mat-radio-button>
+            <mat-radio-button value="Expense">Expense</mat-radio-button>
+        </mat-radio-group>
 
         <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid">Submit</button>
     </div>

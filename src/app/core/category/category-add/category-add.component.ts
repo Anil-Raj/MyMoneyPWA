@@ -28,9 +28,9 @@ export class CategoryAddComponent implements OnInit {
     }
     onSubmit({ value }: { value: any }) {
 
-        const transaction = <Category>value;
+        const transaction = value;
         console.log(transaction);
-        this.database.put('category_' + new Date().valueOf(), transaction);
+        this.database.put('category_' + transaction.Type.toLowerCase() + '_' + new Date().valueOf(), transaction);
         this.router.navigate(['/category']);
     }
 }

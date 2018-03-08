@@ -8,17 +8,18 @@ import { TransactionAddComponent } from './transaction-add/transaction-add.compo
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 import { TransactionEditComponent } from './transaction-edit/transaction-edit.component';
 import { TransactionService } from './services/transaction.service';
-import { GroupByPipe } from '../../pipes/group-by.pipe';
 import { CategoryService } from '../category/category.service';
 import { CategoryModule } from '../category/category.module';
 import { CatSelInputComponent } from '../category/cat-sel-input/cat-sel-input.component';
-import { MatButtonModule, MatListModule, MatToolbarModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatListModule, MatToolbarModule, MatInputModule, MatRipple, MatRippleModule } from '@angular/material';
 import { DatePipe } from '../../pipes/date.pipe';
 import { DayPipe } from '../../pipes/day.pipe';
 import { MonthPipe } from '../../pipes/month.pipe';
 import { YearPipe } from '../../pipes/year.pipe';
 import { FormFieldComponent } from './form-field/form-field.component';
 import { PouchDBService } from './services/pouchdb.service';
+import { GroupByModule } from '../../pipes/group-by.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -26,14 +27,13 @@ import { PouchDBService } from './services/pouchdb.service';
     ReactiveFormsModule,
     RouterModule,
     CategoryModule,
-    MatButtonModule, MatListModule, MatToolbarModule, MatInputModule
+    MatButtonModule, MatListModule, MatToolbarModule, MatInputModule, GroupByModule, MatRippleModule
   ],
   declarations: [
     TransactionListComponent,
     TransactionAddComponent,
     TransactionDetailComponent,
     TransactionEditComponent,
-    GroupByPipe,
     DatePipe,
     DayPipe,
     MonthPipe,

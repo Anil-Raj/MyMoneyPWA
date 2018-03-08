@@ -22,28 +22,28 @@ import { TrendComponent } from './core/trend/trend.component';
 import { SettingComponent } from './core/setting/setting.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DebtComponent,
-    TrendComponent,
-    SettingComponent,
-  ],
-  imports: [
-    CommonModule,
-    HttpModule,
-    HttpClientModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    ComponentsModule,
-    TransactionModule,
-    CategoryModule,
-    MatButtonModule, MatListModule, MatToolbarModule,MatMenuModule,
+    declarations: [
+        AppComponent,
+        DebtComponent,
+        TrendComponent,
+        SettingComponent,
+    ],
+    imports: [
+        CommonModule,
+        HttpModule,
+        HttpClientModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        ComponentsModule,
+        TransactionModule,
+        CategoryModule,
+        MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule, GroupByModule,
 
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
-  ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
-  bootstrap: [AppComponent]
+        ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ],
+    providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

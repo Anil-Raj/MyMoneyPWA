@@ -4,7 +4,7 @@
         <div class="trans-group-header">
             <div *ngIf="groupByFilter == 'categoryName'">
                 <div>
-                    <mat-list >
+                    <mat-list>
                         <mat-list-item>
                             <img mat-list-avatar src="/assets/myicons/img_avatar.png">
                             <h3 mat-line>
@@ -15,24 +15,25 @@
                     </mat-list>
                 </div>
                 <mat-divider></mat-divider>
+
                 <mat-list>
-                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero._id}}" class="wrapper trans">
-                        <div class="left">
-                            <span class="date">{{hero.time | date}}</span>
-                            <div class="date-detail">
+                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero._id}}" class="wrapper" matRipple style="position:relative" >
+                            <div class="left">
+                                <div class="date">{{hero.time | date}}</div>
+                                <div class="date-detail">
                                     <div class="day">{{hero.time | day }}</div>
-                                <div>{{hero.time | month }} {{hero.time | year }}</div>
+                                    <div>{{hero.time | month }} {{hero.time | year }}</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="right">
-                            <div>{{hero.Amount}}</div>
-                        </div>
-                    </mat-list-item>
-                </mat-list>
+                            <div class="right">
+                                <div>{{hero.Amount}}</div>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
             </div>
             <div *ngIf="groupByFilter == 'time'">
                 <mat-list>
-                    <mat-list-item class="wrapper ">
+                    <mat-list-item class="wrapper" >
                         <div class="left">
                             <div class="date">{{item.value[0].time | date}}</div>
                             <div class="date-detail">
@@ -41,19 +42,19 @@
                             </div>
                         </div>
                         <div class="right">
-                                <div>{{getSum(item.value)}}</div>
-                            </div>
+                            <div>{{getSum(item.value)}}</div>
+                        </div>
                     </mat-list-item>
 
                 </mat-list>
                 <mat-divider></mat-divider>
                 <mat-list>
-                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero._id}}" class="trans">
-                            <img mat-list-avatar src="/assets/myicons/img_avatar.png" alt="aasdf">
-                            <h3 mat-line>
-                                {{hero.categoryName}}
-                            </h3>
-                            {{hero.Amount}}
+                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero._id}}" matRipple style="position:relative" >
+                        <img mat-list-avatar src="/assets/myicons/img_avatar.png" alt="aasdf">
+                        <h3 mat-line>
+                            {{hero.categoryName}}
+                        </h3>
+                        {{hero.Amount}}
                     </mat-list-item>
                 </mat-list>
             </div>

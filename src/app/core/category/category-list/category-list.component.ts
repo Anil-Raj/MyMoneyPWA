@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PouchDBService } from '../../transaction/services/pouchdb.service';
 
 @Component({
   selector: 'app-category-list',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryListComponent implements OnInit {
 
-  constructor() { }
+categories_data ;
+groupByFilter = 'Type';
+  constructor(private database: PouchDBService) { }
 
   ngOnInit() {
+    this.database.isTransactionsModified.subscribe(() => {
+        this.database.getDoc('category_').subscribe((categories) => {
+            this.categories_data = categories.rows.map(row => {
+
+                return row.doc;
+            });
+            console.log(this.categories_data);
+        });
+    });
   }
 
 }

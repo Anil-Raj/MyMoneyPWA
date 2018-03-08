@@ -9,8 +9,9 @@ import { CategorySelectComponent } from './category-select/category-select.compo
 import { CatSelInputComponent } from './cat-sel-input/cat-sel-input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatRadioModule } from '@angular/material';
+import { MatInputModule, MatRadioModule, MatListModule, MatToolbarModule, MatMenuModule, MatButtonModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
+import { GroupByModule } from '../../pipes/group-by.module';
 
 @NgModule({
   imports: [
@@ -20,7 +21,12 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatRadioModule
+    MatRadioModule,
+    MatListModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    GroupByModule
   ],
   declarations: [
     CategoryAddComponent,

@@ -1,0 +1,20 @@
+.category-list{
+    position: fixed;
+    top:0;
+    right: 0;
+    z-index: 400;
+    width: 100%;
+    background: white;
+    height: 100%;
+
+}
+.mat-list-avatar{
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.category_icon{
+    width:70px;
+    float:left;
+}

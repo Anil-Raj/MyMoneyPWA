@@ -5,9 +5,9 @@
                 <div>
                     <mat-list>
                         <mat-list-item>
-                            <img mat-list-avatar src="/assets/myicons/img_avatar.png">
+                            <img mat-list-avatar [src]="item.value[0].categoryName.Icon">
                             <h3 mat-line>
-                                {{getHeader(item.key,item.value)}}
+                                {{item.value[0].categoryName.Name}}
                             </h3>
                             {{getSum(item.value)}}
                         </mat-list-item>

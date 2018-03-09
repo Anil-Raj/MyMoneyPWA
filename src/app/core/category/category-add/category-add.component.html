@@ -10,6 +10,7 @@
             <mat-radio-button checked=true value="Income">Income</mat-radio-button>
             <mat-radio-button value="Expense">Expense</mat-radio-button>
         </mat-radio-group>
+        <app-category-icon-input formControlName="Icon"></app-category-icon-input>
 
         <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid">Submit</button>
     </div>

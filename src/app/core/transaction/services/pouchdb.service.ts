@@ -17,9 +17,9 @@ export class PouchDBService {
             this.database = new PouchDB('dman');
             this.isInstantiated = true;
             this.database.bulkDocs([
-                { Name: 'Salary', Type: 'Income', _id: 'category_income_1' },
-                { Name: 'Internet Bill', Type: 'Expense', _id: 'category_expense_2' },
-                { Name: 'TV Bill', Type: 'Expense', _id: 'category_expense_3' }
+                { Name: 'Salary', Type: 'Income', _id: 'category_income_1', Icon: '' },
+                { Name: 'Internet Bill', Type: 'Expense', _id: 'category_expense_2', Icon: '' },
+                { Name: 'TV Bill', Type: 'Expense', _id: 'category_expense_3', Icon: '' }
             ]).then(function (result) {
                 // handle result
             }).catch(function (err) {
@@ -43,7 +43,6 @@ export class PouchDBService {
             document._rev = result._rev;
             return this.database.put(document);
         }, error => {
-            console.log(error);
             if (error.status == '404') {
                 return this.database.put(document);
             } else {

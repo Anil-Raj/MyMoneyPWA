@@ -29,7 +29,7 @@ export class TransactionListComponent implements OnInit, OnChanges {
                 this.transactions = transactions.rows.map(row => {
                     return row.doc;
                 });
-                console.log(this.transactions);
+                // console.log(this.transactions);
 
             });
         });
@@ -60,14 +60,14 @@ export class TransactionListComponent implements OnInit, OnChanges {
 
     }
 
-    getHeader(key, trs: Transaction[]) {
-        if (this.groupByFilter === 'time') {
-            return trs[0].time;
-        }
-        if (this.groupByFilter === 'categoryName') {
-            return trs[0].categoryName;
-        }
-    }
+    // getHeader(key, trs: any[]) {
+    //     if (this.groupByFilter === 'time') {
+    //         return trs[0].time;
+    //     }
+    //     if (this.groupByFilter === 'categoryName') {
+    //         return trs[0].categoryName.Name;
+    //     }
+    // }
     getSum(items) {
         let sum = 0;
         items.map(item => {

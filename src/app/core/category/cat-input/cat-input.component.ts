@@ -32,6 +32,7 @@ export class CategoryInputComponent implements ControlValueAccessor, OnChanges {
     isSelectCategory = false;
     categories: any = [];
     selectedCategory: any;
+    icon_not_selected = '/assets/myicons/ml/icon_not_selected.png';
     constructor(private categoryServie: CategoryService, private database: PouchDBService) {
         // this.categoryServie.awaiCategories().subscribe(a => this.categories  = a);
         this.categories = this.database.getDoc('category_').subscribe((categories) => {

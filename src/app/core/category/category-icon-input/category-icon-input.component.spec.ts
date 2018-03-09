@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategorySelectComponent } from './category-select.component';
+import { CategoryIconInputComponent } from './category-icon-input.component';
 
-describe('CategorySelectComponent', () => {
-  let component: CategorySelectComponent;
-  let fixture: ComponentFixture<CategorySelectComponent>;
+describe('CategoryIconInputComponent', () => {
+  let component: CategoryIconInputComponent;
+  let fixture: ComponentFixture<CategoryIconInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategorySelectComponent ]
+      declarations: [ CategoryIconInputComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CategorySelectComponent);
+    fixture = TestBed.createComponent(CategoryIconInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

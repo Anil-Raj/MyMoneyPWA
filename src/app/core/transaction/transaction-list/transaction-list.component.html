@@ -1,4 +1,3 @@
-<!-- <div (click)="toggle()">hjsvdg</div> -->
 <div *ngFor="let item of transactions | groupBy:groupByFilter">
     <div class="card">
         <div class="trans-group-header">
@@ -17,7 +16,7 @@
                 <mat-divider></mat-divider>
 
                 <mat-list>
-                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero._id}}" class="wrapper" matRipple style="position:relative" >
+                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero._id}}" class="wrapper no-outline" matRipple style="position:relative" >
                             <div class="left">
                                 <div class="date">{{hero.time | date}}</div>
                                 <div class="date-detail">
@@ -49,7 +48,7 @@
                 </mat-list>
                 <mat-divider></mat-divider>
                 <mat-list>
-                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero._id}}" matRipple style="position:relative" >
+                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero._id}}" class="no-outline" matRipple style="position:relative" >
                         <img mat-list-avatar src="/assets/myicons/img_avatar.png" alt="aasdf">
                         <h3 mat-line>
                             {{hero.categoryName}}

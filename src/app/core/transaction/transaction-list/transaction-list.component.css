@@ -19,6 +19,11 @@
 }
 .mat-list{
     padding-top: 0px;
+
+}
+
+.no-outline:focus{
+    outline: none;
 }
 
 /* .trans {

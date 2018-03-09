@@ -39,7 +39,8 @@ export class PouchDBService {
     public put(id: string, document: any) {
         document._id = id;
         console.log(document);
-        return this.get(id).subscribe(result => {
+        return this.database.get(id).then(result => {
+            document._rev = result._rev;
             return this.database.put(document);
         }, error => {
             console.log(error);
@@ -52,6 +53,8 @@ export class PouchDBService {
             }
         });
     }
+
+
     public getDoc(id: string): any {
         return Observable.from(this.database.allDocs({ startkey: id, endkey: id + '\uffff', include_docs: true }));
 

@@ -14,9 +14,7 @@ import { Router } from '@angular/router';
 })
 export class TransactionAddComponent implements OnInit {
 
-
-    private transaction: Transaction = null;
-
+    private transaction: Transaction ;
     addTransactionForm: FormGroup;
 
     constructor(private service: TransactionService, private database: PouchDBService, private router: Router) { }
@@ -24,9 +22,9 @@ export class TransactionAddComponent implements OnInit {
     ngOnInit() {
         this.addTransactionForm = new FormGroup({
             Description: new FormControl(),
-            Amount: new FormControl('', Validators.required ),
-            categoryName: new FormControl(),
-            time: new FormControl(Date())
+            Amount: new FormControl('', Validators.required),
+            categoryName: new FormControl('', Validators.required),
+            time: new FormControl(Date(), Validators.required)
         });
     }
     onSubmit({ value }: { value: Transaction }) {
@@ -34,8 +32,9 @@ export class TransactionAddComponent implements OnInit {
         const transaction = <Transaction>value;
         console.log(transaction);
         this.service.newTransaction(transaction);
-        this.database.put('transaction_' + new Date().valueOf(), transaction);
-        this.database.transactionsModified(true);
-        this.router.navigate(['/transaction']);
+        this.database.put('transaction_' + new Date().valueOf(), transaction).then(() => {
+            this.router.navigate(['/transaction/']);
+            this.database.transactionsModified(true);
+        });
     }
 }

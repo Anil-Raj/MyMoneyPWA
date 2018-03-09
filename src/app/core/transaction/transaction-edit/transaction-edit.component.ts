@@ -1,49 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { TransactionService } from '../services/transaction.service';
 import { CategoryService } from '../../category/category.service';
 import { Transaction } from '../../../Models/Transaction';
 import { Category } from '../../../Models/Category';
 import { PouchDBService } from '../services/pouchdb.service';
+import { FormGroup, FormControl } from '@angular/forms';
+import PouchDB from 'pouchdb';
 
 @Component({
-  selector: 'app-transaction-edit',
-  templateUrl: './transaction-edit.component.html',
-  styleUrls: ['./transaction-edit.component.css']
+    selector: 'app-transaction-edit',
+    templateUrl: './transaction-edit.component.html',
+    styleUrls: ['./transaction-edit.component.css']
 })
 export class TransactionEditComponent implements OnInit {
 
+    id;
 
+    private transaction: any;
 
-  transaction: any;
-  selectedCategory: Category;
-  isSelectCategoryVisible = false;
-  constructor(private route: ActivatedRoute, private service: PouchDBService) { }
+    editTransactionForm: FormGroup;
 
-  ngOnInit() {
-      this.getTransaction();
-  }
+    constructor(private service: TransactionService,
+        private database: PouchDBService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private location: Location) { }
 
-  getTransaction(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.service.get(id).subscribe(a => {
-      this.transaction = a;
-    });
-  }
-  update(category) {
-    // this.transaction.categoryName = category;
-    console.log(this.transaction.categoryName);
+    ngOnInit() {
+        this.editTransactionForm = new FormGroup({
+            Description: new FormControl(''),
+            Amount: new FormControl(''),
+            categoryName: new FormControl(''),
+            time: new FormControl(new Date())
+        });
+        this.getTransaction();
+    }
 
-    this.service.put(this.transaction._id, this.transaction);
-  }
-  selectCategory(event) {
-    console.log(event);
-    this.transaction.categoryName = event.name;
-    this.transaction.categoryId = event.id;
-    this.isSelectCategoryVisible = false;
-  }
-  selectCategoryWindow() {
-    this.isSelectCategoryVisible = true;
-  }
+    getTransaction(): void {
+        this.id = this.route.snapshot.paramMap.get('id');
+        this.database.getDoc(this.id).subscribe((categories) => {
+            this.transaction = categories.rows.map(row => {
+                return row.doc;
+            });
+            this.editTransactionForm.patchValue({
+                Description: this.transaction[0].Description,
+                Amount: this.transaction[0].Amount,
+                categoryName: this.transaction[0].categoryName,
+                time: this.transaction[0].time
+            });
 
+        });
+    }
+    onSubmit({ value }: { value: any }) {
+        const transaction = value;
+        console.log(transaction);
+        this.service.newTransaction(transaction);
+        this.database.put(this.id, transaction).then(() => {
+            this.router.navigate(['/transaction/' + this.id]);
+            this.database.transactionsModified(true);
+        });
+    }
 }

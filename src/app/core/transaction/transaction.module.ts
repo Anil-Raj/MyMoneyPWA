@@ -10,7 +10,6 @@ import { TransactionEditComponent } from './transaction-edit/transaction-edit.co
 import { TransactionService } from './services/transaction.service';
 import { CategoryService } from '../category/category.service';
 import { CategoryModule } from '../category/category.module';
-import { CatSelInputComponent } from '../category/cat-sel-input/cat-sel-input.component';
 import { MatButtonModule, MatListModule, MatToolbarModule, MatInputModule, MatRipple, MatRippleModule } from '@angular/material';
 import { DatePipe } from '../../pipes/date.pipe';
 import { DayPipe } from '../../pipes/day.pipe';

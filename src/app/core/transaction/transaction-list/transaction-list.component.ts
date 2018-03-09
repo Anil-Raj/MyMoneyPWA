@@ -13,6 +13,7 @@ import { SidebarService } from '../../../components/sidebar/sidebar.service';
 })
 export class TransactionListComponent implements OnInit, OnChanges {
 
+
     categories: any[];
     transactions: Transaction[];
     groupByFilter = 'categoryName';
@@ -24,45 +25,38 @@ export class TransactionListComponent implements OnInit, OnChanges {
         private zone: NgZone, private route: ActivatedRoute,
         private navService: SidebarService) {
         this.database.isTransactionsModified.subscribe(() => {
-            this.categories = this.database.getDoc('transaction_').subscribe((categories) => {
-                this.transactions = categories.rows.map(row => {
-                    return row.doc;
-                });
-            });
-        });
-        this.navService.groupBy.subscribe(a => this.groupByFilter = a);
-
-    }
-
-    ngOnInit() {
-        this.database.isTransactionsModified.subscribe(() => {
-            console.log('inside majsdhfjhdp');
-            this.categories = this.database.getDoc('transaction_').subscribe((categories) => {
-                this.transactions = categories.rows.map(row => {
-                    console.log(row.doc);
-
+            this.database.getDoc('transaction_').subscribe((transactions) => {
+                this.transactions = transactions.rows.map(row => {
                     return row.doc;
                 });
                 console.log(this.transactions);
 
             });
-            console.log('inside m');
         });
+        this.navService.groupBy.subscribe(a => this.groupByFilter = a);
+
+
+
+    }
+
+    ngOnInit() {
+        // this.database.isTransactionsModified.then(() => {
+        //     console.log('inside majsdhfjhdp');
+        //     this.database.getDoc('transaction_').subscribe((categories) => {
+        //         this.transactions = categories.rows.map(row => {
+        //             console.log(row.doc);
+
+        //             return row.doc;
+        //         });
+        //         console.log(this.transactions);
+
+        //     });
+        //     console.log('inside m');
+        // });
         this.database.transactionsModified(true);
 
     }
     ngOnChanges() {
-        // this.database.isTransactionsModified.subscribe(() => {
-        //     console.log('inside map');
-        //     this.categories = this.database.getDoc('transaction_').subscribe((categories) => {
-        //         this.transactions = categories.rows.map(row => {
-
-        //             return row.doc;
-        //         });
-        //     });
-        // });
-        // console.log('inside change');
-
 
     }
 

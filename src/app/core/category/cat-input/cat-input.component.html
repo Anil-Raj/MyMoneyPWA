@@ -3,7 +3,7 @@
         <input [(ngModel)]="selectedCategory" placeholder="{{selectedCategory}}" (focus)="displaySelectCategory()">
     </div>
     <div *ngIf="!selectedCategory">
-        <input  placeholder="SelectedCategory" (focus)="displaySelectCategory()">
+        <input  placeholder="SelectCategory" (focus)="displaySelectCategory()">
     </div>
 </div>
 <div *ngIf="isSelectCategory" class="category-list" [@flyInOut]>

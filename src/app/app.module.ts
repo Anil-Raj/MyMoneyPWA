@@ -39,7 +39,7 @@ import { SettingComponent } from './core/setting/setting.component';
         ComponentsModule,
         TransactionModule,
         CategoryModule,
-        MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule, GroupByModule,
+        MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule,
 
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
     ],

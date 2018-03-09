@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CatSelInputComponent } from './cat-sel-input.component';
+import { CategoryInputComponent } from './cat-input.component';
 
 describe('CatSelInputComponent', () => {
-  let component: CatSelInputComponent;
-  let fixture: ComponentFixture<CatSelInputComponent>;
+  let component: CategoryInputComponent;
+  let fixture: ComponentFixture<CategoryInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CatSelInputComponent ]
+      declarations: [ CategoryInputComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CatSelInputComponent);
+    fixture = TestBed.createComponent(CategoryInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

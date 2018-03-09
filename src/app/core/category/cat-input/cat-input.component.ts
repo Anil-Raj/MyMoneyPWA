@@ -5,9 +5,9 @@ import { PouchDBService } from '../../transaction/services/pouchdb.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
-    selector: 'app-cat-sel-input',
-    templateUrl: './cat-sel-input.component.html',
-    styleUrls: ['./cat-sel-input.component.css'],
+    selector: 'app-cat-input',
+    templateUrl: './cat-input.component.html',
+    styleUrls: ['./cat-input.component.css'],
 
     animations: [
         trigger('flyInOut', [
@@ -23,15 +23,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
       ],
 
     providers: [
-        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CatSelInputComponent), multi: true },
-        { provide: NG_VALIDATORS, useExisting: forwardRef(() => CatSelInputComponent), multi: true }
+        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CategoryInputComponent), multi: true },
+        { provide: NG_VALIDATORS, useExisting: forwardRef(() => CategoryInputComponent), multi: true }
     ]
 })
-export class CatSelInputComponent implements ControlValueAccessor, OnChanges {
-
-
-
-
+export class CategoryInputComponent implements ControlValueAccessor, OnChanges {
 
     isSelectCategory = false;
     categories: any = [];

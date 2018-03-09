@@ -1,39 +1,21 @@
-<!-- <div *ngIf="!isSelectCategoryVisible">
-    <div *ngIf="transaction">
-        <h2>{{ transaction.description | uppercase }} Details</h2>
-        <div>
-            <span>id: </span>
-            <input [(ngModel)]="transaction.id" />
-        </div>
-        <div>
-            <label>Category:</label>
-            <label placeholder="category">
-                <app-cat-input  [(ngModel)]="transaction.categoryName" ></app-cat-input>
-            </label>
-        </div>
-        <div>
-            <label>name:</label>
-            <label placeholder="name">
-                <input [(ngModel)]="transaction.description" />
-            </label>
-        </div>
-
-
-        <button (click)="update()">Submit</button>
-    </div>
-</div> -->
 <form [formGroup]="editTransactionForm" (ngSubmit)="onSubmit(editTransactionForm)">
     <div>
-        <mat-form-field>
-            <input matInput formControlName="Amount" >
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput formControlName="Description" >
-        </mat-form-field>
+        <div style="width:100%;">
+            <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                <input matInput formControlName="Amount">
+            </mat-form-field>
+        </div>
+        <div style="width:100%;">
+            <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                <textarea matInput formControlName="Description"></textarea>
+            </mat-form-field>
+        </div>
         <app-cat-input formControlName="categoryName" required></app-cat-input>
-        <mat-form-field>
-            <input matInput  type="date" formControlName="time">
-        </mat-form-field>
+        <div style="width:100%;">
+            <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                <input matInput type="date" formControlName="time">
+            </mat-form-field>
+        </div>
         <button type="submit" class="btn btn-success" [disabled]="!editTransactionForm.valid">Submit</button>
     </div>
 </form>

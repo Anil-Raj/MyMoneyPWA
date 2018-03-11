@@ -13,10 +13,9 @@ import { SidebarService } from '../../../components/sidebar/sidebar.service';
 })
 export class TransactionListComponent implements OnInit, OnChanges {
 
-
     categories: any[];
-    transactions: Transaction[];
-    groupByFilter = 'categoryName';
+    transactions: any[];
+    groupByFilter = 'categoryId';
     today = new Date();
     public people: Transaction[];
     public form: any;
@@ -24,50 +23,23 @@ export class TransactionListComponent implements OnInit, OnChanges {
         private database: PouchDBService,
         private zone: NgZone, private route: ActivatedRoute,
         private navService: SidebarService) {
-        this.database.isTransactionsModified.subscribe(() => {
-            this.database.getDoc('transaction_').subscribe((transactions) => {
-                this.transactions = transactions.rows.map(row => {
-                    return row.doc;
-                });
-                // console.log(this.transactions);
-
+        this.database.getDoc('transaction_').subscribe((transactions) => {
+            this.transactions = transactions.rows.map(row => {
+                return row.doc;
             });
+            // console.log(this.transactions);
+
         });
         this.navService.groupBy.subscribe(a => this.groupByFilter = a);
-
-
-
     }
 
     ngOnInit() {
-        // this.database.isTransactionsModified.then(() => {
-        //     console.log('inside majsdhfjhdp');
-        //     this.database.getDoc('transaction_').subscribe((categories) => {
-        //         this.transactions = categories.rows.map(row => {
-        //             console.log(row.doc);
-
-        //             return row.doc;
-        //         });
-        //         console.log(this.transactions);
-
-        //     });
-        //     console.log('inside m');
-        // });
-        this.database.transactionsModified(true);
+        this.groupByFilter = 'categoryId';
+        console.log(this.groupByFilter);
 
     }
     ngOnChanges() {
-
     }
-
-    // getHeader(key, trs: any[]) {
-    //     if (this.groupByFilter === 'time') {
-    //         return trs[0].time;
-    //     }
-    //     if (this.groupByFilter === 'categoryName') {
-    //         return trs[0].categoryName.Name;
-    //     }
-    // }
     getSum(items) {
         let sum = 0;
         items.map(item => {
@@ -75,5 +47,25 @@ export class TransactionListComponent implements OnInit, OnChanges {
         });
         return sum;
     }
-
+    income() {
+        let sum = 0;
+        this.transactions.map(a => {
+            if (a.categoryName.Type === 'Income') {
+                sum += parseInt(a.Amount, 10);
+            }
+        });
+        return sum;
+    }
+    expense() {
+        let sum = 0;
+        this.transactions.map(a => {
+            if (a.categoryName.Type === 'Expense') {
+                sum += parseInt(a.Amount, 10);
+            }
+        });
+        return sum;
+    }
+    netAmount() {
+        return this.income() - this.expense();
+    }
 }

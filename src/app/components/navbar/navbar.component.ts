@@ -12,12 +12,12 @@ export class NavbarComponent {
 
     constructor(public nav: SidebarService) { }
     navOpen() {
-        this.nav.toggle();
+        this.nav.show();
     }
     groupByTransaction() {
         this.nav.confirmMission('time');
     }
     groupByCategory() {
-        this.nav.confirmMission('categoryName');
+        this.nav.confirmMission('categoryId');
     }
 }

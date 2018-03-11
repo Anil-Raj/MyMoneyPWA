@@ -26,22 +26,6 @@
     outline: none;
 }
 
-/* .trans {
-    transition: 0.3s;
-    padding: 10px 0px;
-     background: white;
-    width: 100%;
-} */
-/* .trans:focus{
-    outline: 0;
-}
-.trans:hover, .trans:active {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    background: rgba(209, 196, 233, .3);
-    width: 100%;
-} */
-
 .date {
     float: left;
     font-size: 2em;
@@ -99,6 +83,7 @@
 
 .wrapper {
     display: flex;
+    padding: 2px;
 }
 
 .left {
@@ -118,3 +103,24 @@
     height: 100px;
 }
 
+.mat-list .mat-list-item .mat-list-item-content{
+    width: 100%;
+}
+.font-24{
+    font-size: 24px;
+}
+.sub-header{
+    font-size: 18px;
+}
+.bold-24{
+    font-size: 24px;
+    font-weight: bold;
+}
+.right .mat-divider{
+    width: 50%;
+    right: 0;
+    left: 50%;
+}
+.overview{
+    padding-bottom: 10px;
+}

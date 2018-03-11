@@ -1,35 +1,35 @@
-<mat-toolbar class = "nav" color="primary"></mat-toolbar>
+<mat-toolbar class="nav" color="primary"></mat-toolbar>
 <mat-toolbar color="primary"></mat-toolbar>
 <div class="featured-image">
-        <div class="round-button">
-            <div class="round-button-circle">
-                <a routerLink="/category-add" class="round-button">
-                    <!-- <i class="material-icons md-48">add</i> -->
-                    <i class="material-icons md-36 md-light">add</i>
-                </a>
-            </div>
+    <div class="round-button">
+        <div class="round-button-circle">
+            <a routerLink="/category-add" class="round-button">
+                <!-- <i class="material-icons md-48">add</i> -->
+                <i class="material-icons md-36 md-light">add</i>
+            </a>
         </div>
     </div>
+</div>
 
 
-    <div *ngFor="let categories of categories_data | groupBy:groupByFilter">
+<div *ngFor="let categories of categories_data | groupBy:groupByFilter">
+    <mat-list>
+        <mat-list-item>
+            <div class="header">
+                {{categories.value[0].Type}}
+            </div>
+        </mat-list-item>
+    </mat-list>
+
+    <button mat-button *ngFor="let category of categories.value" routerLink="{{category._id}}" class=" category">
         <mat-list>
-            <mat-list-item>
-                    <div class="header">
-                            {{categories.value[0].Type}}
-                        </div>
+            <mat-list-item class=" category">
+                <img mat-list-avatar [src]="category.Icon">
+                <span class="category-name">
+                    {{category.Name}}
+                </span>
             </mat-list-item>
         </mat-list>
+    </button>
 
-            <button mat-button *ngFor="let category of categories.value" routerLink="{{category._id}}" class=" category">
-                    <mat-list>
-                    <mat-list-item class=" category">
-                    <img mat-list-avatar src="/assets/myicons/img_avatar.png">
-                    <span class="category-name">
-                            {{category.Name}}
-                    </span>
-                    </mat-list-item>
-                </mat-list>
-            </button>
-
-    </div>
+</div>

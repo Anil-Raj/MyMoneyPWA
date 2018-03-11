@@ -8,6 +8,8 @@ export class GroupByPipe implements PipeTransform {
     transform(value: Array<any>, field: string): Array<any> {
         if (value) {
             const groupedObj = value.reduce((prev, cur) => {
+                console.log(prev, cur, );
+
                 if (!prev[cur[field]]) {
                     prev[cur[field]] = [cur];
                 } else {

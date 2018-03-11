@@ -19,6 +19,7 @@ import {
     MatMenuModule,
     MatButtonModule,
     MatGridListModule } from '@angular/material';
+import { CategoryItemComponent } from './category-item/category-item.component';
 
 @NgModule({
     imports: [
@@ -42,7 +43,8 @@ import {
         CategoryEditComponent,
         CategoryListComponent,
         CategoryInputComponent,
-        CategoryIconInputComponent
+        CategoryIconInputComponent,
+        CategoryItemComponent
     ],
     exports: [
         CategoryAddComponent,
@@ -50,7 +52,8 @@ import {
         CategoryEditComponent,
         CategoryListComponent,
         CategoryInputComponent,
-        CategoryIconInputComponent
+        CategoryIconInputComponent,
+        CategoryItemComponent
     ],
     providers: [
         CategoryService

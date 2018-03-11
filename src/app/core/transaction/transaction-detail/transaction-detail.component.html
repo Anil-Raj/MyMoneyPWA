@@ -1,5 +1,6 @@
-<span *ngIf="transaction">
+<!-- <span *ngIf="transaction">
     <i class="material-icons" routerLink="/transaction/edit/{{transaction._id}}">mode edit</i>
+    <i class="material-icons" (click)="del(transaction._id)">delete</i>
 </span>
 <div *ngIf="transaction">
     <h2>{{ transaction.Description | uppercase }} Details</h2>
@@ -12,8 +13,38 @@
     </div>
     <div>
         <label>category:</label>
-        <label placeholder="name">{{transaction.categoryName}}</label>
+        <label placeholder="name">{{transaction.categoryName.Name}}</label>
 
     </div>
 
+</div> -->
+
+
+<div [@slideUp] class="add-category">
+    <mat-toolbar>
+        <i class="material-icons" (click)="back()">arrow_back</i>
+        <span class="fill-space"></span>
+        <!-- <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid"><i class="material-icons">save</i></button> -->
+        <i class="material-icons icon" routerLink="/transaction/edit/{{transaction._id}}">mode edit</i>
+        <i class="material-icons icon" (click)="del(transaction._id)">delete</i>
+
+    </mat-toolbar>
+    <div *ngIf="transaction">
+        <h2>{{ transaction.Description | uppercase }} Details</h2>
+        <div>
+            <!-- <span>id: </span>{{transaction._id}}</div> -->
+        <div>
+            <label>name:</label>
+            <label placeholder="name">{{transaction.Description}}</label>
+
+        </div>
+        <div>
+            <!-- <label>category:</label>
+            <label placeholder="name">{{transaction.categoryName.Name}}</label> -->
+            <app-category-item [category]="transaction.categoryName"></app-category-item>
+
+        </div>
+
+
+    </div>
 </div>

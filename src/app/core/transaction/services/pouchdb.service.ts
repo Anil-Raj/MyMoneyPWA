@@ -11,15 +11,20 @@ export class PouchDBService {
     private isInstantiated: boolean;
     private database: any;
     private listener: EventEmitter<any> = new EventEmitter();
-    isTransactionsModified = new BehaviorSubject<boolean>(false);
     public constructor() {
         if (!this.isInstantiated) {
             this.database = new PouchDB('dman');
             this.isInstantiated = true;
             this.database.bulkDocs([
-                { Name: 'Salary', Type: 'Income', _id: 'category_income_1', Icon: '' },
-                { Name: 'Internet Bill', Type: 'Expense', _id: 'category_expense_2', Icon: '' },
-                { Name: 'TV Bill', Type: 'Expense', _id: 'category_expense_3', Icon: '' }
+                { Name: 'Cloth', Type: 'Expense', _id: 'category_expense_1', Icon: '/assets/myicons/ml/icon_17.png' },
+                { Name: 'Electronic Gadgets', Type: 'Expense', _id: 'category_expense_2', Icon: '/assets/myicons/ml/icon_9.png' },
+                { Name: 'Travel', Type: 'Expense', _id: 'category_expense_3', Icon: '/assets/myicons/ml/ic_category_travel.png' },
+                { Name: 'Salary', Type: 'Income', _id: 'category_income_1', Icon: '/assets/myicons/ml/ic_category_salary.png' },
+                {
+                    Name: 'Interest Money', Type: 'Income', _id: 'category_income_2',
+                    Icon: '/assets/myicons/ml/ic_category_interestmoney.png'
+                },
+                { Name: 'Debt Collection', Type: 'Income', _id: 'category_income_3', Icon: '/assets/myicons/ml/icon_140.png' },
             ]).then(function (result) {
                 // handle result
             }).catch(function (err) {
@@ -68,12 +73,25 @@ export class PouchDBService {
             console.error(JSON.stringify(error));
         });
     }
+    public del(id: string) {
+        console.log(document);
+        return this.database.get(id).then(result => {
+            result._deleted = true;
+            return this.database.put(result);
+        }, error => {
+            if (error.status == '404') {
+                return this.database.put(document);
+            } else {
+                return new Promise((resolve, reject) => {
+                    reject(error);
+                });
+            }
+        });
+
+    }
 
     public getChangeListener() {
         return this.listener;
-    }
-    transactionsModified(value) {
-        this.isTransactionsModified.next(value);
     }
 
 }

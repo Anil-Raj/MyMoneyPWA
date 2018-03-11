@@ -4,7 +4,7 @@ import { PouchDBService } from '../../transaction/services/pouchdb.service';
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.css']
+  styleUrls: ['./category-list.component.css'],
 })
 export class CategoryListComponent implements OnInit {
 
@@ -13,7 +13,7 @@ groupByFilter = 'Type';
   constructor(private database: PouchDBService) { }
 
   ngOnInit() {
-    this.database.isTransactionsModified.subscribe(() => {
+    // this.database.isCategoriesModified.subscribe(() => {
         this.database.getDoc('category_').subscribe((categories) => {
             this.categories_data = categories.rows.map(row => {
 
@@ -21,7 +21,7 @@ groupByFilter = 'Type';
             });
             console.log(this.categories_data);
         });
-    });
+    // });
   }
 
 }

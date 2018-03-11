@@ -1,7 +1,36 @@
+<mat-card>
+    <div class="overview">
+        <div class="day bold-24">Overview</div>
+        <div class="sub-header">Tap to view full report</div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="wrapper">
+        <div class="left font-24">Inflow</div>
+        <div class="right font-24">
+            <div>{{income()}}</div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="left font-24">Outflow</div>
+        <div class="right font-24">
+            <div>{{expense()}}</div>
+        </div>
+    </div>
+    <div class="right">
+        <mat-divider></mat-divider>
+    </div>
+    <div class="wrapper">
+        <div class="left font-24"></div>
+        <div class="right font-24">
+            <div>{{netAmount()}}</div>
+        </div>
+    </div>
+</mat-card>
+
 <div *ngFor="let item of transactions | groupBy:groupByFilter">
     <div class="card">
         <div class="trans-group-header">
-            <div *ngIf="groupByFilter == 'categoryName'">
+            <div *ngIf="groupByFilter == 'categoryId'">
                 <div>
                     <mat-list>
                         <mat-list-item>
@@ -16,23 +45,23 @@
                 <mat-divider></mat-divider>
 
                 <mat-list>
-                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero._id}}" class="wrapper no-outline" matRipple style="position:relative" >
-                            <div class="left">
-                                <div class="date">{{hero.time | date}}</div>
-                                <div class="date-detail">
-                                    <div class="day">{{hero.time | day }}</div>
-                                    <div>{{hero.time | month }} {{hero.time | year }}</div>
-                                </div>
+                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero._id}}" class="wrapper no-outline" matRipple style="position:relative">
+                        <div class="left">
+                            <div class="date">{{hero.time | date}}</div>
+                            <div class="date-detail">
+                                <div class="day">{{hero.time | day }}</div>
+                                <div>{{hero.time | month }} {{hero.time | year }}</div>
                             </div>
-                            <div class="right">
-                                <div>{{hero.Amount}}</div>
-                            </div>
-                        </mat-list-item>
-                    </mat-list>
+                        </div>
+                        <div class="right">
+                            <div>{{hero.Amount}}</div>
+                        </div>
+                    </mat-list-item>
+                </mat-list>
             </div>
             <div *ngIf="groupByFilter == 'time'">
                 <mat-list>
-                    <mat-list-item class="wrapper" >
+                    <mat-list-item class="wrapper">
                         <div class="left">
                             <div class="date">{{item.value[0].time | date}}</div>
                             <div class="date-detail">
@@ -48,10 +77,10 @@
                 </mat-list>
                 <mat-divider></mat-divider>
                 <mat-list>
-                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero._id}}" class="no-outline" matRipple style="position:relative" >
-                        <img mat-list-avatar src="/assets/myicons/img_avatar.png" alt="aasdf">
+                    <mat-list-item *ngFor="let hero of item.value" routerLink="{{hero._id}}" class="no-outline" matRipple style="position:relative">
+                        <img mat-list-avatar [src]="hero.categoryName.Icon" alt="aasdf">
                         <h3 mat-line>
-                            {{hero.categoryName}}
+                            {{hero.categoryName.Name}}
                         </h3>
                         {{hero.Amount}}
                     </mat-list-item>

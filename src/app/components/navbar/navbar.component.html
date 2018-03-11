@@ -1,9 +1,9 @@
 <mat-toolbar class="nav" color="primary">
-    <div (click)="navOpen()" id="sidebarCollapse">
+    <div (click)="navOpen()" >
         <!-- <i class="glyphicon glyphicon-align-left"></i> -->
         <i class="material-icons">menu</i>
     </div>
-    <span class="example-fill-remaining-space"></span>
+    <span class="fill-space"></span>
     <mat-menu #appMenu="matMenu">
         <button mat-menu-item  (click)="groupByTransaction()" >View By Transaction   </button>
         <button mat-menu-item (click)="groupByCategory()"> View By Category    </button>

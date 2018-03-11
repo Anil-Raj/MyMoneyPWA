@@ -59,7 +59,10 @@ export class TransactionEditComponent implements OnInit {
         this.service.newTransaction(transaction);
         this.database.put(this.id, transaction).then(() => {
             this.router.navigate(['/transaction/' + this.id]);
-            this.database.transactionsModified(true);
         });
     }
+    back() {
+        this.location.back();
+    }
+
 }

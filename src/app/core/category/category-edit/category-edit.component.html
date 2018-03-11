@@ -1,3 +1,26 @@
-<p>
-  category-edit works!
-</p>
+<div [@flyUp] class="add-category">
+        <mat-toolbar>
+            <i class="material-icons" (click)="back()">arrow_back</i>
+            <span class="fill-space"></span>
+            <!-- <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid"><i class="material-icons">save</i></button> -->
+            <button mat-button (click)="onSubmit(addCategoryForm)">Save</button>
+        </mat-toolbar>
+        <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit(addCategoryForm)">
+            <div>
+                <mat-form-field>
+                    <input matInput formControlName="Name" placeholder="Name">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput formControlName="Description" placeholder="Description">
+                </mat-form-field>
+                <mat-radio-group formControlName="Type">
+                    <mat-radio-button checked=true value="Income">Income</mat-radio-button>
+                    <mat-radio-button value="Expense">Expense</mat-radio-button>
+                </mat-radio-group>
+                <app-category-icon-input formControlName="Icon"></app-category-icon-input>
+
+                <!-- <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid">Submit</button> -->
+            </div>
+        </form>
+
+    </div>

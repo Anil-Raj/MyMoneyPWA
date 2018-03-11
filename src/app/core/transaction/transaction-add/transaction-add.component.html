@@ -1,23 +1,31 @@
-<form [formGroup]="addTransactionForm" (ngSubmit)="onSubmit(addTransactionForm)">
-    <div>
-        <div style="width:100%;">
-            <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
-                <input matInput formControlName="Amount" placeholder="Amount">
-            </mat-form-field>
-        </div>
-        <div style="width:100%;">
-            <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
-                <textarea matInput formControlName="Description" placeholder="Note"></textarea>
-            </mat-form-field>
-        </div>
+<div [@slideUp] class="add-category">
+        <mat-toolbar>
+                <i class="material-icons" (click)="back()">arrow_back</i>
+                <span class="fill-space"></span>
+                <button mat-button (click)="onSubmit(addTransactionForm)">Save</button>
+
+            </mat-toolbar>
+    <form [formGroup]="addTransactionForm" (ngSubmit)="onSubmit(addTransactionForm)">
         <div>
-            <app-cat-input formControlName="categoryName"></app-cat-input>
+            <div style="width:100%;">
+                <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                    <input matInput formControlName="Amount" placeholder="Amount">
+                </mat-form-field>
+            </div>
+            <div style="width:100%;">
+                <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                    <textarea matInput formControlName="Description" placeholder="Note"></textarea>
+                </mat-form-field>
+            </div>
+            <div>
+                <app-cat-input formControlName="categoryName"></app-cat-input>
+            </div>
+            <div style="width:100%;">
+                <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                    <input matInput type="date" formControlName="time">
+                </mat-form-field>
+            </div>
+            <!-- <button type="submit" class="btn btn-success" [disabled]="!addTransactionForm.valid">Submit</button> -->
         </div>
-        <div style="width:100%;">
-            <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
-                <input matInput type="date" formControlName="time">
-            </mat-form-field>
-        </div>
-        <button type="submit" class="btn btn-success" [disabled]="!addTransactionForm.valid">Submit</button>
-    </div>
-</form>
+    </form>
+</div>

@@ -1,21 +1,33 @@
-<form [formGroup]="editTransactionForm" (ngSubmit)="onSubmit(editTransactionForm)">
-    <div>
-        <div style="width:100%;">
-            <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
-                <input matInput formControlName="Amount">
-            </mat-form-field>
-        </div>
-        <div style="width:100%;">
-            <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
-                <textarea matInput formControlName="Description"></textarea>
-            </mat-form-field>
-        </div>
-        <app-cat-input formControlName="categoryName" required></app-cat-input>
-        <div style="width:100%;">
-            <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
-                <input matInput type="date" formControlName="time">
-            </mat-form-field>
-        </div>
-        <button type="submit" class="btn btn-success" [disabled]="!editTransactionForm.valid">Submit</button>
+<div [@slideUp] class="add-category">
+        <form [formGroup]="editTransactionForm" (ngSubmit)="onSubmit(editTransactionForm)">
+            <mat-toolbar>
+                <i class="material-icons" (click)="back()">arrow_back</i>
+                <span class="fill-space"></span>
+                <!-- <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid"><i class="material-icons">save</i></button> -->
+                <!-- <i class="material-icons icon" routerLink="/transaction/edit/{{transaction._id}}">mode edit</i> -->
+                <!-- <i class="material-icons icon" (click)="del(transaction._id)">delete</i> -->
+                <button mat-button (click)="onSubmit(editTransactionForm)">Save</button>
+            </mat-toolbar>
+
+            <div>
+                <div style="width:100%;">
+                    <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                        <input matInput formControlName="Amount">
+                    </mat-form-field>
+                </div>
+                <div style="width:100%;">
+                    <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                        <textarea matInput formControlName="Description"></textarea>
+                    </mat-form-field>
+                </div>
+                <app-cat-input formControlName="categoryName" required></app-cat-input>
+                <div style="width:100%;">
+                    <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                        <input matInput type="date" formControlName="time">
+                    </mat-form-field>
+                </div>
+                <!-- <button type="submit" class="btn btn-success" [disabled]="!editTransactionForm.valid">Submit</button> -->
+            </div>
+        </form>
+
     </div>
-</form>

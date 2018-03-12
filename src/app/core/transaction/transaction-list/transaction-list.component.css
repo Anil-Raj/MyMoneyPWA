@@ -50,6 +50,7 @@
     position: fixed;
     right: 0px;
     bottom: 0px;
+    z-index: 100;
 }
 
 .round-button {
@@ -103,11 +104,14 @@
     height: 100px;
 }
 
-.mat-list .mat-list-item .mat-list-item-content{
-    width: 100%;
+.mat-list .mat-list-item div{
+    /* width: 100%!important; */
 }
 .font-24{
     font-size: 24px;
+}
+.font-36{
+    font-size: 36px;
 }
 .sub-header{
     font-size: 18px;
@@ -124,3 +128,4 @@
 .overview{
     padding-bottom: 10px;
 }
+

@@ -4,12 +4,19 @@
         <i class="material-icons">menu</i>
     </div>
     <span class="fill-space"></span>
-    <mat-menu #appMenu="matMenu">
-        <button mat-menu-item  (click)="groupByTransaction()" >View By Transaction   </button>
-        <button mat-menu-item (click)="groupByCategory()"> View By Category    </button>
+    <mat-menu #appMenu="matMenu" >
+        <button *ngIf="nav.getGroupByOptions() == gb.Transaction" mat-menu-item  (click)="groupByTransaction()" >View By Transaction   </button>
+        <button *ngIf="nav.getGroupByOptions() == gb.Category" mat-menu-item (click)="groupByCategory()"> View By Category    </button>
+        <button  mat-menu-item  [matMenuTriggerFor]="subMenu"> Select Time Range    </button>
+
+
 
     </mat-menu>
-
+    <mat-menu #subMenu="matMenu">
+            <button  mat-menu-item (click)="groupByMonth()"> <i class="material-icons" *ngIf="viewByFilter == 'month'">done</i> By Month </button>
+            <button  mat-menu-item (click)="groupByWeek()"><i class="material-icons" *ngIf="viewByFilter == 'week'">done</i> By Week    </button>
+            <button  mat-menu-item (click)="groupByDay()"><i class="material-icons" *ngIf="viewByFilter == 'day'">done</i> By Day   </button>
+          </mat-menu>
     <span  [matMenuTriggerFor]="appMenu">
         <mat-icon>more_vert</mat-icon>
     </span>

@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, EventEmitter, Output } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { SidebarService } from '../sidebar/sidebar.service';
+import { SidebarService, GroupBy } from '../sidebar/sidebar.service';
 
 @Component({
     selector: 'app-navbar',
@@ -9,15 +9,29 @@ import { SidebarService } from '../sidebar/sidebar.service';
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+    gb = GroupBy;
+    viewByFilter;
+    constructor(public nav: SidebarService, private navService: SidebarService) {
+         this.navService.viewBy.subscribe(a => this.viewByFilter = a.range);
+        console.log(this.viewByFilter);
+    }
 
-    constructor(public nav: SidebarService) { }
     navOpen() {
         this.nav.show();
     }
     groupByTransaction() {
-        this.nav.confirmMission('time');
+        this.nav.confirmGroupBy('time');
     }
     groupByCategory() {
-        this.nav.confirmMission('categoryId');
+        this.nav.confirmGroupBy('categoryId');
+    }
+    groupByMonth() {
+        this.nav.confirmViewBy( 'month' );
+    }
+    groupByDay() {
+        this.nav.confirmViewBy( 'date' );
+    }
+    groupByWeek() {
+        this.nav.confirmViewBy( 'week' );
     }
 }

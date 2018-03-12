@@ -4,14 +4,11 @@
     <div class="round-button">
         <div class="round-button-circle">
             <a routerLink="/category-add" class="round-button">
-                <!-- <i class="material-icons md-48">add</i> -->
                 <i class="material-icons md-36 md-light">add</i>
             </a>
         </div>
     </div>
 </div>
-
-
 <div *ngFor="let categories of categories_data | groupBy:groupByFilter">
     <mat-list>
         <mat-list-item>

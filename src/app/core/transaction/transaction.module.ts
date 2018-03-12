@@ -17,7 +17,8 @@ import {
     MatInputModule,
     MatRipple,
     MatRippleModule,
-    MatCardModule
+    MatCardModule,
+    MatTabsModule
 } from '@angular/material';
 import { DatePipe } from '../../pipes/date.pipe';
 import { DayPipe } from '../../pipes/day.pipe';
@@ -40,7 +41,8 @@ import { GroupByModule } from '../../pipes/group-by.module';
         MatInputModule,
         GroupByModule,
         MatRippleModule,
-        MatCardModule
+        MatCardModule,
+        MatTabsModule
     ],
     declarations: [
         TransactionListComponent,

@@ -3,9 +3,6 @@
             <mat-toolbar>
                 <i class="material-icons" (click)="back()">arrow_back</i>
                 <span class="fill-space"></span>
-                <!-- <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid"><i class="material-icons">save</i></button> -->
-                <!-- <i class="material-icons icon" routerLink="/transaction/edit/{{transaction._id}}">mode edit</i> -->
-                <!-- <i class="material-icons icon" (click)="del(transaction._id)">delete</i> -->
                 <button mat-button (click)="onSubmit(editTransactionForm)">Save</button>
             </mat-toolbar>
 
@@ -26,7 +23,6 @@
                         <input matInput type="date" formControlName="time">
                     </mat-form-field>
                 </div>
-                <!-- <button type="submit" class="btn btn-success" [disabled]="!editTransactionForm.valid">Submit</button> -->
             </div>
         </form>
 

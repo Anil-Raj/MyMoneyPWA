@@ -29,6 +29,7 @@
     "bootstrap": "^4.0.0",
     "core-js": "^2.4.1",
     "jquery": "^3.3.1",
+    "moment": "^2.21.0",
     "popper.js": "^1.12.9",
     "pouchdb": "^6.4.3",
     "rxjs": "^5.5.6",

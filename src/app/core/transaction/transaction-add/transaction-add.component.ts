@@ -39,7 +39,7 @@ export class TransactionAddComponent implements OnInit {
         this.addTransactionForm = new FormGroup({
             Description: new FormControl(),
             Amount: new FormControl('', Validators.required),
-            categoryName: new FormControl('', Validators.required),
+            category: new FormControl('', Validators.required),
             time: new FormControl(Date(), Validators.required)
         });
     }
@@ -47,7 +47,7 @@ export class TransactionAddComponent implements OnInit {
         if (valid) {
             const transaction = value;
             console.log(transaction);
-            transaction.categoryId = transaction.categoryName._id;
+            transaction.categoryId = transaction.category._id;
             this.service.newTransaction(transaction);
             this.database.put('transaction_' + new Date().valueOf(), transaction).then(() => {
                 this.router.navigate(['/transaction/']);

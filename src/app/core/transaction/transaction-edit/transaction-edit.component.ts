@@ -17,9 +17,7 @@ import PouchDB from 'pouchdb';
 export class TransactionEditComponent implements OnInit {
 
     id;
-
     private transaction: any;
-
     editTransactionForm: FormGroup;
 
     constructor(private service: TransactionService,

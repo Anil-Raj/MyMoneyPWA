@@ -1,5 +1,5 @@
-<mat-tab-group (selectedTabChange)="updateTr($event)">
-    <mat-tab *ngFor="let val of timerange" [label]="val+' '+ viewByFilter.range">
+<mat-tab-group backgroundColor="#673ab7" [(selectedIndex)]="selectedIndex" (selectedTabChange)="updateTr($event)" >
+    <mat-tab *ngFor="let val of timerange" [label]="val.Label">
         <mat-card *ngIf="(transactions | viewBy:viewByFilter).length > 0">
             <div class="overview">
                 <div class="day bold-24">Overview</div>
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </mat-card>
-        <div *ngIf="(transactions | viewBy:viewByFilter).length < 1 " style="padding-top:40%;">{{ (transactions | viewBy:viewByFilter).length }}
+        <div *ngIf="(transactions | viewBy:viewByFilter).length < 1 " style="padding-top:40vh;">{{ (transactions | viewBy:viewByFilter).length }}
             <div class="font-36"> No transactions</div>
             <div> Tap + to add one</div>
         </div>

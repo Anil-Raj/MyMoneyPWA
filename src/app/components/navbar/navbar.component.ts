@@ -29,7 +29,7 @@ export class NavbarComponent {
         this.nav.confirmViewBy( 'month' );
     }
     groupByDay() {
-        this.nav.confirmViewBy( 'date' );
+        this.nav.confirmViewBy( 'day' );
     }
     groupByWeek() {
         this.nav.confirmViewBy( 'week' );

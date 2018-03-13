@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SidebarService } from '../../../components/sidebar/sidebar.service';
 import { GroupByPipe } from '../../../pipes/group-by.pipe';
 import { ViewByPipe } from '../../../pipes/view-by.pipe';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-transaction-list',
@@ -15,23 +16,22 @@ import { ViewByPipe } from '../../../pipes/view-by.pipe';
 })
 export class TransactionListComponent implements OnInit, OnChanges {
 
-    timerange: string[] = [
-        'Last',
-        'This',
-        'Future'
+    timerange: any[] = [
 
     ];
+    selectedIndex = 1;
     categories: any[];
     transactions: any[];
     groupByFilter = 'categoryId';
     today = new Date();
     public people: Transaction[];
     public form: any;
-    viewByFilter;
+    viewByFilter ;
     constructor(private service: TransactionService,
         private database: PouchDBService,
         private zone: NgZone, private route: ActivatedRoute,
         private navService: SidebarService) {
+
         this.database.getDoc('transaction_').subscribe((transactions) => {
             this.transactions = transactions.rows.map(row => {
                 return row.doc;
@@ -43,11 +43,61 @@ export class TransactionListComponent implements OnInit, OnChanges {
         });
         this.navService.groupBy.subscribe(a => this.groupByFilter = a);
         this.navService.viewBy.subscribe(a => this.viewByFilter = a);
+        this.updateTimerange();
+
+    }
+    updateTimerange() {
+        this.navService.viewBy.subscribe(a => {
+            this.timerange = [];
+            const range: moment.unitOfTime.DurationConstructor = this.viewByFilter.range as moment.unitOfTime.DurationConstructor;
+            console.log('adsfasd');
+            //     range = a.range;
+            // } else {
+            //     range = 'week';
+            // }
+            const start = moment().startOf('day').add(-10, range);
+            const end = moment().endOf('day');
+
+            // const this.timerange = [];
+            let day = start;
+
+            while (day <= end) {
+                if (range === 'month') {
+                    this.timerange.push({
+                        Label: day.format('MM/YYYY'),
+                        start: day.format()
+                    });
+                } else if (range === 'week') {
+                    this.timerange.push(
+                        {
+                            Label: day.format('DD/MM') + ' - ' + day.clone().add(1, range).add(-1, 's').format('DD/MM'),
+                            start: day.format()
+                        });
+                } else if (range === 'day') {
+                    this.timerange.push({
+                        Label: day.format('D MMM YYYY'),
+                        start: day.format()
+                    });
+                }
+
+                day = day.clone().add(1, range);
+            }
+            this.timerange.push({
+                isFuture: true,
+                Label: 'Future',
+                start: moment().format()
+            });
+            // this.timerange.push(this.timerange);
+            console.log(this.timerange);
+            this.selectedIndex = this.timerange.length - 2;
+
+        });
     }
 
     ngOnInit() {
         this.groupByFilter = 'categoryId';
         console.log(this.groupByFilter);
+
 
     }
     ngOnChanges() {
@@ -94,23 +144,15 @@ export class TransactionListComponent implements OnInit, OnChanges {
 
     }
     updateTr(val) {
-        console.log(val.tab.textLabel);
+        // console.log(val);
+        console.log(this.timerange.length - 1 - this.selectedIndex);
 
-        if (val.tab.textLabel === 'This ' + this.viewByFilter.range) {
-            console.log('Today');
-
-            // this.viewByFilter = { value: 0, range: 'date' };
-            this.navService.confirmViewByValue(0);
-        } else if (val.tab.textLabel === 'Last ' + this.viewByFilter.range) {
-            console.log('Last');
-
-            this.navService.confirmViewByValue(-1);
-            // this.viewByFilter = { value: -1, range: 'date' };
-        } else {
-            this.navService.confirmViewByValue(1);
-        }
-        // this.viewByFilter = { value: 0, range: 'date' };
-        // this.navService.confirmViewBy({ value: 0, range: 'date' });
+        this.viewByFilter = {
+            isFuture: false,
+            range: this.navService.viewBy.getValue().range,
+            start: this.timerange[val.index].start
+        };
+        console.log(this.viewByFilter);
 
     }
 }

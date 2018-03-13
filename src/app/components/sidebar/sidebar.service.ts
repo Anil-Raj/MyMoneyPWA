@@ -27,6 +27,7 @@ export class SidebarService {
     }
     confirmViewBy(range: string) {
         // console.log(viewBy);
+        console.log(range, { value: this.viewBy.getValue().value, range: range });
 
         this.viewBy.next({ value: this.viewBy.getValue().value, range: range });
     }

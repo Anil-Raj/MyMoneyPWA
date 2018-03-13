@@ -1,4 +1,4 @@
-<mat-tab-group backgroundColor="#673ab7" [(selectedIndex)]="selectedIndex" (selectedTabChange)="updateTr($event)">
+<mat-tab-group  [(selectedIndex)]="selectedIndex" (selectedTabChange)="updateTr($event)">
     <mat-tab *ngFor="let val of timerange" [label]="val.Label">
         <mat-card *ngIf="(transactions | viewBy:viewByFilter).length > 0">
             <div class="overview">

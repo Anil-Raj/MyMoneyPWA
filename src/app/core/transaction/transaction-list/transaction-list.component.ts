@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, OnChanges } from '@angular/core';
+import { Component, OnInit, NgZone, OnChanges, ViewEncapsulation     } from '@angular/core';
 import { Transaction } from '../../../Models/Transaction';
 import { TransactionService } from '../services/transaction.service';
 import { CategoryService } from '../../category/category.service';
@@ -9,10 +9,12 @@ import { GroupByPipe } from '../../../pipes/group-by.pipe';
 import { ViewByPipe } from '../../../pipes/view-by.pipe';
 import * as moment from 'moment';
 
+
 @Component({
     selector: 'app-transaction-list',
     templateUrl: './transaction-list.component.html',
-    styleUrls: ['./transaction-list.component.css']
+    styleUrls: ['./transaction-list.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class TransactionListComponent implements OnInit, OnChanges {
 

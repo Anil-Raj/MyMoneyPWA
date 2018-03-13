@@ -9,8 +9,8 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/inline.672ea7b6a0825108e4d2.bundle.js",
-        "/main.b7de7d53fc864dc1d3b8.bundle.js",
+        "/inline.14bad41e8b4a02dd0c56.bundle.js",
+        "/main.65fe846af035f42e407e.bundle.js",
         "/polyfills.1457c99db4b6dba06e8d.bundle.js",
         "/styles.2d30a25045cd79d575f5.bundle.css"
       ],
@@ -38,6 +38,7 @@
         "/assets/myicons/img_avatar.png",
         "/assets/myicons/logo.png",
         "/assets/myicons/salary.png",
+        "/assets/myicons/ml/giphy.gif",
         "/assets/myicons/ml/icon_10.png",
         "/assets/myicons/ml/icon_11.png",
         "/assets/myicons/ml/icon_125.png",
@@ -78,16 +79,17 @@
         "/assets/myicons/ml/ic_category_salary.png",
         "/assets/myicons/ml/ic_category_shopping.png",
         "/assets/myicons/ml/ic_category_transport.png",
-        "/assets/myicons/ml/ic_category_travel.png"
+        "/assets/myicons/ml/ic_category_travel.png",
+        "/assets/myicons/ml/lg.money-coin-palette-color-preloader.gif"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "/inline.672ea7b6a0825108e4d2.bundle.js": "1dab86cd8e377a5489bc5c10666bf3071f477a84",
+    "/inline.14bad41e8b4a02dd0c56.bundle.js": "f221fb8176a5e8ffdcd05926f73c95d51d79ffe7",
     "/assets/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2": "f4ddff060ff0ba19d8ee04122397557658bc85ee",
-    "/main.b7de7d53fc864dc1d3b8.bundle.js": "3f06f1b26fea35c135754b7a4792c116b3cacbf6",
+    "/main.65fe846af035f42e407e.bundle.js": "60754ca57356f09a4fcf3bdb79b78b12a34d7863",
     "/assets/manifest.json": "460d2ed844e35a431b611071314b19e23cd1fc6e",
     "/polyfills.1457c99db4b6dba06e8d.bundle.js": "e29de1bb2e2b4396c66ea8deed94ff4b4b57821d",
     "/assets/icons/ic_menu_black_24dp/android/drawable-hdpi/ic_menu_black_24dp.png": "c9ca4be70a026cb37ff62918cbdf2d6781295386",
@@ -95,7 +97,7 @@
     "/assets/icons/ic_menu_black_24dp/android/drawable-mdpi/ic_menu_black_24dp.png": "d301fb069cc7d08af50334b39c18c10c03be2052",
     "/favicon.ico": "52fd6c3666a81684a667fedbcaed49b6c653702c",
     "/assets/icons/ic_menu_black_24dp/android/drawable-xhdpi/ic_menu_black_24dp.png": "14f1b18698132d3d4caf1ac051a75909ddcb52a7",
-    "/index.html": "e2eecc67fed07772a202c06558f222f8864c32ba",
+    "/index.html": "3e8544adebde56bcbd551643d8ccd65b606346db",
     "/assets/icons/ic_menu_black_24dp/android/drawable-xxhdpi/ic_menu_black_24dp.png": "86fac594d1def8cac14b939b7356c4eb47c4780b",
     "/assets/icons/ic_menu_black_24dp/android/drawable-xxxhdpi/ic_menu_black_24dp.png": "d9646fa2f11dd175cab7c2ccbc25a806b8fa4a74",
     "/assets/icons/ic_menu_black_24dp/ios/ic_menu.imageset/Contents.json": "ebdbb03ea5003250d4800eaa1db7d4e150b4657a",
@@ -108,6 +110,7 @@
     "/assets/myicons/img_avatar.png": "68be10f1e9c654aea790ad2b5b842328a65de08e",
     "/assets/myicons/logo.png": "72ee72ff75b9fe492200d083062b36e9e1df57e2",
     "/assets/myicons/salary.png": "c419cc4e7fb7a0f80a0bc2c28ed5746523dd4d08",
+    "/assets/myicons/ml/giphy.gif": "2ba89930f7014163b4c7922bd1f26e9fe78cfc7e",
     "/assets/myicons/ml/icon_10.png": "a292bb5fbd6212c3805f757fa72f1bda6dde0d50",
     "/assets/myicons/ml/icon_11.png": "fb3053dee5fe220ad993a9e3f4840b6654e5c92f",
     "/assets/myicons/ml/icon_125.png": "9f9da3101238c0ccddcd14dd2c32e07248d91def",
@@ -148,6 +151,7 @@
     "/assets/myicons/ml/ic_category_salary.png": "44ae2cea54077d604c50df280e56815a167cb7a3",
     "/assets/myicons/ml/ic_category_shopping.png": "dfc949571999ce34d6dff77bcdfcd4a5c0549ad0",
     "/assets/myicons/ml/ic_category_transport.png": "5e808674643151f78ab8c2ac834368b31cf04227",
-    "/assets/myicons/ml/ic_category_travel.png": "ebb2571cac0a66677a9b0f188f7260e55002e769"
+    "/assets/myicons/ml/ic_category_travel.png": "ebb2571cac0a66677a9b0f188f7260e55002e769",
+    "/assets/myicons/ml/lg.money-coin-palette-color-preloader.gif": "94cc0510161ddbaf72a1454d59bff794cc4268ac"
   }
 }

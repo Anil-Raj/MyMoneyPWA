@@ -15,21 +15,19 @@
 }
 
 .trans-group-header {
-    /* padding:.5em; */
 }
-.mat-list{
+
+.mat-list {
     padding-top: 0px;
-
 }
 
-.no-outline:focus{
+.no-outline:focus {
     outline: none;
 }
 
 .date {
     float: left;
     font-size: 2em;
-    /* padding-left: 5px; */
 }
 
 .date-detail {
@@ -37,7 +35,8 @@
     padding-left: 16px;
     font-size: .8em;
 }
-.day{
+
+.day {
     padding-bottom: .4em;
 }
 
@@ -104,36 +103,88 @@
     height: 100px;
 }
 
-.mat-list .mat-list-item div{
-    /* width: 100%!important; */
+.mat-list .mat-list-item div {
 }
-.font-24{
+
+.font-24 {
     font-size: 24px;
 }
-.font-36{
+
+.font-36 {
     font-size: 36px;
 }
-.sub-header{
+
+.sub-header {
     font-size: 18px;
 }
-.bold-24{
+
+.bold-24 {
     font-size: 24px;
     font-weight: bold;
 }
-.right .mat-divider{
+
+.right .mat-divider {
     width: 50%;
     right: 0;
     left: 50%;
 }
-.overview{
+
+.overview {
     padding-bottom: 10px;
 }
 
-.centered{
+.centered {
     margin-top: 25vh;
     margin-left: 50vw;
-    /* height: 100%; */
 }
-.centered > div{
+
+.centered>div {
     margin-left: -120px;
 }
+
+.mat-tab-header{
+    background: #673ab7!important;
+    color: white;
+    left: 0px;
+}
+.mat-tab-list{
+    color: white;
+    background-color: #673ab7;
+}
+.mat-tab-header-pagination{
+
+}
+.mat-tab-label{
+    color:white;
+}
+.mat-tab-header-pagination-chevron {
+    border-color:white;
+}
+/* .mat-tab-body-wrapper {
+    color: white;
+    background-color: #673ab7;
+}
+
+.mat-tab-label.mat-tab-label-active {
+    background-color: #3f51b5;
+} */
+
+.mat-toolbar{
+    /* z-index: 999;
+    position: fixed */
+  }
+   .mat-tab-group{
+    margin-top:0px !important;
+  }
+
+  .mat-tab-header{
+        z-index: 999;
+        width:100vw;
+        position: fixed  !important;
+        background-color: #673ab7 !important;
+        margin-top: -1px;
+  }
+  .mat-tab-body-wrapper{
+      position: relative !important;
+      margin-top:0px;
+  }

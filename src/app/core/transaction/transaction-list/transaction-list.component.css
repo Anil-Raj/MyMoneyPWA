@@ -129,3 +129,11 @@
     padding-bottom: 10px;
 }
 
+.centered{
+    margin-top: 25vh;
+    margin-left: 50vw;
+    /* height: 100%; */
+}
+.centered > div{
+    margin-left: -120px;
+}

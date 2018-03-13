@@ -26,7 +26,7 @@ export class TransactionListComponent implements OnInit, OnChanges {
     today = new Date();
     public people: Transaction[];
     public form: any;
-    viewByFilter ;
+    viewByFilter;
     constructor(private service: TransactionService,
         private database: PouchDBService,
         private zone: NgZone, private route: ActivatedRoute,
@@ -144,14 +144,21 @@ export class TransactionListComponent implements OnInit, OnChanges {
 
     }
     updateTr(val) {
-        // console.log(val);
+        console.log(val);
         console.log(this.timerange.length - 1 - this.selectedIndex);
-
-        this.viewByFilter = {
-            isFuture: false,
-            range: this.navService.viewBy.getValue().range,
-            start: this.timerange[val.index].start
-        };
+        if (val.tab.textLabel === 'Future') {
+            this.viewByFilter = {
+                isFuture: true,
+                range: this.navService.viewBy.getValue().range,
+                start: this.timerange[val.index].start
+            };
+        } else {
+            this.viewByFilter = {
+                isFuture: false,
+                range: this.navService.viewBy.getValue().range,
+                start: this.timerange[val.index].start
+            };
+        }
         console.log(this.viewByFilter);
 
     }

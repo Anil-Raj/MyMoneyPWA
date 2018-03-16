@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, OnChanges, ViewEncapsulation     } from '@angular/core';
+import { Component, OnInit, NgZone, OnChanges, ViewEncapsulation } from '@angular/core';
 import { Transaction } from '../../../Models/Transaction';
 import { TransactionService } from '../services/transaction.service';
 import { CategoryService } from '../../category/category.service';
@@ -65,21 +65,70 @@ export class TransactionListComponent implements OnInit, OnChanges {
 
             while (day <= end) {
                 if (range === 'month') {
-                    this.timerange.push({
-                        Label: day.format('MM/YYYY'),
-                        start: day.format()
-                    });
-                } else if (range === 'week') {
-                    this.timerange.push(
-                        {
-                            Label: day.format('DD/MM') + ' - ' + day.clone().add(1, range).add(-1, 's').format('DD/MM'),
+                    if (day.isSame(moment(), 'month')) {
+                        this.timerange.push(
+                            {
+                                Label: 'This Month',
+                                start: day.format()
+                            });
+
+                    } else if (day.isSame(moment().add(-1, 'month'), 'month')) {
+                        this.timerange.push(
+                            {
+                                Label: 'Last Month',
+                                start: day.format()
+                            });
+
+                    } else {
+                        this.timerange.push({
+                            Label: day.format('MM/YYYY'),
                             start: day.format()
                         });
+                    }
+                } else if (range === 'week') {
+                    if (day.isSame(moment(), 'week')) {
+                        this.timerange.push(
+                            {
+                                Label: 'This Week',
+                                start: day.format()
+                            });
+
+                    } else if (day.isSame(moment().add(-1, 'week'), 'week')) {
+                        this.timerange.push(
+                            {
+                                Label: 'Last Week',
+                                start: day.format()
+                            });
+
+                    } else {
+                        this.timerange.push(
+                            {
+                                Label: day.format('DD/MM') + ' - ' + day.clone().add(1, range).add(-1, 's').format('DD/MM'),
+                                start: day.format()
+                            });
+                    }
+
                 } else if (range === 'day') {
-                    this.timerange.push({
-                        Label: day.format('D MMM YYYY'),
-                        start: day.format()
-                    });
+                    if (day.isSame(moment(), 'day')) {
+                        this.timerange.push(
+                            {
+                                Label: 'Today',
+                                start: day.format()
+                            });
+
+                    } else if (day.isSame(moment().add(-1, 'day'), 'day')) {
+                        this.timerange.push(
+                            {
+                                Label: 'Yesterday',
+                                start: day.format()
+                            });
+
+                    } else {
+                        this.timerange.push({
+                            Label: day.format('D MMM YYYY'),
+                            start: day.format()
+                        });
+                    }
                 }
 
                 day = day.clone().add(1, range);

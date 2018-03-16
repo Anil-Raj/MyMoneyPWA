@@ -149,7 +149,7 @@
 }
 .mat-tab-list{
     color: white;
-    background-color: #673ab7;
+    background-color: 673ab7;
 }
 .mat-tab-header-pagination{
 
@@ -181,10 +181,16 @@
         z-index: 999;
         width:100vw;
         position: fixed  !important;
-        background-color: #673ab7 !important;
-        margin-top: -1px;
+        background-color: 673ab7 !important;
+        margin-top: -2px;
   }
   .mat-tab-body-wrapper{
       position: relative !important;
       margin-top:0px;
   }
+  .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: red;
+}
+.mat-tab-group.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus, .mat-tab-group.mat-primary .mat-tab-link:not(.mat-tab-disabled):focus, .mat-tab-nav-bar.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus, .mat-tab-nav-bar.mat-primary .mat-tab-link:not(.mat-tab-disabled):focus {
+    background-color: red;
+}

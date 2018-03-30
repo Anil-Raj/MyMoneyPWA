@@ -1,0 +1,19 @@
+.account-list{
+    position: fixed;
+    top:0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    background: white;
+    height: 100%;
+
+}
+
+.account{
+    position: fixed;
+    top:0;
+    left: 40px;
+    z-index: 1000;
+    color:white;
+}
+

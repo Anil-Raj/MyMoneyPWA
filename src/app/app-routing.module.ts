@@ -11,6 +11,7 @@ import { SettingComponent } from './core/setting/setting.component';
 import { CategoryAddComponent } from './core/category/category-add/category-add.component';
 import { CategoryDetailComponent } from './core/category/category-detail/category-detail.component';
 import { CategoryEditComponent } from './core/category/category-edit/category-edit.component';
+import { FitnessComponent } from './core/fitness/fitness/fitness.component';
 
 const routes: Routes = [
   { path: 'transaction', component: TransactionListComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'category/edit/:id', component: CategoryEditComponent },
   { path: 'category-add', component: CategoryAddComponent },
   { path: 'settings', component: SettingComponent },
+  { path: 'fitness', component: FitnessComponent },
   { path: '', redirectTo: 'transaction', pathMatch: 'full' }
 ];
 

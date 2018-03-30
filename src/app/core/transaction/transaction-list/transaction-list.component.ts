@@ -25,6 +25,8 @@ export class TransactionListComponent implements OnInit, OnChanges {
     categories: any[];
     transactions: any[];
     groupByFilter = 'categoryId';
+    account;
+
     today = new Date();
     public people: Transaction[];
     public form: any;
@@ -47,6 +49,11 @@ export class TransactionListComponent implements OnInit, OnChanges {
         this.navService.viewBy.subscribe(a => this.viewByFilter = a);
         this.updateTimerange();
 
+    }
+    selectAccount(account) {
+    }
+    getAccountAmount(account) {
+        return 500;
     }
     updateTimerange() {
         this.navService.viewBy.subscribe(a => {

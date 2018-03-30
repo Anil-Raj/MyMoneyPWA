@@ -27,6 +27,7 @@ import { YearPipe } from '../../pipes/year.pipe';
 import { FormFieldComponent } from './form-field/form-field.component';
 import { PouchDBService } from './services/pouchdb.service';
 import { GroupByModule } from '../../pipes/group-by.module';
+import { AccountModule } from '../account/account.module';
 
 @NgModule({
     imports: [
@@ -42,7 +43,8 @@ import { GroupByModule } from '../../pipes/group-by.module';
         GroupByModule,
         MatRippleModule,
         MatCardModule,
-        MatTabsModule
+        MatTabsModule,
+        AccountModule
     ],
     declarations: [
         TransactionListComponent,

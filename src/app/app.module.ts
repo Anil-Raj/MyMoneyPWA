@@ -20,6 +20,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { DebtComponent } from './core/debt/debt.component';
 import { TrendComponent } from './core/trend/trend.component';
 import { SettingComponent } from './core/setting/setting.component';
+import { FitnessComponent } from './core/fitness/fitness/fitness.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { SettingComponent } from './core/setting/setting.component';
         DebtComponent,
         TrendComponent,
         SettingComponent,
+        FitnessComponent,
     ],
     imports: [
         CommonModule,

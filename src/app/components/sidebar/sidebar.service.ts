@@ -22,6 +22,8 @@ export class SidebarService {
     groupBy = new BehaviorSubject<string>('categoryId');
 
     viewBy = new BehaviorSubject<any>({ value: 0, range: 'week' });
+
+    account = new BehaviorSubject<any>({ id: 0, Name: 'Bank', Amount: 200 });
     confirmGroupBy(groupBy: string) {
         this.groupBy.next(groupBy);
     }
@@ -36,6 +38,13 @@ export class SidebarService {
 
         console.log({ value: value, range: this.viewBy.getValue().range });
         this.viewBy.next({ value: value, range: this.viewBy.getValue().range });
+    }
+
+    confirmAccountValue(value) {
+        console.log(value);
+
+        console.log({ value: value, range: this.viewBy.getValue().range });
+        this.account.next(value);
     }
 
     constructor() { this.visible = false; }

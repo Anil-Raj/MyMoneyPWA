@@ -1,0 +1,15 @@
+<div *ngIf="!isIconSelected" (click)="displayIconSelected()" class="category_icon">
+    <div *ngIf="selectedIcon">
+        <img mat-list-avatar [src]="selectedIcon" (click)="displayIconSelected()">
+    </div>
+    <div *ngIf="!selectedIcon">
+        <img mat-list-avatar [src]="icon_not_selected" (click)="displayIconSelected()">
+    </div>
+</div>
+<div *ngIf="isIconSelected" class="category-list" [@flyInOut]>
+    <mat-grid-list cols="6" rowHeight="1:1">
+        <mat-grid-tile *ngFor="let icon of ICONS " (click)="select(icon)">
+            <img mat-list-avatar [src]="icon">
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

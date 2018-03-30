@@ -1,0 +1,9 @@
+.category {
+    transition: 0.3s;
+    background: white;
+    font-size: .8em;
+    width: 100%;
+}
+.category-name{
+    padding-left: 20px;
+}

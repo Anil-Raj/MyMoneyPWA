@@ -2,21 +2,34 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>Angular5PwaMoney</title>
-  <base href="/">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>My Money</title>
+    <base href="/">
+    <link rel="manifest" href="assets/manifest.json">
+    <meta name="theme-color" content="#673ab7" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
 <body>
-  <app-root></app-root>
+    <app-root>
+        <img src="/assets/myicons/ml/giphy.gif" alt="" style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -100px;
+      "> </app-root>
+
 </body>
+<script>
+    if ('serviceWorker' in navigator) {
+        // sw.js can literally be empty, but must exist
+        // navigator.serviceWorker.register('/ngsw-worker.js');
+        //test
+        //test 2
+    }
+
+</script>
 
 </html>

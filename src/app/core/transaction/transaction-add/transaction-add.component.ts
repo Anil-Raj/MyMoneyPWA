@@ -1,77 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, trigger, style, transition, state, animate } from '@angular/core';
 import { Transaction } from '../../../Models/Transaction';
 import { Category } from '../../../Models/Category';
 import { CategoryService } from '../../category/category.service';
 import { TransactionService } from '../services/transaction.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { PouchDBService } from '../services/pouchdb.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-transaction-add',
-  templateUrl: './transaction-add.component.html',
-  styleUrls: ['./transaction-add.component.css']
+    selector: 'app-transaction-add',
+    templateUrl: './transaction-add.component.html',
+    styleUrls: ['./transaction-add.component.css'],
+    animations: [
+        trigger('slideUp', [
+            state('in', style({ transform: 'translateY(0)' })),
+            transition('void => *', [
+                style({ transform: 'translateY(100%)' }),
+                animate('.3s ease-out')
+            ]),
+            transition('* => void', [
+                animate(500, style({ transform: 'translateY(-100%)' }))
+            ])
+        ])
+    ],
 })
 export class TransactionAddComponent implements OnInit {
 
+    private transaction: Transaction;
+    addTransactionForm: FormGroup;
 
-  private transaction: Transaction = null;
-  selectedCategory: Category;
-  categoryList: any;
+    constructor(private service: TransactionService,
+        private database: PouchDBService,
+        private router: Router,
+        private location: Location) { }
 
-  // description: string;
-  amount: number;
-  addTransactionForm: FormGroup;
-
-
-
-  // description = new FormControl('Description of TRansaction', Validators.required);
-
-
-
-
-  constructor(private service: TransactionService, private categoryServie: CategoryService) { }
-
-  ngOnInit() {
-    this.categoryServie.awaiCategories().subscribe(a => {this.categoryList  = a; console.log(a);
-    });
-    this.addTransactionForm = new FormGroup ({
-      Description: new FormControl('Description of TRansaction', Validators.required),
-      Amount: new FormControl('0', Validators.required),
-      // CategoryId: new FormControl(),
-      CategoryName: new FormControl(),
-      Date: new FormControl()
-  });
-  }
-
-
-  onSubmit({ value }: { value: Transaction }) {
-    // const date: Date = new Date();
-    // const transaction: TransactionModel = {
-    //   Id: 0,
-    //   Description: '',
-    //     Amount: 0,
-    //     CategoryId: 0,
-    //     CategoryName: '',
-    //     Time: date
-
-    // };
-    // transaction.Description = this.description;
-    // transaction.Amount = this.amount;
-    const transaction = <Transaction>value;
-    console.log(transaction);
-
-
-    this.service.newTransaction(transaction);
-  }
-
-
+    ngOnInit() {
+        this.addTransactionForm = new FormGroup({
+            Description: new FormControl(),
+            Amount: new FormControl('', Validators.required),
+            category: new FormControl('', Validators.required),
+            time: new FormControl(Date(), Validators.required)
+        });
+    }
+    onSubmit({ valid, value }: { valid: any, value: any }) {
+        if (valid) {
+            const transaction = value;
+            console.log(transaction);
+            transaction.categoryId = transaction.category._id;
+            this.service.newTransaction(transaction);
+            this.database.put('transaction_' + new Date().valueOf(), transaction).then(() => {
+                this.router.navigate(['/transaction/']);
+            });
+        }
+    }
+    back() {
+        this.location.back();
+    }
 }
-class TransactionModel {
-  Id: number;
-  Amount: number;
-  Description: string;
-  Time: Date;
-  CategoryId: number;
-  CategoryName: string;
-}
-
-

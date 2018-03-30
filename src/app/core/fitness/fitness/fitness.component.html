@@ -1,0 +1,66 @@
+<!-- <div *ngFor="let item of transactions| viewBy:viewByFilter |  groupBy:groupByFilter">
+    <div class="card">
+        <div class="trans-group-header">
+            <div *ngIf="groupByFilter == 'categoryId'">
+                <div>
+                    <mat-list>
+                        <mat-list-item>
+                            <img mat-list-avatar [src]="item.value[0].category.Icon">
+                            <h3 mat-line>
+                                {{item.value[0].category.Name}}
+                            </h3>
+                            <div class=" font-24">{{getSum(item.value)}}</div>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+                <mat-divider></mat-divider>
+
+                <mat-list>
+                    <mat-list-item *ngFor="let transaction of item.value" routerLink="{{transaction._id}}" class="wrapper no-outline" matRipple
+                        style="position:relative">
+                        <div class="left">
+                            <div class="date">{{transaction.time | date}}</div>
+                            <div class="date-detail">
+                                <div class="day">{{transaction.time  }}</div>
+                                <div>{{transaction.time }} {{transaction.time  }}</div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div *ngIf="transaction.category.Type == 'Expense'" class=" font-24" style="color:red">{{transaction.Amount}}</div>
+                            <div *ngIf="transaction.category.Type == 'Income'" class=" font-24" style="color:blue">{{transaction.Amount}}</div>
+                        </div>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <div *ngIf="groupByFilter == 'time'">
+                <mat-list>
+                    <mat-list-item class="wrapper">
+                        <div class="left">
+                            <div class="date">{{item.value[0].time | date}}</div>
+                            <div class="date-detail">
+                                <div class="day">{{item.value[0].time }}</div>
+                                <div>{{item.value[0].time  }} {{item.value[0].time  }}</div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class=" font-24">{{getSum(item.value)}}</div>
+                        </div>
+                    </mat-list-item>
+
+                </mat-list>
+                <mat-divider></mat-divider>
+                <mat-list>
+                    <mat-list-item *ngFor="let transaction of item.value" routerLink="{{transaction._id}}" class="no-outline" matRipple style="position:relative">
+                        <img mat-list-avatar [src]="transaction.category.Icon" alt="aasdf">
+                        <h3 mat-line>
+                            {{transaction.category.Name}}
+                        </h3>
+                        <div *ngIf="transaction.category.Type == 'Expense'" class=" font-24" style="color:red">{{transaction.Amount}}</div>
+                        <div *ngIf="transaction.category.Type == 'Income'" class=" font-24" style="color:blue">{{transaction.Amount}}</div>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+
+        </div>
+    </div>
+</div> -->

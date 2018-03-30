@@ -1,26 +1,29 @@
-<div *ngIf="!isSelectCategoryVisible">
-<div *ngIf="transaction">
-  <h2>{{ transaction.description | uppercase }} Details</h2>
-  <div>
-    <span>id: </span>
-    <input [(ngModel)]="transaction.id" />
-  </div>
-  <div>
-    <label>name:</label>
-    <label placeholder="name">
-      <input [(ngModel)]="transaction.description" />
-    </label>
-  </div>
-  <div>
-      <label>Category:</label>
-      <label placeholder="category">
-        <div (click)="selectCategoryWindow()" >{{transaction.categoryName}}</div>
-      </label>
-    </div>
+<div [@slideUp] class="add-category">
+        <form [formGroup]="editTransactionForm" (ngSubmit)="onSubmit(editTransactionForm)">
+            <mat-toolbar>
+                <i class="material-icons" (click)="back()">arrow_back</i>
+                <span class="fill-space"></span>
+                <button mat-button (click)="onSubmit(editTransactionForm)">Save</button>
+            </mat-toolbar>
 
-  <button (click)="update()">Submit</button>
-</div>
-</div>
-<div *ngIf="isSelectCategoryVisible">
-    <app-category-select (change)="selectCategory($event)"></app-category-select>
-  </div>
+            <div>
+                <div style="width:100%;">
+                    <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                        <input matInput formControlName="Amount">
+                    </mat-form-field>
+                </div>
+                <div style="width:100%;">
+                    <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                        <textarea matInput formControlName="Description"></textarea>
+                    </mat-form-field>
+                </div>
+                <app-cat-input formControlName="categoryName" required></app-cat-input>
+                <div style="width:100%;">
+                    <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                        <input matInput type="date" formControlName="time">
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+
+    </div>

@@ -1,0 +1,17 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .add-category {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    background: white;
+    min-height: 100%;
+    width: 100%;
+}
+
+.fill-space {
+    flex: 1 1 auto;
+}

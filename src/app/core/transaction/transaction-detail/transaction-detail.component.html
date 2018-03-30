@@ -1,19 +1,18 @@
-<p  *ngIf="transaction">
-    <button routerLink="/transaction/edit/{{transaction.id}}" >edit</button>
-</p>
-<div *ngIf="transaction">
-    <h2>{{ transaction.description | uppercase }} Details</h2>
-    <div>
-        <span>id: </span>{{transaction.id}}</div>
-    <div>
-        <label>name:</label>
-        <label placeholder="name">{{transaction.description}}</label>
-
+<div [@slideUp] class="add-category">
+    <div *ngIf="transaction">
+        <mat-toolbar>
+            <i class="material-icons" (click)="back()">arrow_back</i>
+            <span class="fill-space"></span>
+            <i class="material-icons icon" routerLink="/transaction/edit/{{transaction._id}}">mode edit</i>
+            <i class="material-icons icon" (click)="del(transaction._id)">delete</i>
+        </mat-toolbar>
+        <div>
+            <div>
+                <label>Amount:</label>
+                <label placeholder="name">{{transaction.Amount}}</label>
+            </div>
+            <div>
+                <app-category-item [category]="transaction.categoryName"></app-category-item>
+            </div>
+        </div>
     </div>
-    <div>
-        <label>category:</label>
-        <label placeholder="name">{{transaction.categoryName}}</label>
-
-    </div>
-
-</div>

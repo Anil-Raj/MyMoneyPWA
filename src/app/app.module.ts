@@ -15,29 +15,37 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TransactionModule } from './core/transaction/transaction.module';
 import { CategoryModule } from './core/category/category.module';
-import { MatButtonModule, MatListModule, MatToolbarModule } from '@angular/material';
-
+import { MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule } from '@angular/material';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { DebtComponent } from './core/debt/debt.component';
+import { TrendComponent } from './core/trend/trend.component';
+import { SettingComponent } from './core/setting/setting.component';
+import { FitnessComponent } from './core/fitness/fitness/fitness.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    CommonModule,
-    HttpModule,
-    HttpClientModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    ComponentsModule,
-    TransactionModule,
-    CategoryModule,
-    MatButtonModule, MatListModule, MatToolbarModule,
+    declarations: [
+        AppComponent,
+        DebtComponent,
+        TrendComponent,
+        SettingComponent,
+        FitnessComponent,
+    ],
+    imports: [
+        CommonModule,
+        HttpModule,
+        HttpClientModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        ComponentsModule,
+        TransactionModule,
+        CategoryModule,
+        MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule,
 
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+        ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ],
+    providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

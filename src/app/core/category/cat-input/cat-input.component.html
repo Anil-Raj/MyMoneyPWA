@@ -1,0 +1,34 @@
+<div *ngIf="!isSelectCategory" (click)="displaySelectCategory()" class="category">
+    <div *ngIf="selectedCategory">
+        <mat-list>
+            <mat-list-item class=" category">
+                <img mat-list-avatar [src]="selectedCategory.Icon">
+                <span class="category-name">
+                    {{selectedCategory.Name}}
+                </span>
+            </mat-list-item>
+        </mat-list>
+    </div>
+    <div *ngIf="!selectedCategory">
+        <mat-list>
+            <mat-list-item class=" category">
+                <img mat-list-avatar [src]="icon_not_selected">
+                <span class="category-name">
+                    Select Category
+                </span>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>
+<div *ngIf="isSelectCategory" class="category-list" [@flyInOut]>
+    <div mat-button *ngFor="let category of categories" (click)="select(category)" class=" category">
+        <mat-list>
+            <mat-list-item class=" category">
+                <img mat-list-avatar [src]="category.Icon">
+                <span class="category-name">
+                    {{category.Name}}
+                </span>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>

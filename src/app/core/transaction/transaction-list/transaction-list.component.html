@@ -1,8 +1,7 @@
-<!-- <div (click)="selectAccount()" >{{account.Name}} {{getAccountAmount(account)}}</div> -->
 <app-account-select></app-account-select>
-<mat-tab-group  [(selectedIndex)]="selectedIndex" (selectedTabChange)="updateTr($event)" >
+<mat-tab-group  [(selectedIndex)]="selectedIndex" >
     <mat-tab *ngFor="let val of timerange" [label]="val.Label">
-        <mat-card *ngIf="(transactions | viewBy:viewByFilter).length > 0">
+        <mat-card *ngIf="(transactions | viewBy:val).length > 0">
             <div class="overview">
                 <div class="day bold-24">Overview</div>
                 <div class="sub-header">Tap to view full report</div>
@@ -30,13 +29,13 @@
                 </div>
             </div>
         </mat-card>
-        <div *ngIf="(transactions | viewBy:viewByFilter).length < 1 " class="centered">
+        <div *ngIf="(transactions | viewBy:val).length < 1 " class="centered">
             <div>
                 <div class="font-36"> No transactions</div>
                 <div> Tap + to add one</div>
             </div>
         </div>
-        <div *ngFor="let item of transactions| viewBy:viewByFilter |  groupBy:groupByFilter">
+        <div *ngFor="let item of transactions| viewBy:val |  groupBy:groupByFilter">
             <div class="card">
                 <div class="trans-group-header">
                     <div *ngIf="groupByFilter == 'categoryId'">
@@ -93,7 +92,6 @@
                                 <h3 mat-line>
                                     {{transaction.category.Name}}
                                 </h3>
-                                <!-- <div class=" font-24">{{transaction.Amount}}</div> -->
                                 <div *ngIf="transaction.category.Type == 'Expense'" class=" font-24" style="color:red">{{transaction.Amount}}</div>
                                 <div *ngIf="transaction.category.Type == 'Income'" class=" font-24" style="color:blue">{{transaction.Amount}}</div>
                             </mat-list-item>

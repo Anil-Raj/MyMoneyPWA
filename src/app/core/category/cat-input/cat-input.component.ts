@@ -11,24 +11,24 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
     animations: [
         trigger('flyInOut', [
-          state('in', style({transform: 'translateY(0)'})),
-          transition('void => *', [
-            style({transform: 'translateY(100%)'}),
-            animate(500)
-          ]),
-          transition('* => void', [
-            animate(100, style({transform: 'translateY(-100%)'}))
-          ])
+            state('in', style({ transform: 'translateY(0)' })),
+            transition('void => *', [
+                style({ transform: 'translateY(100%)' }),
+                animate(500)
+            ]),
+            transition('* => void', [
+                animate(100, style({ transform: 'translateY(-100%)' }))
+            ])
         ])
-      ],
+    ],
 
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CategoryInputComponent), multi: true },
         { provide: NG_VALIDATORS, useExisting: forwardRef(() => CategoryInputComponent), multi: true }
     ]
 })
-export class CategoryInputComponent implements ControlValueAccessor, OnChanges {
-
+export class CategoryInputComponent implements ControlValueAccessor, OnChanges, OnInit {
+    @Input() category: any;
     isSelectCategory = false;
     categories: any = [];
     selectedCategory: any;
@@ -40,8 +40,12 @@ export class CategoryInputComponent implements ControlValueAccessor, OnChanges {
                 return row.doc;
             });
         });
+    }
 
-       }
+    ngOnInit() {
+        console.log(this.category);
+        // this.selectedCategory = this.category.category.value;
+    }
     propagateChange: any = () => { };
     validateFn: any = () => { };
 

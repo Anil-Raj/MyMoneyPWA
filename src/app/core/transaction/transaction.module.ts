@@ -28,12 +28,14 @@ import { FormFieldComponent } from './form-field/form-field.component';
 import { PouchDBService } from './services/pouchdb.service';
 import { GroupByModule } from '../../pipes/group-by.module';
 import { AccountModule } from '../account/account.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        BrowserAnimationsModule,
         RouterModule,
         CategoryModule,
         MatButtonModule,

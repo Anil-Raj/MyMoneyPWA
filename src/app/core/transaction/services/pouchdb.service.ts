@@ -16,15 +16,32 @@ export class PouchDBService {
             this.database = new PouchDB('dman');
             this.isInstantiated = true;
             this.database.bulkDocs([
-                { Name: 'Cloth', Type: 'Expense', _id: 'category_expense_1', Icon: '/assets/myicons/ml/icon_17.png' },
-                { Name: 'Electronic Gadgets', Type: 'Expense', _id: 'category_expense_2', Icon: '/assets/myicons/ml/icon_9.png' },
-                { Name: 'Travel', Type: 'Expense', _id: 'category_expense_3', Icon: '/assets/myicons/ml/ic_category_travel.png' },
-                { Name: 'Salary', Type: 'Income', _id: 'category_income_1', Icon: '/assets/myicons/ml/ic_category_salary.png' },
+                {
+                    Name: 'Cloth', Type: 'Expense', _id: 'category_expense_1',
+                    Icon: '/assets/myicons/ml/icon_17.png', accountId: 'account_1'
+                },
+                {
+                    Name: 'Electronic Gadgets', Type: 'Expense', _id: 'category_expense_2',
+                    Icon: '/assets/myicons/ml/icon_9.png', accountId: 'account_1'
+                },
+                {
+                    Name: 'Travel', Type: 'Expense', _id: 'category_expense_3',
+                    Icon: '/assets/myicons/ml/ic_category_travel.png', accountId: 'account_1'
+                },
+                {
+                    Name: 'Salary', Type: 'Income', _id: 'category_income_1',
+                    Icon: '/assets/myicons/ml/ic_category_salary.png', accountId: 'account_1'
+                },
                 {
                     Name: 'Interest Money', Type: 'Income', _id: 'category_income_2',
-                    Icon: '/assets/myicons/ml/ic_category_interestmoney.png'
+                    Icon: '/assets/myicons/ml/ic_category_interestmoney.png', accountId: 2
                 },
-                { Name: 'Debt Collection', Type: 'Income', _id: 'category_income_3', Icon: '/assets/myicons/ml/icon_140.png' },
+                {
+                    Name: 'Debt Collection', Type: 'Income', _id: 'category_income_3',
+                    Icon: '/assets/myicons/ml/icon_140.png', accountId: 'account_2'
+                },
+                { _id: 'account_1', Name: 'Bank1234', Amount: 0 },
+                { _id: 'account_2', Name: 'Cash', Amount: 0 }
             ]).then(function (result) {
                 // handle result
             }).catch(function (err) {

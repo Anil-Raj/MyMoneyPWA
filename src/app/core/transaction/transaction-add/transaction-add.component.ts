@@ -49,7 +49,8 @@ export class TransactionAddComponent implements OnInit {
             console.log(transaction);
             transaction.categoryId = transaction.category._id;
             this.service.newTransaction(transaction);
-            this.database.put('transaction_' + new Date().valueOf(), transaction).then(() => {
+            this.database.put('transaction_' + new Date().valueOf(), transaction).then((a) => {
+                console.log(a);
                 this.router.navigate(['/transaction/']);
             });
         }

@@ -60,14 +60,8 @@ export class TransactionListComponent implements OnInit, OnChanges {
             this.timerange = [];
             const range: moment.unitOfTime.DurationConstructor = this.viewByFilter.range as moment.unitOfTime.DurationConstructor;
             console.log('adsfasd');
-            //     range = a.range;
-            // } else {
-            //     range = 'week';
-            // }
             const start = moment().startOf('day').add(-10, range);
             const end = moment().endOf('day');
-
-            // const this.timerange = [];
             let day = start;
 
             while (day <= end) {
@@ -145,7 +139,6 @@ export class TransactionListComponent implements OnInit, OnChanges {
                 Label: 'Future',
                 start: moment().format()
             });
-            // this.timerange.push(this.timerange);
             console.log(this.timerange);
             this.selectedIndex = this.timerange.length - 2;
 
@@ -161,18 +154,13 @@ export class TransactionListComponent implements OnInit, OnChanges {
     ngOnChanges() {
     }
     getSum(items) {
-        // console.log(items);
-
         let sum = 0;
         items.map(item => {
             sum += parseInt(item.Amount, 10);
         });
         return items[0].category.Type === 'Income' ? sum : sum * -1;
-        // return sum;
     }
     income(transactions) {
-        // console.log(transactions);
-
         let sum = 0;
         transactions.map(a => {
             if (a.category.Type === 'Income') {
@@ -183,7 +171,6 @@ export class TransactionListComponent implements OnInit, OnChanges {
     }
     expense(transactions) {
         let sum = 0;
-        // console.log(transactions);
         transactions.map(a => {
             if (a.category.Type === 'Expense') {
                 sum += parseInt(a.Amount, 10);

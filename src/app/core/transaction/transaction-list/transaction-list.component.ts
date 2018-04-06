@@ -25,8 +25,6 @@ export class TransactionListComponent implements OnInit, OnChanges {
     categories: any[];
     transactions: any[];
     groupByFilter = 'categoryId';
-    account;
-
     today = new Date();
     public people: Transaction[];
     public form: any;
@@ -50,8 +48,6 @@ export class TransactionListComponent implements OnInit, OnChanges {
         this.updateTimerange();
 
     }
-    selectAccount(account) {
-    }
     getAccountAmount(account) {
         return 500;
     }
@@ -70,20 +66,24 @@ export class TransactionListComponent implements OnInit, OnChanges {
                         this.timerange.push(
                             {
                                 Label: 'This Month',
-                                start: day.format()
+                                start: day.format(),
+                                range: 'month'
                             });
 
                     } else if (day.isSame(moment().add(-1, 'month'), 'month')) {
                         this.timerange.push(
                             {
                                 Label: 'Last Month',
-                                start: day.format()
+                                start: day.format(),
+                                range: 'month'
                             });
 
                     } else {
                         this.timerange.push({
                             Label: day.format('MM/YYYY'),
-                            start: day.format()
+                            start: day.format(),
+                            range: 'month'
+
                         });
                     }
                 } else if (range === 'week') {
@@ -91,22 +91,28 @@ export class TransactionListComponent implements OnInit, OnChanges {
                         this.timerange.push(
                             {
                                 Label: 'This Week',
-                                start: day.format()
+                                start: day.format(),
+                                range: 'week'
                             });
 
                     } else if (day.isSame(moment().add(-1, 'week'), 'week')) {
                         this.timerange.push(
                             {
                                 Label: 'Last Week',
-                                start: day.format()
+                                start: day.format(),
+                                range: 'week'
                             });
 
                     } else {
                         this.timerange.push(
                             {
-                                Label: day.format('DD/MM') + ' - ' + day.clone().add(1, range).add(-1, 's').format('DD/MM'),
-                                start: day.format()
+                                Label: day.format('DD/MM') + ' - ' + day.startOf('week').clone().add(1, range).add(-1, 's').format('DD/MM'),
+                                start: day.format(),
+                                range: 'week'
                             });
+                        console.log(day.startOf('week').format('DD/MM/YYYY') + ' - ' +
+                            day.startOf('week').clone().add(1, range).add(-1, 's').format('DD/MM/YYYY'));
+
                     }
 
                 } else if (range === 'day') {
@@ -114,20 +120,23 @@ export class TransactionListComponent implements OnInit, OnChanges {
                         this.timerange.push(
                             {
                                 Label: 'Today',
-                                start: day.format()
+                                start: day.format(),
+                                range: 'day'
                             });
 
                     } else if (day.isSame(moment().add(-1, 'day'), 'day')) {
                         this.timerange.push(
                             {
                                 Label: 'Yesterday',
-                                start: day.format()
+                                start: day.format(),
+                                range: 'day'
                             });
 
                     } else {
                         this.timerange.push({
                             Label: day.format('D MMM YYYY'),
-                            start: day.format()
+                            start: day.format(),
+                            range: 'day'
                         });
                     }
                 }

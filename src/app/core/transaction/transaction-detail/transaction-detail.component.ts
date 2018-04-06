@@ -39,6 +39,8 @@ export class TransactionDetailComponent implements OnInit {
         const id = this.route.snapshot.paramMap.get('id');
         this.service.get(id).subscribe(a => {
             this.transaction = a;
+            console.log(this.transaction);
+
         });
     }
     edit() {

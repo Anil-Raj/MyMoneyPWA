@@ -20,7 +20,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { DebtComponent } from './core/debt/debt.component';
 import { TrendComponent } from './core/trend/trend.component';
 import { SettingComponent } from './core/setting/setting.component';
-import { FitnessComponent } from './core/fitness/fitness/fitness.component';
+import { FitnessModule } from './core/fitness/fitness/fitness.module';
 
 @NgModule({
     declarations: [
@@ -28,7 +28,6 @@ import { FitnessComponent } from './core/fitness/fitness/fitness.component';
         DebtComponent,
         TrendComponent,
         SettingComponent,
-        FitnessComponent,
     ],
     imports: [
         CommonModule,
@@ -41,6 +40,7 @@ import { FitnessComponent } from './core/fitness/fitness/fitness.component';
         ComponentsModule,
         TransactionModule,
         CategoryModule,
+        FitnessModule,
         MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule,
 
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })

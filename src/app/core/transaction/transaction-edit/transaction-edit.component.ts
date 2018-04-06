@@ -8,11 +8,24 @@ import { Category } from '../../../Models/Category';
 import { PouchDBService } from '../services/pouchdb.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import PouchDB from 'pouchdb';
+import { trigger, style, state, transition, animate } from '@angular/animations';
 
 @Component({
     selector: 'app-transaction-edit',
     templateUrl: './transaction-edit.component.html',
-    styleUrls: ['./transaction-edit.component.css']
+    styleUrls: ['./transaction-edit.component.css'],
+    animations: [
+        trigger('slideUp', [
+            state('in', style({ transform: 'translateY(0)' })),
+            transition('void => *', [
+                style({ transform: 'translateY(100%)' }),
+                animate('.3s ease-out')
+            ]),
+            transition('* => void', [
+                animate(500, style({ transform: 'translateY(-100%)' }))
+            ])
+        ])
+    ],
 })
 export class TransactionEditComponent implements OnInit {
 
@@ -30,7 +43,7 @@ export class TransactionEditComponent implements OnInit {
         this.editTransactionForm = new FormGroup({
             Description: new FormControl(''),
             Amount: new FormControl(''),
-            categoryName: new FormControl(''),
+            category: new FormControl(''),
             time: new FormControl(new Date())
         });
         this.getTransaction();
@@ -45,7 +58,7 @@ export class TransactionEditComponent implements OnInit {
             this.editTransactionForm.patchValue({
                 Description: this.transaction[0].Description,
                 Amount: this.transaction[0].Amount,
-                categoryName: this.transaction[0].categoryName,
+                category: this.transaction[0].category,
                 time: this.transaction[0].time
             });
 
@@ -56,7 +69,7 @@ export class TransactionEditComponent implements OnInit {
         console.log(transaction);
         this.service.newTransaction(transaction);
         this.database.put(this.id, transaction).then(() => {
-            this.router.navigate(['/transaction/' + this.id]);
+            this.router.navigate(['/transaction/']);
         });
     }
     back() {

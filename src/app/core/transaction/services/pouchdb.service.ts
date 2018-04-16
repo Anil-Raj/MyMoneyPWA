@@ -1,5 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import PouchDB from 'pouchdb';
+import PouchFind from 'pouchdb-find';
+PouchDB.plugin(PouchFind);
 import { Transaction } from '../../../Models/Transaction';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
@@ -65,7 +67,9 @@ export class PouchDBService {
     public fetch() {
         return this.database.allDocs({ include_docs: true });
     }
-
+    public get_tr_for_acc(ac):any {
+        return Observable.from(this.database.find({ selector: { accountId: ac._id } }));
+    }
     public get(): any {
         return Observable.from(this.database.allDocs({ include_docs: true }));
     }

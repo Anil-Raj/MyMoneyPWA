@@ -36,27 +36,45 @@ export class TransactionListComponent implements OnInit, OnChanges {
         private zone: NgZone, private route: ActivatedRoute,
         private navService: SidebarService) {
 
-        this.database.get().subscribe((transactions) => {
-            this.transactionsFromAllAccount = transactions.rows.map(row => {
-                const transaction = new Transaction();
-                console.log(row.doc);
-
-                return transaction.toForm(row.doc);
-            });
-            // let accId;
-            console.log(this.transactionsFromAllAccount);
-
-            this.navService.account.subscribe(ac => {
-                this.transactions = this.transactionsFromAllAccount
-                    .filter(tr => tr.accountId === ac._id);
-                console.log(this.transactionsFromAllAccount);
+        this.navService.account.subscribe(ac => {
+            console.log(ac);
+            this.database.get_tr_for_acc(ac).subscribe((transactions) => {
+                // return transactions.docs;
+                console.log(transactions.docs);
+                this.transactions = transactions.docs.map(transaction => {
+                    const tr = new Transaction();
+                    return tr.toForm(transaction);
+                });
                 console.log(this.transactions);
+
+
             });
-            const gb = new GroupByPipe();
-            const vb = new ViewByPipe();
-            // this.transactions = vb.transform(this.transactions, this.viewByFilter);
-            // console.log(this.transactions);
         });
+
+
+
+
+        // this.database.get().subscribe((transactions) => {
+        //     this.transactionsFromAllAccount = transactions.rows.map(row => {
+        //         const transaction = new Transaction();
+        //         console.log(row.doc);
+
+        //         return transaction.toForm(row.doc);
+        //     });
+        //     // let accId;
+        //     console.log(this.transactionsFromAllAccount);
+
+        //     this.navService.account.subscribe(ac => {
+        //         this.transactions = this.transactionsFromAllAccount
+        //             .filter(tr => tr.accountId === ac._id);
+        //         console.log(this.transactionsFromAllAccount);
+        //         console.log(this.transactions);
+        //     });
+        //     const gb = new GroupByPipe();
+        //     const vb = new ViewByPipe();
+        //     // this.transactions = vb.transform(this.transactions, this.viewByFilter);
+        //     // console.log(this.transactions);
+        // });
         this.navService.groupBy.subscribe(a => this.groupByFilter = a);
         this.navService.viewBy.subscribe(a => this.viewByFilter = a);
         this.updateTimerange();

@@ -34,6 +34,7 @@
     "moment": "^2.21.0",
     "popper.js": "^1.12.9",
     "pouchdb": "^6.4.3",
+    "pouchdb-find": "^6.4.3",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

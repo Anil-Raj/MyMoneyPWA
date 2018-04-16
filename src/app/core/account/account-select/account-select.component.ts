@@ -29,13 +29,23 @@ export class AccountSelectComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.navService.account.subscribe(a => this.selectedAccount = a);
-        this.database.get_acc().subscribe((transactions) => {
-            this.accounts = transactions.rows.map(row => {
+
+        this.database.get_acc().subscribe((acc) => {
+            console.log(this.accounts);
+            this.accounts = acc.rows.map(row => {
+                console.log(row);
+                this.database.get_tr_for_acc(row.doc).subscribe(trs => {
+                    let sum = 0;
+                    trs.docs.map(tr => {
+                        sum += tr.amount;
+                    });
+                    console.log(sum);
+                    row.doc.amount = sum / 100;
+                });
                 return row.doc;
             });
-            console.log(this.accounts);
-
+            this.navService.account.subscribe(a => this.selectedAccount = a);
+            this.navService.confirmAccountValue(this.accounts[0]);
         });
     }
     displaySelectAccount() {

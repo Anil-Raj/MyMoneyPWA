@@ -24,7 +24,7 @@ export class SidebarService {
 
     viewBy = new BehaviorSubject<any>({ value: 0, range: 'week' });
 
-    account = new BehaviorSubject<any>({ id: 0, Name: 'Bank', amount: 0 });
+    account = new BehaviorSubject<any>({});
     confirmGroupBy(groupBy: string) {
         this.groupBy.next(groupBy);
     }
@@ -50,13 +50,13 @@ export class SidebarService {
 
     constructor(private database: PouchDBService) {
         this.visible = false;
-        this.database.get_acc().subscribe((transactions) => {
-            const accounts = transactions.rows.map(row => {
-                return row.doc;
-            });
-            console.log(accounts);
-            this.confirmAccountValue(accounts[0]);
-        });
+        // this.database.get_acc().subscribe((transactions) => {
+        //     const accounts = transactions.rows.map(row => {
+        //         return row.doc;
+        //     });
+        //     console.log(accounts);
+        //     this.confirmAccountValue(accounts[0]);
+        // });
     }
 
     hide() { this.visible = false; }

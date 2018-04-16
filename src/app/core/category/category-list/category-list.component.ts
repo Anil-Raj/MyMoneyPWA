@@ -14,7 +14,9 @@ groupByFilter = 'Type';
 
   ngOnInit() {
     // this.database.isCategoriesModified.subscribe(() => {
-        this.database.getDoc('category_').subscribe((categories) => {
+        this.database.get_cat().subscribe((categories) => {
+            console.log(categories);
+
             this.categories_data = categories.rows.map(row => {
 
                 return row.doc;

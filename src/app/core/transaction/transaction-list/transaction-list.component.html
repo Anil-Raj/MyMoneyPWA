@@ -1,4 +1,4 @@
-<app-account-select></app-account-select>
+<app-account-select ></app-account-select>
 <mat-tab-group  [(selectedIndex)]="selectedIndex" >
     <mat-tab *ngFor="let val of timerange" [label]="val.Label">
         <mat-card *ngIf="(transactions | viewBy:val).length > 0">
@@ -25,7 +25,7 @@
             <div class="wrapper">
                 <div class="left font-24"></div>
                 <div class="right font-24">
-                    <div>{{netAmount(transactions | viewBy:viewByFilter )}}</div>
+                    <div>{{netamount(transactions | viewBy:viewByFilter )}}</div>
                 </div>
             </div>
         </mat-card>
@@ -63,8 +63,7 @@
                                     </div>
                                 </div>
                                 <div class="right">
-                                    <div *ngIf="transaction.category.Type == 'Expense'" class=" font-24" style="color:red">{{transaction.Amount}}</div>
-                                    <div *ngIf="transaction.category.Type == 'Income'" class=" font-24" style="color:blue">{{transaction.Amount}}</div>
+                                    <div   [ngClass]="{'red': transaction.category.Kind == kindEnum.EXPENSE, 'blue': transaction.category.Kind == kindEnum.INCOME}" class=" font-24">{{transaction.amount}}</div>
                                 </div>
                             </mat-list-item>
                         </mat-list>
@@ -87,13 +86,12 @@
                         </mat-list>
                         <mat-divider></mat-divider>
                         <mat-list>
-                            <mat-list-item *ngFor="let transaction of item.value" routerLink="{{transaction._id}}" class="no-outline" matRipple style="position:relative">
+                            <mat-list-item *ngFor="let transaction of item.value" routerLink="{{transaction.id}}" class="no-outline" matRipple style="position:relative">
                                 <img mat-list-avatar [src]="transaction.category.Icon" alt="aasdf">
                                 <h3 mat-line>
                                     {{transaction.category.Name}}
                                 </h3>
-                                <div *ngIf="transaction.category.Type == 'Expense'" class=" font-24" style="color:red">{{transaction.Amount}}</div>
-                                <div *ngIf="transaction.category.Type == 'Income'" class=" font-24" style="color:blue">{{transaction.Amount}}</div>
+                                <div   [ngClass]="{'red': transaction.category.Kind == kindEnum.EXPENSE, 'blue': transaction.category.Kind == kindEnum.INCOME}" class=" font-24">{{transaction.amount}}</div>
                             </mat-list-item>
                         </mat-list>
                     </div>

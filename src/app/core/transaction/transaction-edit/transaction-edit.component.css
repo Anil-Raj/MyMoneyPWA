@@ -11,3 +11,9 @@
 .fill-space {
     flex: 1 1 auto;
 }
+.red{
+    color:red;
+}
+.blue{
+    color:blue;
+}

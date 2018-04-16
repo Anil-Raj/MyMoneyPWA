@@ -35,10 +35,12 @@ export class CategoryInputComponent implements ControlValueAccessor, OnChanges, 
     icon_not_selected = '/assets/myicons/ml/icon_not_selected.png';
     constructor(private categoryServie: CategoryService, private database: PouchDBService) {
         // this.categoryServie.awaiCategories().subscribe(a => this.categories  = a);
-        this.categories = this.database.getDoc('category_').subscribe((categories) => {
+        this.categories = this.database.get_cat().subscribe((categories) => {
             this.categories = categories.rows.map(row => {
                 return row.doc;
             });
+            console.log(this.categories);
+
         });
     }
 

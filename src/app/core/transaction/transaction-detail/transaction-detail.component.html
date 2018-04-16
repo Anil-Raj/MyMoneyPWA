@@ -8,8 +8,8 @@
         </mat-toolbar>
         <div>
             <div>
-                <label>Amount:</label>
-                <label placeholder="name">{{transaction.Amount}}</label>
+                <label >amount:</label>
+                <label [ngClass]="{'red': transaction.category.Kind == kindEnum.EXPENSE, 'blue': transaction.category.Kind == kindEnum.INCOME}" placeholder="name">{{transaction.amount}}</label>
             </div>
             <div>
                 <app-category-item [category]="transaction.category"></app-category-item>

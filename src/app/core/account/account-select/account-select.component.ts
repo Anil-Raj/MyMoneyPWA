@@ -26,20 +26,17 @@ export class AccountSelectComponent implements OnInit {
     isSelectAccount = false;
     selectedAccount: any;
     constructor(private navService: SidebarService, private database: PouchDBService) {
-        this.database.getDoc('account').subscribe((transactions) => {
-            this.accounts = transactions.rows.map(row => {
-                return row.doc;
-            });
-            console.log(this.accounts);
-            this.selectedAccount = this.accounts[0];
-            console.log(this.selectedAccount);
-        });
-
-
     }
 
     ngOnInit() {
         this.navService.account.subscribe(a => this.selectedAccount = a);
+        this.database.get_acc().subscribe((transactions) => {
+            this.accounts = transactions.rows.map(row => {
+                return row.doc;
+            });
+            console.log(this.accounts);
+
+        });
     }
     displaySelectAccount() {
         this.isSelectAccount = true;

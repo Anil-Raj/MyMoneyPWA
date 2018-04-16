@@ -4,6 +4,7 @@ import { TransactionService } from '../services/transaction.service';
 import { CategoryService } from '../../category/category.service';
 import { PouchDBService } from '../services/pouchdb.service';
 import { Location } from '@angular/common';
+import { Transaction, KindEnum } from '../../../Models/Transaction';
 
 @Component({
     selector: 'app-transaction-detail',
@@ -25,37 +26,33 @@ import { Location } from '@angular/common';
 export class TransactionDetailComponent implements OnInit {
 
     transaction: any;
+    kindEnum = KindEnum;
     constructor(private route: ActivatedRoute,
         private service: PouchDBService,
         private router: Router,
         private location: Location,
         ) { }
-
     ngOnInit() {
         this.getTransaction();
     }
 
     getTransaction(): void {
         const id = this.route.snapshot.paramMap.get('id');
-        this.service.get(id).subscribe(a => {
-            this.transaction = a;
+        this.service.get().subscribe(a => {
+            const tr = new Transaction();
+            this.transaction = tr.toForm(a.rows[0].doc);
             console.log(this.transaction);
-
         });
     }
     edit() {
-
     }
     del(tr) {
         this.service.del(tr).then((a) => {
             console.log(a);
             this.router.navigate(['/transaction/']);
         });
-
     }
     back() {
         this.router.navigate(['/transaction']);
     }
-
-
 }

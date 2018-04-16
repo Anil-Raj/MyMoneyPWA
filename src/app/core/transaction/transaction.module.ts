@@ -18,8 +18,10 @@ import {
     MatRipple,
     MatRippleModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
+    MatIcon,
 } from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
 import { DatePipe } from '../../pipes/date.pipe';
 import { DayPipe } from '../../pipes/day.pipe';
 import { MonthPipe } from '../../pipes/month.pipe';
@@ -29,6 +31,7 @@ import { PouchDBService } from './services/pouchdb.service';
 import { GroupByModule } from '../../pipes/group-by.module';
 import { AccountModule } from '../account/account.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AmountInputComponent } from './amount-input/amount-input.component';
 
 @NgModule({
     imports: [
@@ -46,7 +49,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatRippleModule,
         MatCardModule,
         MatTabsModule,
-        AccountModule
+        MatIconModule,
+        AccountModule,
+
     ],
     declarations: [
         TransactionListComponent,
@@ -57,7 +62,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         DayPipe,
         MonthPipe,
         YearPipe,
-        FormFieldComponent
+        FormFieldComponent,
+        AmountInputComponent
     ],
     exports: [
         TransactionListComponent,

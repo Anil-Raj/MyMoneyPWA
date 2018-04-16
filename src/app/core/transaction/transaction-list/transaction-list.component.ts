@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone, OnChanges, ViewEncapsulation } from '@angular/core';
-import { Transaction } from '../../../Models/Transaction';
+import { KindEnum, Transaction } from '../../../Models/Transaction';
 import { TransactionService } from '../services/transaction.service';
 import { CategoryService } from '../../category/category.service';
 import { PouchDBService } from '../services/pouchdb.service';
@@ -23,20 +23,34 @@ export class TransactionListComponent implements OnInit, OnChanges {
     ];
     selectedIndex = 1;
     categories: any[];
+    transactionsFromAllAccount: any[];
     transactions: any[];
     groupByFilter = 'categoryId';
     today = new Date();
     public people: Transaction[];
     public form: any;
     viewByFilter;
+    kindEnum = KindEnum;
     constructor(private service: TransactionService,
         private database: PouchDBService,
         private zone: NgZone, private route: ActivatedRoute,
         private navService: SidebarService) {
 
-        this.database.getDoc('transaction_').subscribe((transactions) => {
-            this.transactions = transactions.rows.map(row => {
-                return row.doc;
+        this.database.get().subscribe((transactions) => {
+            this.transactionsFromAllAccount = transactions.rows.map(row => {
+                const transaction = new Transaction();
+                console.log(row.doc);
+
+                return transaction.toForm(row.doc);
+            });
+            // let accId;
+            console.log(this.transactionsFromAllAccount);
+
+            this.navService.account.subscribe(ac => {
+                this.transactions = this.transactionsFromAllAccount
+                    .filter(tr => tr.accountId === ac._id);
+                console.log(this.transactionsFromAllAccount);
+                console.log(this.transactions);
             });
             const gb = new GroupByPipe();
             const vb = new ViewByPipe();
@@ -48,7 +62,7 @@ export class TransactionListComponent implements OnInit, OnChanges {
         this.updateTimerange();
 
     }
-    getAccountAmount(account) {
+    getAccountamount(account) {
         return 500;
     }
     updateTimerange() {
@@ -165,15 +179,15 @@ export class TransactionListComponent implements OnInit, OnChanges {
     getSum(items) {
         let sum = 0;
         items.map(item => {
-            sum += parseInt(item.Amount, 10);
+            sum += (parseInt(item.amount, 10) * (item.kind === KindEnum.INCOME ? 1 : -1));
         });
-        return items[0].category.Type === 'Income' ? sum : sum * -1;
+        return sum;
     }
     income(transactions) {
         let sum = 0;
         transactions.map(a => {
-            if (a.category.Type === 'Income') {
-                sum += parseInt(a.Amount, 10);
+            if (a.category.Kind === KindEnum.INCOME) {
+                sum += parseInt(a.amount, 10);
             }
         });
         return sum;
@@ -181,13 +195,13 @@ export class TransactionListComponent implements OnInit, OnChanges {
     expense(transactions) {
         let sum = 0;
         transactions.map(a => {
-            if (a.category.Type === 'Expense') {
-                sum += parseInt(a.Amount, 10);
+            if (a.category.Kind === KindEnum.EXPENSE) {
+                sum += parseInt(a.amount, 10);
             }
         });
         return sum;
     }
-    netAmount(transactions) {
+    netamount(transactions) {
         return this.income(transactions) - this.expense(transactions);
     }
     getLength(transactions: any[]) {

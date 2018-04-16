@@ -36,7 +36,7 @@ export class CategoryAddComponent implements OnInit, OnDestroy {
         this.meta.updateTag(metaDef);
         this.addCategoryForm = new FormGroup({
             Icon: new FormControl('', Validators.required),
-            Description: new FormControl(),
+            Note: new FormControl(),
             Name: new FormControl('', Validators.required),
             Type: new FormControl('Income'),
 

@@ -25,7 +25,7 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
         this.meta.updateTag(metaDef);
         this.id = this.route.snapshot.paramMap.get('id');
         console.log(this.id);
-        this.database.getDoc(this.id).subscribe((categories) => {
+        this.database.get_cat().subscribe((categories) => {
             this.category = categories.rows.map(row => {
                 return row.doc;
             });

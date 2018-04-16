@@ -1,20 +1,23 @@
 <div [@slideUp] class="add-category">
-        <mat-toolbar>
-                <i class="material-icons" (click)="back()">arrow_back</i>
-                <span class="fill-space"></span>
-                <button mat-button (click)="onSubmit(addTransactionForm)">Save</button>
+    <mat-toolbar>
+        <i class="material-icons" (click)="back()">arrow_back</i>
+        <span class="fill-space"></span>
+        <button mat-button (click)="onSubmit(addTransactionForm)">Save</button>
 
-            </mat-toolbar>
+    </mat-toolbar>
     <form [formGroup]="addTransactionForm" (ngSubmit)="onSubmit(addTransactionForm)">
         <div>
             <div style="width:100%;">
-                <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
-                    <input matInput formControlName="Amount" placeholder="Amount">
-                </mat-form-field>
+                <div style="width:50%; min-width:250px; max-width:300px;">
+                    <app-amount-input [ngClass]="{'red': addTransactionForm.value.category.Kind == kindEnum.EXPENSE,
+                    'blue': addTransactionForm.value.category.Kind == kindEnum.INCOME,
+                    'green': !addTransactionForm.value.category  } " matInput formControlName="amount" placeholder="amount">
+                    </app-amount-input>
+                </div>
             </div>
             <div style="width:100%;">
                 <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
-                    <textarea matInput formControlName="Description" placeholder="Note"></textarea>
+                    <textarea matInput formControlName="Note" placeholder="Note"></textarea>
                 </mat-form-field>
             </div>
             <div>

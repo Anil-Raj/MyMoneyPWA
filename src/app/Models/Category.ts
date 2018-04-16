@@ -1,6 +1,10 @@
+import { KindEnum } from './Transaction';
+
+
 export class Category {
-    id: number;
+    _id: number;
     name: string;
     description: string;
     parentCategory: string;
+    Kind: number;
 }

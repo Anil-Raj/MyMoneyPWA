@@ -21,6 +21,7 @@ import { DebtComponent } from './core/debt/debt.component';
 import { TrendComponent } from './core/trend/trend.component';
 import { SettingComponent } from './core/setting/setting.component';
 import { FitnessModule } from './core/fitness/fitness/fitness.module';
+import { GoogleSigninComponent } from './core/google-signin/google-signin.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { FitnessModule } from './core/fitness/fitness/fitness.module';
         DebtComponent,
         TrendComponent,
         SettingComponent,
+        GoogleSigninComponent,
     ],
     imports: [
         CommonModule,
@@ -42,7 +44,6 @@ import { FitnessModule } from './core/fitness/fitness/fitness.module';
         CategoryModule,
         FitnessModule,
         MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule,
-
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],

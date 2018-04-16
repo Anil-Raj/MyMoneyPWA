@@ -28,7 +28,7 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
         this.getCategory();
         this.addCategoryForm = new FormGroup({
             Icon: new FormControl(),
-            Description: new FormControl(),
+            Note: new FormControl(),
             Name: new FormControl('', Validators.required),
             Type: new FormControl(),
 
@@ -46,7 +46,7 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
             });
             this.addCategoryForm.patchValue({
                 Icon: this.category[0].Icon,
-                Description: this.category[0].Description,
+                Note: this.category[0].Note,
                 Name: this.category[0].Name,
                 Type: this.category[0].Type
             });

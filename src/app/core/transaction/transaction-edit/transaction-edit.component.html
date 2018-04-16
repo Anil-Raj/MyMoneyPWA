@@ -9,12 +9,12 @@
         <div>
             <div style="width:100%;">
                 <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
-                    <input matInput formControlName="Amount">
+                    <input [ngClass]="{'red': editTransactionForm.value.category.Kind == kindEnum.EXPENSE, 'blue': editTransactionForm.value.category.Kind == kindEnum.INCOME}" matInput formControlName="amount">
                 </mat-form-field>
             </div>
             <div style="width:100%;">
                 <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
-                    <textarea matInput formControlName="Description"></textarea>
+                    <textarea matInput formControlName="Note"></textarea>
                 </mat-form-field>
             </div>
             <app-cat-input formControlName="category"  [category]="editTransactionForm.controls" required></app-cat-input>

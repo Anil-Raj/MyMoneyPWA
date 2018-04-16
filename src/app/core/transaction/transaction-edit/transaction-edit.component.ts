@@ -3,12 +3,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { TransactionService } from '../services/transaction.service';
 import { CategoryService } from '../../category/category.service';
-import { Transaction } from '../../../Models/Transaction';
+import { Transaction, KindEnum } from '../../../Models/Transaction';
 import { Category } from '../../../Models/Category';
 import { PouchDBService } from '../services/pouchdb.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import PouchDB from 'pouchdb';
 import { trigger, style, state, transition, animate } from '@angular/animations';
+import { SidebarService } from '../../../components/sidebar/sidebar.service';
 
 @Component({
     selector: 'app-transaction-edit',
@@ -29,20 +30,25 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
 })
 export class TransactionEditComponent implements OnInit {
 
+    selectedAccount: any;
     id;
     private transaction: any;
     editTransactionForm: FormGroup;
-
+    kindEnum = KindEnum;
     constructor(private service: TransactionService,
         private database: PouchDBService,
         private router: Router,
         private route: ActivatedRoute,
-        private location: Location) { }
+        private location: Location,
+        private navService: SidebarService) {
+        this.navService.account.subscribe(ac => this.selectedAccount = ac);
+
+    }
 
     ngOnInit() {
         this.editTransactionForm = new FormGroup({
-            Description: new FormControl(''),
-            Amount: new FormControl(''),
+            Note: new FormControl(''),
+            amount: new FormControl(''),
             category: new FormControl(''),
             time: new FormControl(new Date())
         });
@@ -53,11 +59,13 @@ export class TransactionEditComponent implements OnInit {
         this.id = this.route.snapshot.paramMap.get('id');
         this.database.getDoc(this.id).subscribe((categories) => {
             this.transaction = categories.rows.map(row => {
-                return row.doc;
+                const tr = new Transaction();
+                return tr.toForm(row.doc);
             });
+            console.log(this.transaction);
             this.editTransactionForm.patchValue({
-                Description: this.transaction[0].Description,
-                Amount: this.transaction[0].Amount,
+                Note: this.transaction[0].Note,
+                amount: this.transaction[0].amount,
                 category: this.transaction[0].category,
                 time: this.transaction[0].time
             });
@@ -65,10 +73,30 @@ export class TransactionEditComponent implements OnInit {
         });
     }
     onSubmit({ value }: { value: any }) {
-        const transaction = value;
-        console.log(transaction);
-        this.service.newTransaction(transaction);
-        this.database.put(this.id, transaction).then(() => {
+        const transaction = new Transaction();
+        const tran = value;
+        console.log(value);
+        tran.kind = value.category.Kind;
+        console.log(KindEnum.EXPENSE, tran.kind);
+
+        console.log(this.selectedAccount);
+        tran.amount = tran.amount;
+        tran.accountId = this.selectedAccount._id;
+        tran.categoryId = value.category._id;
+        value.currency = 'USD';
+        let tr: any;
+        tr = transaction.fromForm(tran);
+        tr.accountId = this.selectedAccount._id;
+        tr.id = this.transaction[0].id;
+        console.log(tr);
+
+
+        // const transaction = value;
+        // console.log(transaction);
+        // transaction.amount = transaction.category.Type == 'Expense' && ? transaction.amount * -1 : transaction.amount;
+        transaction.accountId = this.selectedAccount._id;
+        // this.service.newTransaction(transaction);
+        this.database.put(this.id, tr).then(() => {
             this.router.navigate(['/transaction/']);
         });
     }

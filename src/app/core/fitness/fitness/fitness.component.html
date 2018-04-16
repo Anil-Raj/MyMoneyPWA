@@ -26,8 +26,8 @@
                             </div>
                         </div>
                         <div class="right">
-                            <div *ngIf="transaction.category.Type == 'Expense'" class=" font-24" style="color:red">{{transaction.Amount}}</div>
-                            <div *ngIf="transaction.category.Type == 'Income'" class=" font-24" style="color:blue">{{transaction.Amount}}</div>
+                            <div *ngIf="transaction.category.Type == 'Expense'" class=" font-24" style="color:red">{{transaction.amount}}</div>
+                            <div *ngIf="transaction.category.Type == 'Income'" class=" font-24" style="color:blue">{{transaction.amount}}</div>
                         </div>
                     </mat-list-item>
                 </mat-list>
@@ -55,8 +55,8 @@
                         <h3 mat-line>
                             {{transaction.category.Name}}
                         </h3>
-                        <div *ngIf="transaction.category.Type == 'Expense'" class=" font-24" style="color:red">{{transaction.Amount}}</div>
-                        <div *ngIf="transaction.category.Type == 'Income'" class=" font-24" style="color:blue">{{transaction.Amount}}</div>
+                        <div *ngIf="transaction.category.Type == 'Expense'" class=" font-24" style="color:red">{{transaction.amount}}</div>
+                        <div *ngIf="transaction.category.Type == 'Income'" class=" font-24" style="color:blue">{{transaction.amount}}</div>
                     </mat-list-item>
                 </mat-list>
             </div>

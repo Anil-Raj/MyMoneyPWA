@@ -8,7 +8,7 @@ export class ViewByPipe implements PipeTransform {
 
     transform(value: any, args?: any): any {
         let filteredData = [];
-        console.log(args);
+        // console.log(args);
         if (value) {
             filteredData = value.filter(transaction => {
                 if (args.range === 'day') {

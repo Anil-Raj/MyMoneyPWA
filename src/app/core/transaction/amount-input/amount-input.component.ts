@@ -1,6 +1,6 @@
 import { Component, OnInit, forwardRef, ViewChild, ElementRef, Renderer, Renderer2 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-const mathjs = require('mathjs');
+import * as mathjs from 'mathjs';
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => AmountInputComponent),

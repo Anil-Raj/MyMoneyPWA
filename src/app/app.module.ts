@@ -22,6 +22,8 @@ import { TrendComponent } from './core/trend/trend.component';
 import { SettingComponent } from './core/setting/setting.component';
 import { FitnessModule } from './core/fitness/fitness/fitness.module';
 import { GoogleSigninComponent } from './core/google-signin/google-signin.component';
+import { AutosizeDirective } from './core/autosize.directive';
+
 
 @NgModule({
     declarations: [
@@ -30,6 +32,7 @@ import { GoogleSigninComponent } from './core/google-signin/google-signin.compon
         TrendComponent,
         SettingComponent,
         GoogleSigninComponent,
+        AutosizeDirective,
     ],
     imports: [
         CommonModule,

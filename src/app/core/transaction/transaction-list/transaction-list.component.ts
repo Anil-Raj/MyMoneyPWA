@@ -8,6 +8,16 @@ import { SidebarService } from '../../../components/sidebar/sidebar.service';
 import { GroupByPipe } from '../../../pipes/group-by.pipe';
 import { ViewByPipe } from '../../../pipes/view-by.pipe';
 import * as moment from 'moment';
+import {
+    sync,
+    load,
+    loadRecent,
+    loadFiltered,
+    save,
+    remove,
+    removeByAccount,
+    destroy
+} from './../../storage/transaction';
 
 
 @Component({
@@ -36,16 +46,34 @@ export class TransactionListComponent implements OnInit, OnChanges {
         private zone: NgZone, private route: ActivatedRoute,
         private navService: SidebarService) {
 
+
+        const a = this.database.loadRecent();
+        console.log(a);
+
+        localStorage.setItem('userInfo',
+            `{
+            "accessToken":"GnaSUNZ_rg_gqAc3_bhUqPDWPNSNRWAt",
+            "couchDB":{
+                "username":"370ae3c8 - 1f13 - 425a - 83d8 - bf09b2d34603",
+                "password":"948096ad - 632a - 42c2 - a49f - 96363529ec61",
+                "transactions":"http://127.0.0.1:5984/transaction1234567",
+                "tags":"https://couch.moneytracker.cc//tags_370ae3c8-1f13-425a-83d8-bf09b2d34603",
+                "settings":"https://couch.moneytracker.cc//settings_370ae3c8-1f13-425a-83d8-bf09b2d34603",
+                "accounts":"https://couch.moneytracker.cc//accounts_370ae3c8-1f13-425a-83d8-bf09b2d34603"
+            }
+        }`);
+        sync(false);
+
         this.navService.account.subscribe(ac => {
-            console.log(ac);
+            // console.log(ac);
             this.database.get_tr_for_acc(ac).subscribe((transactions) => {
                 // return transactions.docs;
-                console.log(transactions.docs);
+                // console.log(transactions.docs);
                 this.transactions = transactions.docs.map(transaction => {
                     const tr = new Transaction();
                     return tr.toForm(transaction);
                 });
-                console.log(this.transactions);
+                // console.log(this.transactions);
 
 
             });
@@ -142,8 +170,8 @@ export class TransactionListComponent implements OnInit, OnChanges {
                                 start: day.format(),
                                 range: 'week'
                             });
-                        console.log(day.startOf('week').format('DD/MM/YYYY') + ' - ' +
-                            day.startOf('week').clone().add(1, range).add(-1, 's').format('DD/MM/YYYY'));
+                        // console.log(day.startOf('week').format('DD/MM/YYYY') + ' - ' +
+                            // day.startOf('week').clone().add(1, range).add(-1, 's').format('DD/MM/YYYY'));
 
                     }
 

@@ -13,7 +13,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
         trigger('flyInOut', [
             state('in', style({ transform: 'translateY(0)' })),
             transition('void => *', [
-                style({ transform: 'translateY(100%)' }),
+                style({ transform: 'translateY(10%)' }),
                 animate(500)
             ]),
             transition('* => void', [

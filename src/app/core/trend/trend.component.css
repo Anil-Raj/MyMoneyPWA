@@ -1,0 +1,40 @@
+i.icon {
+    display: inline-block;
+    opacity: 1;
+    margin: 0 .25rem 0 0;
+    width: 1.18em;
+    height: 1em;
+    font-family: Icons;
+    font-style: normal;
+    font-weight: 400;
+    text-decoration: inherit;
+    text-align: center;
+    speak: none;
+    font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+}
+
+.ui.icon.message>.icon:not(.close) {
+    display: block;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: auto;
+    line-height: 1;
+    vertical-align: middle;
+    font-size: 3em;
+    opacity: .8;
+}
+
+.ui.message>:first-child {
+    margin-top: 0;
+}
+.ui.message>.icon {
+    margin-right: .6em;
+}
+i.icon, i.icons {
+    font-size: 1em;
+}

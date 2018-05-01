@@ -1,4 +1,5 @@
 import Currency from './Currency';
+import pick from 'lodash/pick';
 import { Category } from './Category';
 import { format } from 'date-fns';
 
@@ -23,7 +24,7 @@ export function toLocalTimestamp(date) {
     const timestamp = date instanceof Date ? date.getTime() : date;
     return timestamp + offset * 60 * 1000;
 }
-export class Transaction {
+ export class Transaction  {
     id: number;
     accountId: string;
     description: string;
@@ -70,4 +71,23 @@ export class Transaction {
                 : undefined
         };
     }
+    fromStorage(data) {
+        return {
+            id: data._id,
+            date: parseInt(data._id.match(/T([0-9]+)-/)[1], 10),
+            ...pick(data, this.persistentKeys(data))
+        };
+    }
+    toStorage(data) {
+        return pick(data, this.persistentKeys(data));
+    }
+    persistentKeys(data) {
+        const keys = ['kind', 'note', 'tags', 'accountId', 'amount', 'currency'];
+        if (data.kind === TRANSFER) {
+            keys.push(...['linkedAccountId', 'linkedAmount', 'linkedCurrency']);
+        }
+
+        return keys;
+    }
+
 }

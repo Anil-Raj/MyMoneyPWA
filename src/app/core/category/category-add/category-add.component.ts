@@ -48,8 +48,15 @@ export class CategoryAddComponent implements OnInit, OnDestroy {
     }
     onSubmit({ valid, value }: { valid: boolean, value: any }) {
         if (valid) {
-            const category = value;
-            this.database.put('category_' + category.Type.toLowerCase() + '_' + new Date().valueOf(), category).then(() => {
+            // value.id = 'category_' + value.Type.toLowerCase() + '_' + new Date().valueOf();
+            const cat = new Category();
+            let c: any;
+            c = cat.fromForm(value);
+            // const category = value;
+            // category.id = 'category_' + value.Type.toLowerCase() + '_' + new Date().valueOf();
+            console.log(c);
+            this.database.put_cat('transaction_' + new Date().valueOf(), c).then(() => {
+            // this.database.put_cat(c).then(() => {
                 this.router.navigate(['/category/']);
             });
         }

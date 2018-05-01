@@ -38,7 +38,9 @@ export class TransactionDetailComponent implements OnInit {
 
     getTransaction(): void {
         const id = this.route.snapshot.paramMap.get('id');
-        this.service.get().subscribe(a => {
+        console.log(id);
+
+        this.service.getDoc(id).subscribe(a => {
             const tr = new Transaction();
             this.transaction = tr.toForm(a.rows[0].doc);
             console.log(this.transaction);

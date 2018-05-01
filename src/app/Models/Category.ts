@@ -7,4 +7,19 @@ export class Category {
     description: string;
     parentCategory: string;
     Kind: number;
+
+    fromForm(data) {
+        return {
+            ...data,
+            id: data.id || `C${Date.now()}`
+            // amount: Currency.toInt(
+            //     data.amount * (data.kind === KindEnum.EXPENSE ? -1 : 1),
+            //     data.currency
+            // ),
+            // categoryId: data.categoryId,
+            // categoryName: data.categoryName,
+            // category: data.category,
+            // time: data.time ? new Date(data.time) : undefined
+        };
+    }
 }

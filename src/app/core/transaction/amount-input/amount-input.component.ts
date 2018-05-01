@@ -1,6 +1,7 @@
-import { Component, OnInit, forwardRef, ViewChild, ElementRef, Renderer, Renderer2 } from '@angular/core';
+import { Component, OnInit, forwardRef, ViewChild, ElementRef, Renderer, Renderer2, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import * as mathjs from 'mathjs';
+import { trigger, state, transition, style, animate, keyframes } from '@angular/animations';
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => AmountInputComponent),
@@ -11,13 +12,33 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
     selector: 'app-amount-input',
     templateUrl: './amount-input.component.html',
     styleUrls: ['./amount-input.component.css'],
-    providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
+    animations: [trigger(
+        'vibrate',
+        [
+            transition('false<=>true', animate(1000, keyframes([
+                style({ transform: 'translate3d(0, 0, 0)', offset: 0 }),
+                style({ transform: 'translate3d(-10px, 0, 0', offset: 0.05 }),
+                style({ transform: 'translate3d(10px, 0, 0)', offset: 0.1 }),
+                style({ transform: 'translate3d(-10px, 0, 0', offset: 0.15 }),
+                style({ transform: 'translate3d(10px, 0, 0)', offset: 0.2 }),
+                style({ transform: 'translate3d(-10px, 0, 0', offset: 0.25 }),
+                style({ transform: 'translate3d(10px, 0, 0)', offset: 0.3 }),
+                style({ transform: 'translate3d(-10px, 0, 0', offset: 0.35 }),
+                style({ transform: 'translate3d(10px, 0, 0)', offset: 0.4 }),
+                style({ transform: 'translate3d(-10px, 0, 0', offset: 0.45 }),
+                style({ transform: 'translate3d(0, 0, 0)', offset: .5 }),
+            ]))),
+        ])],
+    providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
+
 
 })
 
 
 export class AmountInputComponent implements ControlValueAccessor {
 
+
+    originalValue: any;
     phoneKeyboard: Array<Array<any>> = [
         [{ key: '1', type: 1, isDisabled: false }, { key: '2', type: 1, isDisabled: false },
         { key: '3', type: 1, isDisabled: false }, { key: 'backspace', type: 0, isDisabled: false }],
@@ -26,18 +47,17 @@ export class AmountInputComponent implements ControlValueAccessor {
         [{ key: '7', type: 1, isDisabled: false }, { key: '8', type: 1, isDisabled: false },
         { key: '9', type: 1, isDisabled: false }, { key: '+', type: 1, isDisabled: false }],
         [{ key: '/', type: 1, isDisabled: false }, { key: '0', type: 1, isDisabled: false },
-        { key: '*', type: 1, isDisabled: false }, { key: '=', type: 1, isDisabled: false }],
+        { key: '*', type: 1, isDisabled: false }, { key: 'keyboard_arrow_right', type: 0, isDisabled: false }],
     ];
     enterkey = true;
     computekey = false;
-
+    isVibrate = false;
     private innerValue: any = '';
     displayCustomKeyboard = false;
 
 
     private onTouchedCallback: () => void;
     private onChangeCallback: (_: any) => void;
-
 
 
     toggleCustomKeyBoard() {
@@ -78,53 +98,9 @@ export class AmountInputComponent implements ControlValueAccessor {
         // console.log(item, parseInt(item, 10), this.innerValue);
 
         try {
-            // console.log(mathjs.eval(this.innerValue + item));
-            // console.log(item);
-            // console.log(this.innerValue);
-            // console.log(this.value);
-            // if (item === '=') {
-            //     console.log('inside ');
-            //     console.log(mathjs.eval(this.innerValue));
-            //     this.value = mathjs.eval(this.innerValue);
-            //     this.innerValue = this.value + '';
-            //     this.writeValue(mathjs.eval(this.innerValue));
-            //     this.computekey = false;
-            // } else if (item === 'Backspace') {
-            //     this.value = this.innerValue.slice(0, -1);
-            //     this.innerValue = this.value;
-            //     this.writeValue(this.innerValue);
-
-            // } else if (item === '+' || item === '-' || item === '*' || item === '/') {
-
-
-            //     const lastchar = this.innerValue.slice(-1);
-            //     if (lastchar === '+' || lastchar === '-' || lastchar === '*' || lastchar === '/') {
-            //         console.log('lastchar', lastchar);
-            //         this.innerValue = this.innerValue.slice(0, -1);
-            //         this.innerValue += item;
-            //         this.writeValue(this.innerValue);
-            //         console.log(this.innerValue);
-
-            //         this.writeValue(this.innerValue);
-
-            //     } else {
-            //         console.log(item);
-            //         console.log(this.innerValue);
-            //         this.innerValue = this.innerValue + item;
-            //         this.writeValue(this.innerValue);
-
-            //     }
-            // } else {
-            //     this.innerValue = this.innerValue + item;
-            //     this.writeValue(this.innerValue);
-            //     console.log(this.innerValue);
-            //     console.log(mathjs.eval(this.innerValue));
-            //     // this.value = mathjs.eval(this.strinvalue);
-            // }
-
-
-
-            if (key === '=') {
+            if (key === 'keyboard_arrow_right') {
+                this.close();
+            } else if (key === '=') {
                 if (Infinity == mathjs.eval(this.innerValue)) {
                     console.log('infinity');
                     throw 'a';
@@ -147,13 +123,11 @@ export class AmountInputComponent implements ControlValueAccessor {
                     this.value += key;
                     // this.disableOperatorButtons();
                 }
+                this.computekey = true;
             } else {
                 console.log(this.value);
-
                 this.value = this.value == 0 ? key : this.value + key;
                 console.log(parseFloat(this.value));
-
-
             }
 
 
@@ -161,8 +135,11 @@ export class AmountInputComponent implements ControlValueAccessor {
             console.log(ex);
 
             console.log('invalid');
-            this.value = 0;
+            console.log(this.value);
+
+            // this.value = 0;
             this.computekey = true;
+            this.isVibrate = !this.isVibrate;
 
 
         }
@@ -187,20 +164,24 @@ export class AmountInputComponent implements ControlValueAccessor {
     }
 
     close() {
-        console.log(this.value);
-        console.log(typeof (this.value));
-        console.log(mathjs.eval(this.value));
-        try {
+
+    try {
+            console.log(this.value);
+            console.log(typeof (this.value));
+            console.log(mathjs.eval(this.value));
             this.value = mathjs.eval(this.value);
             console.log(this.value, 'Infinity', this.value === 'Infinity');
 
             if (this.value === Infinity) {
                 throw 'infinity';
             }
+            this.displayCustomKeyboard = false;
         } catch (ex) {
-            this.value = 0;
+            this.isVibrate = !this.isVibrate;
+            
         }
-        this.displayCustomKeyboard = false;
+
+
     }
 
 }

@@ -27,29 +27,46 @@ export class PouchDBService {
             this.database = new PouchDB('transaction');
             this.isInstantiated = true;
             const cat = new Category();
-            let c1, c2, c3, c4, c5: any;
-            c1 = cat.fromForm({
-                Name: 'Cloth', Kind: 0, Type: 'Expense',
-                Icon: '/assets/myicons/ml/icon_17.png'
-            });
-            c2 = cat.fromForm({
-                Name: 'Travel', Kind: 0, Type: 'Expense',
-                Icon: '/assets/myicons/ml/ic_category_travel.png'
-            });
-            c3 = cat.fromForm({
-                Name: 'Travel', Kind: 0, Type: 'Expense',
-                Icon: '/assets/myicons/ml/ic_category_travel.png'
-            });
-            c4 = cat.fromForm({
-                Name: 'Salary', Kind: 1, Type: 'Income',
-                    Icon: '/assets/myicons/ml/ic_category_salary.png'
-            });
-            c5 = cat.fromForm({
-                Name: 'Interest Money', Kind: 1,Type: 'Income',
-                    Icon: '/assets/myicons/ml/ic_category_interestmoney.png',
-            });
+            // let c1, c2, c3, c4, c5: any;
+            // c1 = cat.fromForm({
+            //     Name: 'Cloth', Kind: 0, Type: 'Expense', _id: 'C0',
+            //     Icon: '/assets/myicons/ml/icon_17.png'
+            // });
+            // c2 = cat.fromForm({
+            //     Name: 'Travel', Kind: 0, Type: 'Expense', _id: 'C1',
+            //     Icon: '/assets/myicons/ml/ic_category_travel.png'
+            // });
+            // c3 = cat.fromForm({
+            //     Name: 'Travel', Kind: 0, Type: 'Expense', _id: 'C2',
+            //     Icon: '/assets/myicons/ml/ic_category_travel.png'
+            // });
+            // c4 = cat.fromForm({
+            //     Name: 'Salary', Kind: 1, Type: 'Income', _id: 'C3',
+            //     Icon: '/assets/myicons/ml/ic_category_salary.png'
+            // });
+            // c5 = cat.fromForm({
+            //     Name: 'Interest Money', Kind: 1, Type: 'Income', _id: 'C4',
+            //     Icon: '/assets/myicons/ml/ic_category_interestmoney.png',
+            // });
+            // console.log(c1, c2, c3, c4, c5);
+
             this.cat_database.bulkDocs([
-                c1, c2, c3, c4, c5
+                {
+                    Name: 'Cloth', Kind: 0, Type: 'Expense', _id: 'C0',
+                    Icon: '/assets/myicons/ml/icon_17.png'
+                },
+                {
+                    Name: 'Travel', Kind: 0, Type: 'Expense', _id: 'C1',
+                    Icon: '/assets/myicons/ml/ic_category_travel.png'
+                },
+                {
+                    Name: 'Salary', Kind: 1, Type: 'Income', _id: 'C3',
+                    Icon: '/assets/myicons/ml/ic_category_salary.png'
+                },
+                {
+                    Name: 'Interest Money', Kind: 1, Type: 'Income', _id: 'C4',
+                    Icon: '/assets/myicons/ml/ic_category_interestmoney.png',
+                }
             ]).then(function (result) {
                 // handle result
             }).catch(function (err) {

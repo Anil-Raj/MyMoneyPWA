@@ -25,10 +25,14 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
         this.meta.updateTag(metaDef);
         this.id = this.route.snapshot.paramMap.get('id');
         console.log(this.id);
-        this.database.getDoc(this.id).subscribe((categories) => {
-            this.category = categories.rows.map(row => {
+        this.database.get_cat().subscribe((categories) => {
+            console.log(categories);
+
+            const category_list = categories.rows.map(row => {
                 return row.doc;
             });
+            console.log(category_list);
+            this.category = category_list.filter(c => c._id === this.id);
             console.log(this.category);
 
         });

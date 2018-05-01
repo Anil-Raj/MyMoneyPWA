@@ -40,10 +40,11 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
     }
     getCategory() {
         this.id = this.route.snapshot.paramMap.get('id');
-        this.database.getDoc(this.id).subscribe((categories) => {
-            this.category = categories.rows.map(row => {
+        this.database.get_cat().subscribe((categories) => {
+            const category_list = categories.rows.map(row => {
                 return row.doc;
             });
+            this.category = category_list.filter(c => c._id === this.id);
             this.addCategoryForm.patchValue({
                 Icon: this.category[0].Icon,
                 Note: this.category[0].Note,

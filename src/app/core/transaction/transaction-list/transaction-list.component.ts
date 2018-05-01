@@ -65,13 +65,18 @@ export class TransactionListComponent implements OnInit, OnChanges {
         sync(false);
 
         this.navService.account.subscribe(ac => {
-            // console.log(ac);
+            console.log(ac);
             this.database.get_tr_for_acc(ac).subscribe((transactions) => {
                 // return transactions.docs;
-                // console.log(transactions.docs);
+                console.log(transactions);
                 this.transactions = transactions.docs.map(transaction => {
                     const tr = new Transaction();
-                    return tr.toForm(transaction);
+                    console.log(transaction);
+
+                    const tran = tr.toForm(transaction);
+                    console.log(tran);
+
+                    return transaction;
                 });
                 // console.log(this.transactions);
 
@@ -171,7 +176,7 @@ export class TransactionListComponent implements OnInit, OnChanges {
                                 range: 'week'
                             });
                         // console.log(day.startOf('week').format('DD/MM/YYYY') + ' - ' +
-                            // day.startOf('week').clone().add(1, range).add(-1, 's').format('DD/MM/YYYY'));
+                        // day.startOf('week').clone().add(1, range).add(-1, 's').format('DD/MM/YYYY'));
 
                     }
 
@@ -203,11 +208,24 @@ export class TransactionListComponent implements OnInit, OnChanges {
 
                 day = day.clone().add(1, range);
             }
-            this.timerange.push({
-                isFuture: true,
-                Label: 'Future',
-                start: moment().format()
-            });
+            switch (range) {
+                case 'day':     this.timerange.push({
+                                    isFuture: true,
+                                    Label: 'Future',
+                                    start:  moment().endOf('day').clone().add(1, 's').format()   });
+                                break;
+                case 'month':   this.timerange.push({
+                                    isFuture: true,
+                                    Label: 'Future',
+                                    start: moment().endOf('month').add(1, 's').format() });
+                                break;
+                case 'week':    this.timerange.push({
+                                    isFuture: true,
+                                    Label: 'Future',
+                                    start: moment().endOf('week').add(1, 's').format() });
+                                break;
+            }
+
             console.log(this.timerange);
             this.selectedIndex = this.timerange.length - 2;
 

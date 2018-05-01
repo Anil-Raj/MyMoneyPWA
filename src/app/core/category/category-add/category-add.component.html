@@ -1,12 +1,12 @@
 <div [@slideUp] class="add-category">
-        <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit(addCategoryForm)">
-    <mat-toolbar>
-        <i class="material-icons" (click)="back()">arrow_back</i>
-        <span class="fill-space"></span>
-        <!-- <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid"><i class="material-icons">save</i></button> -->
-        <button mat-button (click)="onSubmit(addCategoryForm)">Save</button>
+        <mat-toolbar>
+                <i class="material-icons" (click)="back()">arrow_back</i>
+                <span class="fill-space"></span>
+                <!-- <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid"><i class="material-icons">save</i></button> -->
+                <button mat-button (click)="onSubmit(addCategoryForm)">Save</button>
 
-    </mat-toolbar>
+            </mat-toolbar>
+        <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit(addCategoryForm)">
         <div>
             <mat-form-field>
                 <input matInput formControlName="Name" placeholder="Name">

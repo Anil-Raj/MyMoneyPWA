@@ -45,7 +45,7 @@ export class NavbarComponent {
         if (localStorage.getItem('user') === null) {
             this.router.navigate(['/sign-in/']);
         } else {
-            localStorage.getItem('user')
+            localStorage.getItem('user');
             this.database.sync('');
         }
 

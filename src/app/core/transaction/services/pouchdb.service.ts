@@ -74,7 +74,7 @@ export class PouchDBService {
             });
 
             this.acc_database.bulkDocs([
-                { _id: 'account_1', Name: 'Bank1234', amount: 0 },
+                { _id: 'account_1', Name: 'HDFC A/C', amount: 0 },
                 { _id: 'account_2', Name: 'Cash', amount: 0 }
             ]).then(function (result) {
                 // handle result
@@ -239,7 +239,7 @@ export class PouchDBService {
                 // endkey: 'T',
                 // limit
             })
-            .then(response => { console.log(response); response.rows.map(row => { console.log(row); return row.doc; }) });
+            .then(response => { console.log(response); response.rows.map(row => { console.log(row); return row.doc; }); });
         // .then(docs => docs.map(a => this.fromStorage(a)));
     }
 

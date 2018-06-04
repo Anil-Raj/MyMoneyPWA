@@ -24,7 +24,7 @@ export function toLocalTimestamp(date) {
     const timestamp = date instanceof Date ? date.getTime() : date;
     return timestamp + offset * 60 * 1000;
 }
- export class Transaction  {
+export class Transaction {
     id: number;
     accountId: string;
     description: string;
@@ -54,7 +54,7 @@ export function toLocalTimestamp(date) {
         return {
             ...data,
             amount: Currency.toFloat(
-                data.amount * (data.kind === KindEnum.EXPENSE ? -1 : 1),
+                data.amount  * (data.kind === KindEnum.EXPENSE ? -1 : 1),
                 data.currency,
                 false
             ),

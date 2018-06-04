@@ -3,17 +3,17 @@
     "name": "My Money",
     "icons": [
       {
-        "src": "/assets/myicons/logo.png",
+        "src": "/assets/myicons/rupee.png",
         "sizes": "96x96",
         "type": "image/png"
       },
       {
-        "src": "/assets/myicons/logo.png",
+        "src": "/assets/myicons/rupee.png",
         "sizes": "144x144",
         "type": "image/png"
       },
       {
-        "src": "/assets/myicons/logo.png",
+        "src": "/assets/myicons/rupee.png",
         "sizes": "192x192",
         "type": "image/png"
       }

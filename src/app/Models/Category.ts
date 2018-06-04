@@ -11,7 +11,8 @@ export class Category {
     fromForm(data) {
         return {
             ...data,
-            id: data.id || `C${Date.now()}`
+            id: data.id || `C${Date.now()}`,
+            Kind: data.Type === 'Income' ? KindEnum.INCOME : KindEnum.EXPENSE
             // amount: Currency.toInt(
             //     data.amount * (data.kind === KindEnum.EXPENSE ? -1 : 1),
             //     data.currency

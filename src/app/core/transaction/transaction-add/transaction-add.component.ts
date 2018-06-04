@@ -70,6 +70,10 @@ export class TransactionAddComponent implements OnInit {
             let tr: any;
             tr = transaction.fromForm(tran);
             tr.accountId = this.selectedAccount._id;
+            if (value.category.Kind === KindEnum.TRANSFER) {
+                tr.linkedAccountId = value.linkedAccound._id;
+            }
+
             tr.kind = tran.category.Kind;
             tr.currency = 'USD';
             console.log(tr);

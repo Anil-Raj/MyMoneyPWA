@@ -266,7 +266,8 @@ export class TransactionListComponent implements OnInit, OnChanges {
         return sum;
     }
     netamount(transactions) {
-        return this.income(transactions) - this.expense(transactions);
+        console.log(transactions);
+        return this.income(transactions) + this.expense(transactions);
     }
     getLength(transactions: any[]) {
         console.log(this.transactions);

@@ -192,7 +192,7 @@ export const Currency = {
      * @param {bool} format
      */
     toFloat(value, code, format = true) {
-        const exp = CURRENCY[code].exp;
+        const exp = 2; //CURRENCY[code].exp;
         const num = Number(`${value}e-${exp}`);
         return format
             ? num.toLocaleString(undefined, {

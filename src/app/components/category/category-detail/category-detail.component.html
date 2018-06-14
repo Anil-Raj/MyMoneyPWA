@@ -1,25 +1,25 @@
 <!-- <div [@slideLeft] [@slideRight] class="add-category"> -->
-<div  [@slideRight] class="add-category">
+    <div  [@slideRight] class="add-category">
 
-    <mat-toolbar>
-            <i class="material-icons" (click)="back()">arrow_back</i>
-            <span class="fill-space"></span>
-            <span *ngIf="category" class="edit">
-                    <i class="material-icons" routerLink="/category/edit/{{category[0]._id}}">mode edit</i>
-                    <i class="material-icons icon" (click)="del(category[0]._id)">delete</i>
-                </span>
-
-        </mat-toolbar>
-
-
-        <div *ngIf="category">
-            <mat-list>
-                <mat-list-item class=" category">
-                    <img mat-list-avatar [src]="category[0].Icon">
-                    <span class="category-name">
-                        {{category[0].Name}}
+        <mat-toolbar>
+                <i class="material-icons" (click)="back()">arrow_back</i>
+                <span class="fill-space"></span>
+                <span *ngIf="category" class="edit">
+                        <i class="material-icons" routerLink="/category/edit/{{category[0]._id}}">mode edit</i>
+                        <i class="material-icons icon" (click)="del(category[0]._id)">delete</i>
                     </span>
-                </mat-list-item>
-            </mat-list>
+
+            </mat-toolbar>
+
+
+            <div *ngIf="category">
+                <mat-list>
+                    <mat-list-item class=" category">
+                        <img mat-list-avatar [src]="category[0].Icon">
+                        <span class="category-name">
+                            {{category[0].Name}}
+                        </span>
+                    </mat-list-item>
+                </mat-list>
+            </div>
         </div>
-    </div>

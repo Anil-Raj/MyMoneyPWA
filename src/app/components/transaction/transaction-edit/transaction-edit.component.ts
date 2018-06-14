@@ -81,12 +81,12 @@ export class TransactionEditComponent implements OnInit {
 
         console.log(this.selectedAccount);
         tran.amount = tran.amount;
-        tran.accountId = this.selectedAccount._id;
+        // tran.accountId = this.selectedAccount._id;
         tran.categoryId = value.category._id;
         value.currency = 'USD';
         let tr: any;
         tr = transaction.fromForm(tran);
-        tr.accountId = this.selectedAccount._id;
+        // tr.accountId = this.selectedAccount._id;
         tr.id = this.transaction[0].id;
         console.log(tr);
 
@@ -94,7 +94,7 @@ export class TransactionEditComponent implements OnInit {
         // const transaction = value;
         // console.log(transaction);
         // transaction.amount = transaction.category.Type == 'Expense' && ? transaction.amount * -1 : transaction.amount;
-        transaction.accountId = this.selectedAccount._id;
+        // transaction.accountId = this.selectedAccount._id;
         // this.service.newTransaction(transaction);
         this.database.put(this.id, tr).then(() => {
             this.router.navigate(['/transaction/']);

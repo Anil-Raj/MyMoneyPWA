@@ -2,24 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { SidebarService } from '../../../services/sidebar.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { PouchDBService } from '../../../services/pouchdb.service';
+import { Animations } from '../../../animations/animations';
 
 
 @Component({
     selector: 'app-account-select',
     templateUrl: './account-select.component.html',
     styleUrls: ['./account-select.component.css'],
-    animations: [
-        trigger('flyInOut', [
-            state('in', style({ transform: 'translateY(0)' })),
-            transition('void => *', [
-                style({ transform: 'translateY(100%)' }),
-                animate(500)
-            ]),
-            transition('* => void', [
-                animate(100, style({ transform: 'translateY(-100%)' }))
-            ])
-        ])
-    ],
+    animations: [Animations.flyInOut],
 })
 export class AccountSelectComponent implements OnInit {
     accounts = [];
@@ -32,18 +22,7 @@ export class AccountSelectComponent implements OnInit {
 
         this.database.get_acc().subscribe((acc) => {
             console.log(this.accounts);
-            this.accounts = acc.rows.map(row => {
-                console.log(row);
-                this.database.get_tr_for_acc(row.doc).subscribe(trs => {
-                    let sum = 0;
-                    trs.docs.map(tr => {
-                        sum += tr.amount;
-                    });
-                    console.log(sum);
-                    row.doc.amount = sum / 100;
-                });
-                return row.doc;
-            });
+            this.accounts = acc;
             this.navService.account.subscribe(a => this.selectedAccount = a);
             this.navService.confirmAccountValue(this.accounts[0]);
         });

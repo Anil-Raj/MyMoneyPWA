@@ -8,7 +8,7 @@ import 'rxjs/add/observable/from';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { transactionsDB, categoriesDB, accountsDB } from '../Models/storage/pouchdb';
 import { Category } from '../Models/Category';
-// import { userInfo } from 'os';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class PouchDBService {
@@ -17,7 +17,7 @@ export class PouchDBService {
     private cat_database: any;
     private acc_database: any;
     private database: any;
-    private remote = 'http://127.0.0.1:5984/';
+    private remote = environment.remote;
 
     private listener: EventEmitter<any> = new EventEmitter();
     public constructor() {
@@ -27,29 +27,6 @@ export class PouchDBService {
             this.database = new PouchDB('transaction');
             this.isInstantiated = true;
             const cat = new Category();
-            // let c1, c2, c3, c4, c5: any;
-            // c1 = cat.fromForm({
-            //     Name: 'Cloth', Kind: 0, Type: 'Expense', _id: 'C0',
-            //     Icon: '/assets/myicons/ml/icon_17.png'
-            // });
-            // c2 = cat.fromForm({
-            //     Name: 'Travel', Kind: 0, Type: 'Expense', _id: 'C1',
-            //     Icon: '/assets/myicons/ml/ic_category_travel.png'
-            // });
-            // c3 = cat.fromForm({
-            //     Name: 'Travel', Kind: 0, Type: 'Expense', _id: 'C2',
-            //     Icon: '/assets/myicons/ml/ic_category_travel.png'
-            // });
-            // c4 = cat.fromForm({
-            //     Name: 'Salary', Kind: 1, Type: 'Income', _id: 'C3',
-            //     Icon: '/assets/myicons/ml/ic_category_salary.png'
-            // });
-            // c5 = cat.fromForm({
-            //     Name: 'Interest Money', Kind: 1, Type: 'Income', _id: 'C4',
-            //     Icon: '/assets/myicons/ml/ic_category_interestmoney.png',
-            // });
-            // console.log(c1, c2, c3, c4, c5);
-
             this.cat_database.bulkDocs([
                 {
                     Name: 'Cloth', Kind: 0, Type: 'Expense', _id: 'C0',
@@ -90,9 +67,6 @@ export class PouchDBService {
         return this.database.allDocs({ include_docs: true });
     }
     public get_tr_for_acc(ac): any {
-        // console.log('adasdfasdf');
-
-        // console.log(this.cat_database);
         console.log('aaaaaaaaaaaaaaaaaaaaaa');
 
         const user = JSON.parse(localStorage.getItem('userInfo'));
@@ -126,15 +100,10 @@ export class PouchDBService {
             return this.cat_database.put(document).then(() => {
                 const db = this.cat_database;
                 this.cat_database.get(document.accountId).then(function (res) {
-                    // const fil =    acc.rows.filter(a => a.id === document.accountId);
-                    // console.log(acc.rows);
                     console.log(res);
                     res.amount = 1000;
-                    // fil._id = acc.id;
-                    // fil._rev =
                     db.put(res).then((re) => {
                         console.log('asdkljfkasdbfjasbhfjkasdfbjasbdh');
-
                         console.log(res);
                     });
                 });
@@ -176,9 +145,7 @@ export class PouchDBService {
                     let result;
                     this.acc_database.get(document.accountId).then(function (res) {
                         console.log('bbbbbbbbbbbbbbbb');
-                        // const db = this.acc_database;
                         console.log('vvvvvv');
-
                         console.log(res);
                         res.amount += document.amount;
                         this.acc_database.put(res).then((re) => {
@@ -218,14 +185,6 @@ export class PouchDBService {
         this.cat_database.sync(this.remote + 'category' + remote, options);
         this.acc_database.sync(this.remote + 'account' + remote, options);
         this.database.sync(this.remote + 'transaction' + remote, options);
-        // const remoteDatabase = new PouchDB(this.remote);
-        // this.database.sync(remoteDatabase, {
-        //     live: true
-        // }).on('change', change => {
-        //     this.listener.emit(change);
-        // }).on('error', error => {
-        //     console.error(JSON.stringify(error));
-        // });
     }
     public del(id: string) {
         console.log(document);
@@ -261,9 +220,6 @@ export class PouchDBService {
     public getChangeListener() {
         return this.listener;
     }
-
-
-
 
     public loadRecent() {
         return categoriesDB()

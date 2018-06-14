@@ -8,13 +8,15 @@
         </mat-toolbar>
         <div class="detail">
             <!-- <mat-list> -->
-                <!-- <mat-list-item> -->
-                    <div [ngClass]="{'red': transaction.category.Kind == kindEnum.EXPENSE, 'blue': transaction.category.Kind == kindEnum.INCOME}"
-                        placeholder="name">{{transaction.amount}}</div>
-                <!-- </mat-list-item> -->
+            <!-- <mat-list-item> -->
+            <div [ngClass]="{'red': transaction.category.Kind == kindEnum.EXPENSE, 'blue': transaction.category.Kind == kindEnum.INCOME}"
+                placeholder="name">{{transaction.amount}}</div>
+                <div>
+                    <app-category-item [category]="transaction.category"></app-category-item>
+                </div>
+            <div *ngIf="transaction.Note" style="width:50%; min-width:250px; max-width:300px;padding-left:  76px;    height: 96px;">{{transaction.Note}}</div>
+            <!-- </mat-list-item> -->
             <!-- </mat-list> -->
-            <div>
-                <app-category-item [category]="transaction.category"></app-category-item>
-            </div>
+
         </div>
     </div>

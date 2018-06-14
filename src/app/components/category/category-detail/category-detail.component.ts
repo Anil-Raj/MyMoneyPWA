@@ -47,7 +47,7 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
     del(tr) {
         this.database.del_cat(tr).then((a) => {
             console.log(a);
-            this.router.navigate(['/transaction/']);
+            this.router.navigate(['/category/']);
         });
     }
 

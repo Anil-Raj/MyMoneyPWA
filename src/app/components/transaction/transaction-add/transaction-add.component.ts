@@ -64,12 +64,10 @@ export class TransactionAddComponent implements OnInit {
 
             console.log(this.selectedAccount);
             tran.amount = tran.amount;
-            tran.accountId = this.selectedAccount._id;
             tran.categoryId = value.category._id;
             value.currency = 'USD';
             let tr: any;
             tr = transaction.fromForm(tran);
-            tr.accountId = this.selectedAccount._id;
             if (value.category.Kind === KindEnum.TRANSFER) {
                 tr.linkedAccountId = value.linkedAccound._id;
             }
@@ -77,7 +75,6 @@ export class TransactionAddComponent implements OnInit {
             tr.kind = tran.category.Kind;
             tr.currency = 'USD';
             console.log(tr);
-            // this.service.newTransaction(transaction);
             this.database.put('transaction_' + new Date().valueOf(), tr).then((a) => {
                 console.log(a);
                 this.router.navigate(['/transaction/']);

@@ -3,24 +3,15 @@ import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS } f
 import { CategoryService } from '../../../services/category.service';
 import { PouchDBService } from '../../../services/pouchdb.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Animations } from '../../../animations/animations';
+
 
 @Component({
     selector: 'app-cat-input',
     templateUrl: './cat-input.component.html',
     styleUrls: ['./cat-input.component.css'],
 
-    animations: [
-        trigger('flyInOut', [
-            state('in', style({ transform: 'translateY(0)' })),
-            transition('void => *', [
-                style({ transform: 'translateY(10%)' }),
-                animate(500)
-            ]),
-            transition('* => void', [
-                animate(100, style({ transform: 'translateY(-100%)' }))
-            ])
-        ])
-    ],
+    animations: [Animations.flyInOut10],
 
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => CategoryInputComponent), multi: true },

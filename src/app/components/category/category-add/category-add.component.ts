@@ -1,27 +1,18 @@
-import { Component, OnInit, trigger, style, transition, state, animate, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Meta, MetaDefinition } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Category } from '../../../Models/Category';
 import { PouchDBService } from '../../../services/pouchdb.service';
 import { Router } from '@angular/router';
+import { Animations } from '../../../animations/animations';
+
 
 @Component({
     selector: 'app-category-add',
     templateUrl: './category-add.component.html',
     styleUrls: ['./category-add.component.css'],
-    animations: [
-        trigger('slideUp', [
-            state('in', style({ transform: 'translateY(0)' })),
-            transition('void => *', [
-                style({ transform: 'translateY(100%)' }),
-                animate('.3s ease-out')
-            ]),
-            transition('* => void', [
-                animate(500, style({ transform: 'translateY(-100%)' }))
-            ])
-        ])
-    ],
+    animations: [Animations.slideUp],
 })
 export class CategoryAddComponent implements OnInit, OnDestroy {
     isSaveCalled = false;
@@ -56,7 +47,7 @@ export class CategoryAddComponent implements OnInit, OnDestroy {
             // category.id = 'category_' + value.Type.toLowerCase() + '_' + new Date().valueOf();
             console.log(c);
             this.database.put_cat('transaction_' + new Date().valueOf(), c).then(() => {
-            // this.database.put_cat(c).then(() => {
+                // this.database.put_cat(c).then(() => {
                 this.router.navigate(['/category/']);
             });
         }

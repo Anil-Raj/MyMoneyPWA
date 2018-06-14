@@ -46,45 +46,6 @@ export class TransactionListComponent implements OnInit, OnChanges {
         private zone: NgZone, private route: ActivatedRoute,
         private navService: SidebarService) {
 
-
-        // const a = this.database.loadRecent();
-        // console.log(a);
-        console.log('asdfaasldnfnlajkdnsfajkfsdf');
-        // localStorage.setItem('userInfo',
-        //     `{
-        //     "accessToken":"GnaSUNZ_rg_gqAc3_bhUqPDWPNSNRWAt",
-        //     "couchDB":{
-        //         "username":"370ae3c8 - 1f13 - 425a - 83d8 - bf09b2d34603",
-        //         "password":"948096ad - 632a - 42c2 - a49f - 96363529ec61",
-        //         "transactions":"http://127.0.0.1:5984/transaction1234"
-        //     }
-        // }`);
-        // sync(false);
-        console.log('asdfasdf');
-
-        // this.navService.account.subscribe(ac => {
-        //     console.log(ac);
-        //     this.database.get_tr_for_acc(ac).subscribe((transactions) => {
-        //         // return transactions.docs;
-        //         console.log(transactions);
-        //         this.transactions = transactions.docs.map(transaction => {
-        //             const tr = new Transaction();
-        //             console.log(transaction);
-
-        //             const tran = tr.toForm(transaction);
-        //             console.log(tran);
-
-        //             return transaction;
-        //         });
-        //         // console.log(this.transactions);
-
-
-        //     });
-        // });
-
-
-
-
         this.database.get().subscribe((transactions) => {
             this.transactionsFromAllAccount = transactions.rows.map(row => {
                 const transaction = new Transaction();
@@ -92,19 +53,16 @@ export class TransactionListComponent implements OnInit, OnChanges {
 
                 return transaction.toForm(row.doc);
             });
-            // let accId;
             console.log(this.transactionsFromAllAccount);
-
+            this.transactions = this.transactionsFromAllAccount;
             this.navService.account.subscribe(ac => {
-                this.transactions = this.transactionsFromAllAccount
-                    .filter(tr => tr.accountId === ac._id);
-                // console.log(this.transactionsFromAllAccount);
-                // console.log(this.transactions);
+                if (ac) {
+                    this.transactions = this.transactionsFromAllAccount
+                        .filter(tr => tr.accountId === ac._id);
+                }
             });
             const gb = new GroupByPipe();
             const vb = new ViewByPipe();
-            // this.transactions = vb.transform(this.transactions, this.viewByFilter);
-            // console.log(this.transactions);
         });
         this.navService.groupBy.subscribe(a => this.groupByFilter = a);
         this.navService.viewBy.subscribe(a => this.viewByFilter = a);
@@ -173,9 +131,6 @@ export class TransactionListComponent implements OnInit, OnChanges {
                                 start: day.format(),
                                 range: 'week'
                             });
-                        // console.log(day.startOf('week').format('DD/MM/YYYY') + ' - ' +
-                        // day.startOf('week').clone().add(1, range).add(-1, 's').format('DD/MM/YYYY'));
-
                     }
 
                 } else if (range === 'day') {
@@ -207,21 +162,24 @@ export class TransactionListComponent implements OnInit, OnChanges {
                 day = day.clone().add(1, range);
             }
             switch (range) {
-                case 'day':     this.timerange.push({
-                                    isFuture: true,
-                                    Label: 'Future',
-                                    start:  moment().endOf('day').clone().add(1, 's').format()   });
-                                break;
-                case 'month':   this.timerange.push({
-                                    isFuture: true,
-                                    Label: 'Future',
-                                    start: moment().endOf('month').add(1, 's').format() });
-                                break;
-                case 'week':    this.timerange.push({
-                                    isFuture: true,
-                                    Label: 'Future',
-                                    start: moment().endOf('week').add(1, 's').format() });
-                                break;
+                case 'day': this.timerange.push({
+                    isFuture: true,
+                    Label: 'Future',
+                    start: moment().endOf('day').clone().add(1, 's').format()
+                });
+                    break;
+                case 'month': this.timerange.push({
+                    isFuture: true,
+                    Label: 'Future',
+                    start: moment().endOf('month').add(1, 's').format()
+                });
+                    break;
+                case 'week': this.timerange.push({
+                    isFuture: true,
+                    Label: 'Future',
+                    start: moment().endOf('week').add(1, 's').format()
+                });
+                    break;
             }
 
             console.log(this.timerange);
@@ -264,7 +222,6 @@ export class TransactionListComponent implements OnInit, OnChanges {
         return sum;
     }
     netamount(transactions) {
-        // console.log(transactions);
         return this.income(transactions) + this.expense(transactions);
     }
     getLength(transactions: any[]) {

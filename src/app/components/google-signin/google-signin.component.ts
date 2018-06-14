@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { PouchDBService } from '../../services/pouchdb.service';
-declare const gapi: any;
+// declare const gapi: any;
 // import {GoogleSignInSuccess} from 'angular-google-signin';
 import { ICON_REGISTRY_PROVIDER_FACTORY } from '@angular/material';
 
@@ -34,17 +34,14 @@ export class GoogleSignInComponent implements AfterViewInit {
         'https://www.googleapis.com/auth/admin.directory.user.readonly'
     ].join(' ');
 
-
-
+    public email;
 
     // constructor() {
     // }
 
     // private myClientId = '72448630988-nhnn7e4chtsn0872i77m5hd65pi0aas3.apps.googleusercontent.com';
 
-
-
-    private id: string = 'google-signin2';
+    private id = 'google-signin2';
 
 
     private _fetchBasicProfile: boolean;
@@ -85,11 +82,14 @@ export class GoogleSignInComponent implements AfterViewInit {
         // this.googleSignInSuccess.next(new GoogleSignInSuccess(googleUser));
         const id: string = googleUser.getId();
         const profile: gapi.auth2.BasicProfile = googleUser.getBasicProfile();
+        console.log(profile);
+
         console.log('ID: ' +
             profile
                 .getId()); // Do not send to your backend! Use an ID token instead.
         console.log('Name: ' + profile.getName());
         localStorage.setItem('user', 'googleuser_' + profile.getId());
+        this.email = profile.getName();
 
     }
 

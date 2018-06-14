@@ -8,20 +8,15 @@
     <form [formGroup]="addTransactionForm" (ngSubmit)="onSubmit(addTransactionForm)">
         <div>
             <div style="width:100%;">
-                <div style="width:50%; min-width:250px; max-width:300px;padding-left:  70px;">
+                <div style="width:50%; min-width:250px; max-width:300px;padding-left:  70px;    height: 48px;">
                     <app-amount-input [ngClass]="{'red': addTransactionForm.value.category.Kind == kindEnum.EXPENSE,
                     'blue': addTransactionForm.value.category.Kind == kindEnum.INCOME,
                     'green': !addTransactionForm.value.category  } " matInput formControlName="amount" placeholder="amount">
                     </app-amount-input>
                 </div>
             </div>
-            <!-- <div style="width:100%;">
-                <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
-                    <textarea matInput formControlName="Note" placeholder="Note"></textarea>
-                </mat-form-field>
-            </div> -->
             <mat-list>
-                <mat-list-item class=" category">
+                <mat-list-item >
                     <i style="font-size: 40px;" class="material-icons">short_text</i>
                     <mat-form-field style="width:50%; min-width:250px; max-width:300px;padding-left: 20px;">
                             <textarea matInput type="text" formControlName="Note"></textarea>
@@ -31,16 +26,8 @@
             <div>
                 <app-cat-input formControlName="category"></app-cat-input>
             </div>
-            <!-- <div>isTransfer: <input type="radio" value="Transfer" formControlName="category"></div> -->
-            <!-- <div style="width:100%;">
-                <i class="material-icons">date_range</i>
-
-                <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
-                    <input matInput type="date" formControlName="time">
-                </mat-form-field>
-            </div> -->
             <mat-list>
-                <mat-list-item class=" category">
+                <mat-list-item >
                     <i style="font-size: 40px;" class="material-icons">date_range</i>
                     <!-- <img mat-list-avatar src="category.Icon"> -->
                     <mat-form-field style="width:50%; min-width:250px; max-width:300px;padding-left: 20px;">

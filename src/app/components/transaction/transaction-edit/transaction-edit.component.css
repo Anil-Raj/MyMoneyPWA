@@ -11,9 +11,99 @@
 .fill-space {
     flex: 1 1 auto;
 }
-.red{
-    color:red;
+
+.red {
+    color: red;
 }
-.blue{
-    color:blue;
+
+.blue {
+    color: blue;
 }
+
+.category {
+    width: 50%;
+    float: left;
+}
+
+.mat-list {
+    padding-top: 0px;
+}
+
+.category {
+    transition: 0.3s;
+    background: white;
+    font-size: .8em;
+    width: 100%;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    padding: 8px;
+}
+
+textarea {
+    /* width: 100%;
+    height: 50px;
+    padding: 12px 20px;
+    margin-left: 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+    border-top: 0px;
+    border-bottom: 1px solid green;
+    border-right: 0px;
+    border-left: 0px;
+    background-color: rgb(241, 250, 247);
+    text-decoration: none;
+    outline: none;
+    display: block;
+    padding: 10px 0;
+    margin: 20px 0;
+    font-size: 1.6em; */
+}
+
+
+
+div.text {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 1.25em;
+  }
+
+  div.text i {
+    margin: 0;
+    padding: 0;
+    display: block;
+    font-size: 100%;
+    padding-top: .1em;
+    padding-right: .25em;
+    /* width: 2em; */
+    text-align: right;
+    float: left;
+  }
+
+  div.text input,
+  div.text textarea {
+    margin: 0;
+    padding: 0;
+    /* display: block; */
+    font-size: 100%;
+    width: 80%;
+  }
+  textarea { resize:vertical; } /* none|horizontal|vertical|both */
+textarea.vert { resize:vertical; }
+textarea.noResize { resize:none; }
+
+  input:active,
+  input:focus,
+  input:hover,
+  textarea:active,
+  textarea:focus,
+  textarea:hover {
+    /* background-color: lightyellow;
+    border-color: yellow; */
+  }

@@ -4,13 +4,13 @@
 <div *ngIf="displayCustomKeyboard" class="category">
     <div class="amount-input-wrapper">
         <div class="mat-input-infix">
-                <mat-toolbar>
-                        <i class="material-icons" (click)="close()">done</i>
-                        <span class="fill-space"></span>
-                        <span *ngIf="category" class="edit">
-                                <i class="material-icons" routerLink="/category/edit/{{category[0]._id}}">mode edit</i>
-                            </span>
-                </mat-toolbar>
+            <mat-toolbar>
+                <i class="material-icons" (click)="close()">done</i>
+                <span class="fill-space"></span>
+                <span *ngIf="category" class="edit">
+                    <i class="material-icons" routerLink="/category/edit/{{category[0]._id}}">mode edit</i>
+                </span>
+            </mat-toolbar>
             <!-- <button type="button" class="close mat-primary mat-mini-fab" color="primary" (click)="close()">
                 <span class="mat-button-wrapper">
                 </span>
@@ -24,7 +24,7 @@
             <span class="mat-input-placeholder-wrapper"> </span>
         </div>
         <div class="keyboard">
-            <div class="form-group">
+            <div class="form-group" style="padding-left: 1em;">
                 <label>
                     <span>{{value}}</span>
                 </label>

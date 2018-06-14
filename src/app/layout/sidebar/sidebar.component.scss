@@ -33,6 +33,7 @@ padding-top: 20px;
 
 
 #sidebar {
+//   background: #344955;
   background: #673ab7;
   color: #fff !important;
   transition: all 0.3s;
@@ -40,12 +41,13 @@ padding-top: 20px;
 
 #sidebar .sidebar-header {
   padding: 20px;
-  background: #673ab7;
+//   background: #344955;
+background: #673ab7;
 }
 
 #sidebar ul.components {
   padding: 20px 0;
-  border-bottom: 1px solid #47748b;
+//   border-bottom: 1px solid green;
 }
 
 #sidebar ul p {
@@ -60,6 +62,8 @@ padding-top: 20px;
   display: block;
 }
 #sidebar ul li a:hover {
+//   color: #dd9c23;
+//   background: #344955;
   color: #7386D5;
   background: #fff;
 }
@@ -70,7 +74,8 @@ padding-top: 20px;
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
-  background: #6d7fcc;
+//   background: green;
+background: #6d7fcc;
 }
 
 .sidenav a {

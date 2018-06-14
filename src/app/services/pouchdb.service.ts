@@ -156,14 +156,10 @@ export class PouchDBService {
         return this.database.get(id).then(result => {
             document._rev = result._rev;
             return this.database.put(document).then(() => {
-                const db = this.database;
-                this.database.get(document.accountId).then(function (res) {
-                    // const fil =    acc.rows.filter(a => a.id === document.accountId);
-                    // console.log(acc.rows);
+                const db = this.acc_database;
+                db.get(document.accountId).then(function (res) {
                     console.log(res);
-                    res.amount = 1000;
-                    // fil._id = acc.id;
-                    // fil._rev =
+                    res.amount += document.amount;
                     db.put(res).then((re) => {
                         console.log('asdkljfkasdbfjasbhfjkasdfbjasbdh');
 
@@ -174,7 +170,31 @@ export class PouchDBService {
         }, error => {
             console.log(error);
             if (error.status === 404) {
-                return this.database.put(document);
+                return this.database.put(document).then(() => {
+                    console.log('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+                    console.log(document.accountId);
+                    let result;
+                    this.acc_database.get(document.accountId).then(function (res) {
+                        console.log('bbbbbbbbbbbbbbbb');
+                        // const db = this.acc_database;
+                        console.log('vvvvvv');
+
+                        console.log(res);
+                        res.amount += document.amount;
+                        this.acc_database.put(res).then((re) => {
+                        result = re;
+
+                            console.log(res);
+                        });
+                    }, err => {
+                        console.log(err);
+                        if (err.status === 404) {
+                            return this.acc_database.put(result).then(() => {
+
+                            });
+                        }
+                    });
+                });
             } else {
                 return new Promise((resolve, reject) => {
                     reject(error);
@@ -197,7 +217,7 @@ export class PouchDBService {
         // remote = ''
         this.cat_database.sync(this.remote + 'category' + remote, options);
         this.acc_database.sync(this.remote + 'account' + remote, options);
-        this.database.sync(this.remote + 'transaction1234' + remote, options);
+        this.database.sync(this.remote + 'transaction' + remote, options);
         // const remoteDatabase = new PouchDB(this.remote);
         // this.database.sync(remoteDatabase, {
         //     live: true
@@ -215,6 +235,21 @@ export class PouchDBService {
         }, error => {
             if (error.status === 404) {
                 return this.database.put(document);
+            } else {
+                return new Promise((resolve, reject) => {
+                    reject(error);
+                });
+            }
+        });
+    }
+    public del_cat(id: string) {
+        console.log(document);
+        return this.cat_database.get(id).then(result => {
+            result._deleted = true;
+            return this.cat_database.put(result);
+        }, error => {
+            if (error.status === 404) {
+                return this.cat_database.put(document);
             } else {
                 return new Promise((resolve, reject) => {
                     reject(error);

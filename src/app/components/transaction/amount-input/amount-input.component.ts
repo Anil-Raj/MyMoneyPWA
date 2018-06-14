@@ -111,6 +111,7 @@ export class AmountInputComponent implements ControlValueAccessor {
             } else if (key === 'backspace') {
                 this.value += '';
                 this.value = this.value.slice(0, -1);
+                this.value = this.value === '' ? '0' : this.value;
             } else if (key === '+' || key === '-' || key === '*' || key === '/') {
                 this.value += '';
                 const lastchar = this.value.slice(-1);
@@ -126,7 +127,7 @@ export class AmountInputComponent implements ControlValueAccessor {
                 this.computekey = true;
             } else {
                 console.log(this.value);
-                this.value = this.value === 0 ? key : this.value + key;
+                this.value = this.value === '0' ? key : this.value + key;
                 console.log(parseFloat(this.value));
             }
 
@@ -165,7 +166,7 @@ export class AmountInputComponent implements ControlValueAccessor {
 
     close() {
 
-    try {
+        try {
             console.log(this.value);
             console.log(typeof (this.value));
             console.log(mathjs.eval(this.value));

@@ -21,9 +21,12 @@ import { DebtComponent } from './components/debt/debt.component';
 import { TrendComponent } from './components/trend/trend.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { FitnessModule } from './components/fitness/fitness.module';
-import { GoogleSigninComponent } from './components/google-signin/google-signin.component';
+import { GoogleSignInComponent } from './components/google-signin/google-signin.component';
+
+// import {GoogleSignInComponent} from 'angular-google-signin';
 import { AutosizeDirective } from './components/autosize.directive';
 import { CoreModule } from './core-module/core.module';
+import { AutoSizeDirective } from './directives/auto-size.directive';
 
 
 @NgModule({
@@ -32,8 +35,11 @@ import { CoreModule } from './core-module/core.module';
         DebtComponent,
         TrendComponent,
         SettingComponent,
-        GoogleSigninComponent,
+        GoogleSignInComponent,
+        // MyGoogleSigninComponent,
         AutosizeDirective,
+
+        // AutoSizeDirective,
     ],
     imports: [
         CommonModule,

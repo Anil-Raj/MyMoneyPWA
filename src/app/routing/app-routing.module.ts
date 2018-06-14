@@ -12,7 +12,7 @@ import { CategoryAddComponent } from './../components/category/category-add/cate
 import { CategoryDetailComponent } from './../components/category/category-detail/category-detail.component';
 import { CategoryEditComponent } from './../components/category/category-edit/category-edit.component';
 import { FitnessComponent } from './../components/fitness/fitness.component';
-import { GoogleSigninComponent } from './../components/google-signin/google-signin.component';
+import { GoogleSignInComponent } from './../components/google-signin/google-signin.component';
 
 const routes: Routes = [
   { path: 'transaction', component: TransactionListComponent },
@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'settings', component: SettingComponent },
   { path: 'fitness', component: FitnessComponent },
   { path: '', redirectTo: 'transaction', pathMatch: 'full' },
-  { path: 'sign-in', component: GoogleSigninComponent },
+  { path: 'sign-in', component: GoogleSignInComponent },
 
 ];
 

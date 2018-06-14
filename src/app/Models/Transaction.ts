@@ -49,7 +49,7 @@ export class Transaction {
         };
     }
     toForm(data) {
-        console.log(data.amount, data.kind);
+        // console.log(data.amount, data.kind);
 
         return {
             ...data,

@@ -7,35 +7,61 @@
         </mat-toolbar>
 
         <div>
-            <mat-list>
+
                 <div style="width:100%;">
-                    <div style="width:50%; min-width:250px; max-width:300px;padding-left: 75px;">
+                    <div style="width:50%; min-width:250px; max-width:300px;padding: 20px 0px 20px 75px;">
                         <app-amount-input [ngClass]="{'red': editTransactionForm.value.category.Kind == kindEnum.EXPENSE,
                         'blue': editTransactionForm.value.category.Kind == kindEnum.INCOME} " matInput formControlName="amount"
                             placeholder="amount">
                         </app-amount-input>
                     </div>
                 </div>
-                <app-cat-input formControlName="category" [category]="editTransactionForm.controls" required></app-cat-input>
 
-                <div style="width:50%; min-width:250px; max-width:300px;">
-                    <input matInput type="date">
+                <!-- <mat-list-item>
+                    <i class="material-icons md-24 icon">date_range </i>
+                    <div style="width:50%; min-width:250px; max-width:300px;padding-left: 20px;">
+                        <input matInput type="date">
+                    </div>
+                </mat-list-item> -->
+
+                <!-- <div>
+                        <i style="font-size: 40px; " class="material-icons">short_text</i>
+                                <textarea matInput type="text" formControlName="Note"></textarea>
+        </div> -->
+                <div style="padding-top:20px; ">
+                    <app-cat-input formControlName="category" [category]="editTransactionForm.controls" required></app-cat-input>
                 </div>
+                <div class="text">
+                    <i style="font-size: 40px; " class="material-icons">short_text</i>
+                    <textarea autosize name="comment" id="comment"></textarea>
+                </div>
+                <!-- <div>isTransfer: <input type="radio" value="Transfer" formControlName="category"></div> -->
+                <!-- <div style="width:100%;">
+                    <i class="material-icons">date_range</i>
+
+                    <mat-form-field style="width:50%; min-width:250px; max-width:300px;">
+                        <input matInput type="date" formControlName="time">
+                    </mat-form-field>
+                </div> -->
+                <mat-list>
+                    <mat-list-item class=" category" style="padding-top:20px; ">
+                        <i style="font-size: 40px;" class="material-icons">date_range</i>
+                        <!-- <img mat-list-avatar src="category.Icon"> -->
+                        <mat-form-field style="width:50%; min-width:250px; max-width:300px;padding-left: 20px;">
+                            <input matInput type="date" formControlName="time">
+                        </mat-form-field>
+                    </mat-list-item>
+                </mat-list>
 
 
 
-                <mat-form-field style="width:50%; min-width:250px; max-width:300px;padding-left: 75px;">
-                    <textarea rows="1" matInput formControlName="Note"></textarea>
-                </mat-form-field>
-
-            </mat-list>
-            <mat-form-field class="example-full-width">
-                    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-                    <mat-datepicker-toggle matSuffix [for]="picker">
-                      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
+            <!-- <mat-form-field class="example-full-width">
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field> -->
         </div>
     </form>
 

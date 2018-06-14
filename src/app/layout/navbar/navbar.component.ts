@@ -43,11 +43,11 @@ export class NavbarComponent {
     }
     sync() {
         if (localStorage.getItem('user') === null) {
-            this.database.sync('');
             this.router.navigate(['/sign-in/']);
+            // this.database.sync(localStorage.getItem('user'));
+
         } else {
-            localStorage.getItem('user');
-            this.database.sync('');
+            this.database.sync(localStorage.getItem('user'));
         }
 
     }

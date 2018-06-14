@@ -32,9 +32,12 @@ import { AccountModule } from '../account/account.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AmountInputComponent } from './amount-input/amount-input.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { AutoSizeModule } from '../../directives/auto-size.directive';
 
 @NgModule({
     imports: [
+
+        // AutoSizeModule,
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
@@ -60,7 +63,7 @@ import { BrowserModule } from '@angular/platform-browser';
         MatCardModule,
         MatTabsModule,
         MatIconModule,
-        AccountModule,
+        AccountModule
 
     ],
     declarations: [

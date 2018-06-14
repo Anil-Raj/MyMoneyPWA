@@ -44,4 +44,11 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
         const metaDef: MetaDefinition = { name: 'theme-color', content: '#673ab7' };
         this.meta.updateTag(metaDef);
     }
+    del(tr) {
+        this.database.del_cat(tr).then((a) => {
+            console.log(a);
+            this.router.navigate(['/transaction/']);
+        });
+    }
+
 }

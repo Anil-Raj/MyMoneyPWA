@@ -7,7 +7,7 @@
     <ul class="list-unstyled components">
       <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
         <a [routerLink]="[menuItem.path]" (click)="closeSidebar()">
-          <i class="material-icons">{{menuItem.icon}}</i>
+          <i class="material-icons material-icons--outline">{{menuItem.icon}}</i>
           <span class="menu-title">{{menuItem.title}}</span>
         </a>
       </li>

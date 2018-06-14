@@ -88,7 +88,7 @@ export class TransactionListComponent implements OnInit, OnChanges {
         this.database.get().subscribe((transactions) => {
             this.transactionsFromAllAccount = transactions.rows.map(row => {
                 const transaction = new Transaction();
-                console.log(row.doc);
+                // console.log(row.doc);
 
                 return transaction.toForm(row.doc);
             });
@@ -98,8 +98,8 @@ export class TransactionListComponent implements OnInit, OnChanges {
             this.navService.account.subscribe(ac => {
                 this.transactions = this.transactionsFromAllAccount
                     .filter(tr => tr.accountId === ac._id);
-                console.log(this.transactionsFromAllAccount);
-                console.log(this.transactions);
+                // console.log(this.transactionsFromAllAccount);
+                // console.log(this.transactions);
             });
             const gb = new GroupByPipe();
             const vb = new ViewByPipe();
@@ -264,7 +264,7 @@ export class TransactionListComponent implements OnInit, OnChanges {
         return sum;
     }
     netamount(transactions) {
-        console.log(transactions);
+        // console.log(transactions);
         return this.income(transactions) + this.expense(transactions);
     }
     getLength(transactions: any[]) {

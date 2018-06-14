@@ -1,4 +1,4 @@
-<div *ngIf="!isSelectCategory" (click)="displaySelectCategory()" class="category">
+<div *ngIf="!isSelectCategory" (click)="displaySelectCategory()" >
     <div *ngIf="selectedCategory">
         <mat-list>
             <mat-list-item class=" category">
@@ -21,7 +21,7 @@
     </div>
 </div>
 <div *ngIf="isSelectCategory" class="category-list" [@flyInOut]>
-    <div mat-button *ngFor="let category of categories" (click)="select(category)" class=" category">
+    <div mat-button *ngFor="let category of categories" (click)="select(category)" >
         <mat-list>
             <mat-list-item class=" category">
                 <img mat-list-avatar [src]="category.Icon">

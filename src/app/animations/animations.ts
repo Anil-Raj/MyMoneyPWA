@@ -1,5 +1,5 @@
 // animations.ts
-import { trigger, state, style, transition, animate } from '@angular/core';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/core';
 
 export const Animations = {
     animeTrigger: trigger('animeTrigger', [

@@ -1,5 +1,6 @@
 import { Component, OnInit, trigger, style, transition, state, animate } from '@angular/core';
-import { Transaction, KindEnum } from '../../../Models/Transaction';
+import { Transaction } from '../../../Models/Transaction';
+import { KindEnum } from '../../../Models/Kind';
 import { Category } from '../../../Models/Category';
 import { CategoryService } from '../../../services/category.service';
 import { TransactionService } from '../../../services/transaction.service';
@@ -57,6 +58,7 @@ export class TransactionAddComponent implements OnInit {
     onSubmit({ valid, value }: { valid: any, value: any }) {
         if (valid) {
             const transaction = new Transaction();
+            value.currency = 'USD';
             const tran = value;
             console.log(value);
             tran.kind = value.category.Kind;
@@ -65,7 +67,6 @@ export class TransactionAddComponent implements OnInit {
             console.log(this.selectedAccount);
             tran.amount = tran.amount;
             tran.categoryId = value.category._id;
-            value.currency = 'USD';
             let tr: any;
             tr = transaction.fromForm(tran);
             if (value.category.Kind === KindEnum.TRANSFER) {
@@ -73,7 +74,6 @@ export class TransactionAddComponent implements OnInit {
             }
 
             tr.kind = tran.category.Kind;
-            tr.currency = 'USD';
             console.log(tr);
             this.database.put('transaction_' + new Date().valueOf(), tr).then((a) => {
                 console.log(a);

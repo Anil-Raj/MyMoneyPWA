@@ -1,4 +1,4 @@
-import { KindEnum } from './Transaction';
+import { KindEnum } from './Kind';
 
 
 export class Category {

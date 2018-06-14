@@ -1,14 +1,17 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import PouchDB from 'pouchdb';
-import PouchFind from 'pouchdb-find';
-PouchDB.plugin(PouchFind);
-import { Transaction } from '../Models/Transaction';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { transactionsDB, categoriesDB, accountsDB } from '../Models/storage/pouchdb';
+import PouchDB from 'pouchdb';
+PouchDB.plugin(PouchFind);
+import PouchFind from 'pouchdb-find';
+
+import { Transaction } from '../Models/Transaction';
 import { Category } from '../Models/Category';
+import { transactionsDB, categoriesDB, accountsDB } from '../Models/storage/pouchdb';
 import { environment } from '../../environments/environment';
+
+
 
 @Injectable()
 export class PouchDBService {
@@ -149,7 +152,7 @@ export class PouchDBService {
                         console.log(res);
                         res.amount += document.amount;
                         this.acc_database.put(res).then((re) => {
-                        result = re;
+                            result = re;
 
                             console.log(res);
                         });

@@ -4,7 +4,9 @@ import { TransactionService } from '../../../services/transaction.service';
 import { CategoryService } from '../../../services/category.service';
 import { PouchDBService } from '../../../services/pouchdb.service';
 import { Location } from '@angular/common';
-import { Transaction, KindEnum } from '../../../Models/Transaction';
+import { Transaction } from '../../../Models/Transaction';
+import { KindEnum } from '../../../Models/Kind';
+
 
 @Component({
     selector: 'app-transaction-detail',
@@ -31,7 +33,7 @@ export class TransactionDetailComponent implements OnInit {
         private service: PouchDBService,
         private router: Router,
         private location: Location,
-        ) { }
+    ) { }
     ngOnInit() {
         this.getTransaction();
     }

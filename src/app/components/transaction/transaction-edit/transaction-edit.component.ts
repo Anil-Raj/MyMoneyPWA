@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { TransactionService } from '../../../services/transaction.service';
-import { CategoryService } from '../../../services/category.service';
-import { Transaction, KindEnum } from '../../../Models/Transaction';
-import { Category } from '../../../Models/Category';
-import { PouchDBService } from '../../../services/pouchdb.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import PouchDB from 'pouchdb';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 import { SidebarService } from '../../../services/sidebar.service';
+import { TransactionService } from '../../../services/transaction.service';
+import { CategoryService } from '../../../services/category.service';
+import { PouchDBService } from '../../../services/pouchdb.service';
+import { Transaction } from '../../../Models/Transaction';
+import { Category } from '../../../Models/Category';
+import { KindEnum } from '../../../Models/Kind';
 
 @Component({
     selector: 'app-transaction-edit',

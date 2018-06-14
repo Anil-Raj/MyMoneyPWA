@@ -2,16 +2,8 @@ import Currency from './Currency';
 import pick from 'lodash/pick';
 import { Category } from './Category';
 import { format } from 'date-fns';
+import { KindEnum } from './Kind';
 
-export const EXPENSE = 0;
-export const TRANSFER = 1;
-export const INCOME = 2;
-
-export enum KindEnum {
-    EXPENSE = 0,
-    INCOME = 1,
-    TRANSFER = 2
-}
 
 const offset = new Date().getTimezoneOffset();
 
@@ -83,7 +75,7 @@ export class Transaction {
     }
     persistentKeys(data) {
         const keys = ['kind', 'note', 'tags', 'accountId', 'amount', 'currency'];
-        if (data.kind === TRANSFER) {
+        if (data.kind === KindEnum.TRANSFER) {
             keys.push(...['linkedAccountId', 'linkedAmount', 'linkedCurrency']);
         }
 

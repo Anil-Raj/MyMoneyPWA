@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionAddComponent } from './transaction-add/transaction-add.component';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
@@ -34,35 +34,30 @@ import { AmountInputComponent } from './amount-input/amount-input.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AutoSizeModule } from '../../directives/auto-size.directive';
 
+
 @NgModule({
     imports: [
-
-        // AutoSizeModule,
+        CommonModule,
+        RouterModule,
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
         MatDatepickerModule,
         MatInputModule,
         MatNativeDateModule,
-        ReactiveFormsModule,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        RouterModule,
-        CategoryModule,
         MatButtonModule,
         MatListModule,
         MatToolbarModule,
         MatInputModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        GroupByModule,
         MatRippleModule,
         MatCardModule,
         MatTabsModule,
         MatIconModule,
+        ReactiveFormsModule,
+        CategoryModule,
+        GroupByModule,
         AccountModule
 
     ],
@@ -75,7 +70,7 @@ import { AutoSizeModule } from '../../directives/auto-size.directive';
         DayPipe,
         MonthPipe,
         YearPipe,
-        FormFieldComponent,
+        // FormFieldComponent,
         AmountInputComponent
     ],
     exports: [
@@ -85,4 +80,5 @@ import { AutoSizeModule } from '../../directives/auto-size.directive';
         TransactionEditComponent
     ]
 })
+
 export class TransactionModule { }

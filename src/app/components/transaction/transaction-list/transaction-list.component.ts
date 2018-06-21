@@ -7,16 +7,16 @@ import { PouchDBService } from '../../../services/pouchdb.service';
 import { ActivatedRoute } from '@angular/router';
 import { SidebarService } from '../../../services/sidebar.service';
 import * as moment from 'moment';
-import {
-    sync,
-    load,
-    loadRecent,
-    loadFiltered,
-    save,
-    remove,
-    removeByAccount,
-    destroy
-} from '../../../Models/storage/transaction';
+// import {
+//     sync,
+//     load,
+//     loadRecent,
+//     loadFiltered,
+//     save,
+//     remove,
+//     removeByAccount,
+//     destroy
+// } from '../../../Models/storage/transaction';
 import { Timerange } from './Timerange';
 
 
@@ -28,7 +28,7 @@ import { Timerange } from './Timerange';
 })
 export class TransactionListComponent  {
 
-    timerange: any[] = [];
+    timerangeList: any[] = [];
     selectedIndex = 1;
     transactionsFromAllAccount: any[];
     transactions: any[];
@@ -55,20 +55,23 @@ export class TransactionListComponent  {
             });
         });
         this.navService.groupBy.subscribe(a => this.groupByFilter = a);
-        this.navService.viewBy.subscribe(a => this.viewByFilter = a);
+        // this.navService.viewBy.subscribe(a => this.viewByFilter = a);
+        this.viewByFilter = this.navService.viewBy;
+
         this.updateTimerange();
 
     }
     updateTimerange() {
-        this.navService.viewBy.subscribe(a => {
+        // this.navService.viewBy.subscribe(range => {
             const tr = new Timerange();
-            console.log(tr.getTimeRanges(a, this.viewByFilter));
+        // this.viewByFilter = this.navService.viewBy;
+            console.log(tr.getTimeRangeList(this.navService.viewBy.range, this.viewByFilter));
 
-            this.timerange = tr.getTimeRanges(a, this.viewByFilter);
-            console.log(this.timerange);
+            this.timerangeList = tr.getTimeRangeList(this.navService.viewBy.range, this.viewByFilter);
+            console.log(this.timerangeList);
 
-            this.selectedIndex = this.timerange.length - 2;
-        });
+            this.selectedIndex = this.timerangeList.length - 2;
+        // });
     }
 
     sum(items) {
@@ -103,7 +106,7 @@ export class TransactionListComponent  {
     updateTr(val) {
         this.viewByFilter = {
             range: this.navService.viewBy.getValue().range,
-            start: this.timerange[val.index].start
+            start: this.timerangeList[val.index].start
         };
         this.viewByFilter.isFuture = val.tab.textLabel === 'Future' ? true : false;
     }

@@ -1,48 +1,34 @@
 <div *ngIf="!displayCustomKeyboard" (click)="toggleCustomKeyBoard()" class="category">
-    <span>{{value}}</span>
-</div>
-<div *ngIf="displayCustomKeyboard" class="category">
-    <div class="amount-input-wrapper">
-        <div class="mat-input-infix">
-            <mat-toolbar>
-                <i class="material-icons" (click)="close()">done</i>
-                <span class="fill-space"></span>
-                <span *ngIf="category" class="edit">
-                    <i class="material-icons" routerLink="/category/edit/{{category[0]._id}}">mode edit</i>
-                </span>
-            </mat-toolbar>
-            <!-- <button type="button" class="close mat-primary mat-mini-fab" color="primary" (click)="close()">
-                <span class="mat-button-wrapper">
-                </span>
-                <mat-icon>home</mat-icon>
-                <div class="mat-button-ripple mat-button-ripple-round mat-ripple" ng-reflect-centered="false"></div>
-                <div class="mat-button-focus-overlay"></div>
-            </button> -->
-
-            <input type="text" ng-reflect-model="" ng-reflect-type="text" maxlength="0" class="ng-pristine ng-valid mat-input-element ng-touched"
-                id="md-input-57" placeholder="">
-            <span class="mat-input-placeholder-wrapper"> </span>
-        </div>
-        <div class="keyboard">
-            <div class="form-group" style="padding-left: 1em;">
-                <label>
-                    <span>{{value}}</span>
-                </label>
+        <span>{{value}}</span>
+    </div>
+    <div *ngIf="displayCustomKeyboard" class="category">
+        <div class="amount-input-wrapper">
+            <div class="mat-input-infix">
+                <mat-toolbar>
+                    <i class="material-icons" (click)="close()">done</i>
+                    <span class="fill-space"></span>
+                    <span *ngIf="category" class="edit">
+                        <i class="material-icons" routerLink="/category/edit/{{category[0]._id}}">mode edit</i>
+                    </span>
+                </mat-toolbar>
+                <input type="text" ng-reflect-model="" ng-reflect-type="text" maxlength="0" class="ng-pristine ng-valid mat-input-element ng-touched"
+                    id="md-input-57" placeholder="">
+                <span class="mat-input-placeholder-wrapper"> </span>
             </div>
-            <div class="keypad" [@vibrate]="isVibrate">
-                <div *ngFor="let row of phoneKeyboard" class="row">
-                    <button type="button" color="white" *ngFor="let item of row" class="key" mat-raised-button [disabled]="item.isDisabled" (click)="select(item.key)">
-                        <span *ngIf="item.type==1">{{item.key}}</span>
-                        <i class="material-icons" *ngIf="item.type==0">{{item.key}}</i>
-                    </button>
+            <div class="keyboard">
+                <div class="form-group" style="padding-left: 1em;">
+                    <label>
+                        <span>{{value}}</span>
+                    </label>
+                </div>
+                <div class="keypad" [@vibrate]="animateInvelidInput">
+                    <div *ngFor="let row of phoneKeyboard" class="row">
+                        <button type="button" color="white" *ngFor="let item of row" class="key" mat-raised-button [disabled]="item.isDisabled" (click)="select(item.key)">
+                            <span *ngIf="item.type==1">{{item.key}}</span>
+                            <i class="material-icons" *ngIf="item.type==0">{{item.key}}</i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- <div *ngIf="enterkey" (click)="close()">></div> -->
-        <!-- <div *ngIf="computekey" (click)="select('=')">=</div> -->
-
     </div>
-</div>
-
-
-<!-- <input [(ngModel)]="value" /> -->

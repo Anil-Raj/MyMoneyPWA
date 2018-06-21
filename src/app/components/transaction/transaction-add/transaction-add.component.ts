@@ -49,7 +49,7 @@ export class TransactionAddComponent implements OnInit {
 
     ngOnInit() {
         this.addTransactionForm = new FormGroup({
-            Note: new FormControl(),
+            note: new FormControl(),
             amount: new FormControl('0', Validators.required),
             category: new FormControl('', Validators.required),
             time: new FormControl(Date(), Validators.required)

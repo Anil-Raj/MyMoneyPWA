@@ -22,7 +22,9 @@ export class SidebarService {
     visible: boolean;
     groupBy = new BehaviorSubject<string>('categoryId');
 
-    viewBy = new BehaviorSubject<any>({ value: 0, range: 'week' });
+    // viewBy = new BehaviorSubject<any>({ value: 0, range: 'week' });
+    viewBy: any = { value: 0, range: 'week' };
+
 
     account = new BehaviorSubject<any>({});
     confirmGroupBy(groupBy: string) {
@@ -34,29 +36,27 @@ export class SidebarService {
 
         this.viewBy.next({ value: this.viewBy.getValue().value, range: range });
     }
-    confirmViewByValue(value) {
-        console.log(value);
+    // confirmViewByValue(value) {
+    //     console.log(value);
 
-        console.log({ value: value, range: this.viewBy.getValue().range });
-        this.viewBy.next({ value: value, range: this.viewBy.getValue().range });
+    //     console.log({ value: value, range: this.viewBy.getValue().range });
+    //     this.viewBy.next({ value: value, range: this.viewBy.getValue().range });
+    // }
+    confirmViewByValue(value) {
+
+        this.viewBy.value = value;
     }
+
 
     confirmAccountValue(value) {
         console.log(value);
 
-        console.log({ value: value, range: this.viewBy.getValue().range });
+        console.log({ value: value, range: this.viewBy.range });
         this.account.next(value);
     }
 
     constructor(private database: PouchDBService) {
         this.visible = false;
-        // this.database.get_acc().subscribe((transactions) => {
-        //     const accounts = transactions.rows.map(row => {
-        //         return row.doc;
-        //     });
-        //     console.log(accounts);
-        //     this.confirmAccountValue(accounts[0]);
-        // });
     }
 
     hide() { this.visible = false; }
@@ -75,15 +75,26 @@ export class SidebarService {
             return gb.Category;
         }
     }
+    // getViewByOptions() {
+    //     const vb = ViewBy;
+    //     if (this.viewBy.getValue().range === 'week') {
+    //         return vb.Week;
+    //     } else if (this.viewBy.getValue().range === 'month') {
+    //         return vb.Month;
+    //     } else {
+    //         return vb.Year;
+    //     }
+    // }
     getViewByOptions() {
         const vb = ViewBy;
-        if (this.viewBy.getValue().range === 'week') {
-            return vb.Week;
-        } else if (this.viewBy.getValue().range === 'month') {
-            return vb.Month;
-        } else {
-            return vb.Year;
-        }
+        // if (this.viewBy.getValue().range === 'week') {
+        //     return vb.Week;
+        // } else if (this.viewBy.getValue().range === 'month') {
+        //     return vb.Month;
+        // } else {
+        //     return vb.Year;
+        // }
+        return this.viewBy.range === 'week' ? vb.Week : (this.viewBy.range === 'month' ? vb.Month : vb.Day);
     }
 
 }

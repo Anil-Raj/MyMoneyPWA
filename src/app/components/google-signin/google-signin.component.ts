@@ -1,13 +1,13 @@
 import { Component, AfterViewInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { PouchDBService } from '../../services/pouchdb.service';
-// declare const gapi: any;
+declare const gapi: any;
 // import {GoogleSignInSuccess} from 'angular-google-signin';
 import { ICON_REGISTRY_PROVIDER_FACTORY } from '@angular/material';
 
 export class GoogleSignInSuccess {
-    public googleUser: gapi.auth2.GoogleUser;
+    public googleUser: any;
 
-    constructor(googleUser: gapi.auth2.GoogleUser) {
+    constructor(googleUser: any) {
         this.googleUser = googleUser;
     }
 }
@@ -78,10 +78,10 @@ export class GoogleSignInComponent implements AfterViewInit {
         // this.googleSignInFailure.next(new GoogleSignInFailure());
     }
 
-    private handleSuccess(googleUser: gapi.auth2.GoogleUser) {
+    private handleSuccess(googleUser: any) {
         // this.googleSignInSuccess.next(new GoogleSignInSuccess(googleUser));
         const id: string = googleUser.getId();
-        const profile: gapi.auth2.BasicProfile = googleUser.getBasicProfile();
+        const profile = googleUser.getBasicProfile();
         console.log(profile);
 
         console.log('ID: ' +
@@ -101,7 +101,7 @@ export class GoogleSignInComponent implements AfterViewInit {
                 // height: this._height,
                 // longtitle: this._longTitle,
                 // theme: this.theme,
-                onsuccess: (googleUser: gapi.auth2.GoogleUser) => this.handleSuccess(googleUser),
+                onsuccess: (googleUser:any) => this.handleSuccess(googleUser),
                 onfailure: () => this.handleFailure()
             });
     }

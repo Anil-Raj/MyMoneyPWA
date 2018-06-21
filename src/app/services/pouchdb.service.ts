@@ -182,7 +182,11 @@ export class PouchDBService {
         const options = {
             live: false,
             retry: false,
-            continuous: false
+            continuous: false,
+            auth: {
+                username: 'admin',
+                password: 'admin'
+              }
         };
         // remote = ''
         this.cat_database.sync(this.remote + 'category' + remote, options);

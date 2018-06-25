@@ -7,6 +7,8 @@ import { PouchDBService } from '../../../services/pouchdb.service';
 import { ActivatedRoute } from '@angular/router';
 import { SidebarService } from '../../../services/sidebar.service';
 import * as moment from 'moment';
+import 'hammerjs';
+
 import {
     sync,
     load,
@@ -26,7 +28,8 @@ import { Timerange } from './Timerange';
     styleUrls: ['./transaction-list.component.css'],
     encapsulation: ViewEncapsulation.None
 })
-export class TransactionListComponent  {
+export class TransactionListComponent {
+    SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
 
     timerange: any[] = [];
     selectedIndex = 1;
@@ -69,6 +72,37 @@ export class TransactionListComponent  {
 
             this.selectedIndex = this.timerange.length - 2;
         });
+    }
+    swipe(currentIndex: number, action: number = this.SWIPE_ACTION.RIGHT) {
+        console.log(currentIndex, typeof (currentIndex));
+        console.log(this.timerange.length - 1, typeof (this.timerange.length));
+        console.log(currentIndex > this.timerange.length - 1);
+
+
+        if (currentIndex > this.timerange.length - 1 || currentIndex < 0) return;
+
+        let nextIndex = 0;
+
+        // next
+        if (action === this.SWIPE_ACTION.LEFT) {
+            // const isLast = currentIndex === this.avatars.length - 1;
+            // nextIndex = isLast ? 0 : currentIndex + 1;
+            if (this.selectedIndex + 1 <= this.timerange.length - 1) {
+                this.selectedIndex += 1;
+            }
+        }
+
+        // previous
+        if (action === this.SWIPE_ACTION.RIGHT) {
+            // const isFirst = currentIndex === 0;
+            // nextIndex = isFirst ? this.avatars.length - 1 : currentIndex - 1;
+            if (this.selectedIndex > 0) {
+                this.selectedIndex -= 1;
+            }
+        }
+
+        // toggle avatar visibility
+        // this.avatars.forEach((x, i) => x.visible = (i === nextIndex));
     }
 
     sum(items) {

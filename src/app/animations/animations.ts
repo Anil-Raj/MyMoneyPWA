@@ -41,6 +41,23 @@ export const Animations = {
         transition('* => void', [
             animate(500, style({ transform: 'translateY(-100%)' }))
         ])
-    ])
+    ]),
+    vibrate: trigger(
+        'vibrate',
+        [
+            transition('false=>true', animate(1000, keyframes([
+                style({ transform: 'translate3d(0, 0, 0)', offset: 0 }),
+                style({ transform: 'translate3d(-10px, 0, 0', offset: 0.05 }),
+                style({ transform: 'translate3d(10px, 0, 0)', offset: 0.1 }),
+                style({ transform: 'translate3d(-10px, 0, 0', offset: 0.15 }),
+                style({ transform: 'translate3d(10px, 0, 0)', offset: 0.2 }),
+                style({ transform: 'translate3d(-10px, 0, 0', offset: 0.25 }),
+                style({ transform: 'translate3d(10px, 0, 0)', offset: 0.3 }),
+                style({ transform: 'translate3d(-10px, 0, 0', offset: 0.35 }),
+                style({ transform: 'translate3d(10px, 0, 0)', offset: 0.4 }),
+                style({ transform: 'translate3d(-10px, 0, 0', offset: 0.45 }),
+                style({ transform: 'translate3d(0, 0, 0)', offset: .5 }),
+            ]))),
+        ])
 
-}
+};

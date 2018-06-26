@@ -1,7 +1,8 @@
 <app-account-select ></app-account-select>
+
 <mat-tab-group  [(selectedIndex)]="selectedIndex"  (swipeleft)="swipe(selectedIndex, $event.type)" (swiperight)="swipe(selectedIndex, $event.type)" >
-    <mat-tab *ngFor="let val of timerange" [label]="val.Label">
-        <mat-card *ngIf="(transactions | viewBy:val).length > 0">
+    <mat-tab *ngFor="let timerange of timerangeList" [label]="timerange.Label">
+        <mat-card *ngIf="(transactions | viewBy:timerange).length > 0">
             <div class="overview">
                 <div class="day bold-24">Overview</div>
                 <div class="sub-header">Tap to view full report</div>
@@ -10,13 +11,13 @@
             <div class="wrapper">
                 <div class="left font-24">Inflow</div>
                 <div class="right font-24">
-                    <div style="color:blue">{{income(transactions | viewBy:val )}}</div>
+                    <div style="color:blue">{{income(transactions | viewBy:timerange )}}</div>
                 </div>
             </div>
             <div class="wrapper">
                 <div class="left font-24">Outflow</div>
                 <div class="right font-24">
-                    <div style="color:red">{{expense(transactions | viewBy:val)}}</div>
+                    <div style="color:red">{{expense(transactions | viewBy:timerange)}}</div>
                 </div>
             </div>
             <div class="right">
@@ -25,17 +26,18 @@
             <div class="wrapper">
                 <div class="left font-24"></div>
                 <div class="right font-24">
-                    <div>{{netamount(transactions | viewBy:val )}}</div>
+                    <div>{{netamount(transactions | viewBy:timerange )}}</div>
                 </div>
             </div>
         </mat-card>
-        <div *ngIf="(transactions | viewBy:val).length < 1 " class="centered">
+        <div *ngIf="(transactions | viewBy:timerange).length < 1 " class="centered">
             <div>
                 <div class="font-36"> No transactions</div>
                 <div> Tap + to add one</div>
             </div>
         </div>
-        <div *ngFor="let item of transactions| viewBy:val |  groupBy:groupByFilter">
+        
+        <div *ngFor="let item of transactions| viewBy:timerange |  groupBy:groupByFilter">
             <div class="card">
                 <div class="trans-group-header">
                     <div *ngIf="groupByFilter == 'categoryId'">

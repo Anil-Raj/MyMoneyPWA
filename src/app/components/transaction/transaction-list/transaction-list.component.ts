@@ -7,6 +7,7 @@ import { PouchDBService } from '../../../services/pouchdb.service';
 import { ActivatedRoute } from '@angular/router';
 import { SidebarService } from '../../../services/sidebar.service';
 import * as moment from 'moment';
+
 import 'hammerjs';
 
 import TransactionStorage from '../../../storage/transaction';
@@ -21,7 +22,7 @@ import { Timerange } from './Timerange';
 })
 export class TransactionListComponent {
     SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
-    timerange: any[] = [];
+    timerangeList: any[] = [];
     selectedIndex = 1;
     transactionsFromAllAccount: any[];
     transactions: any[];
@@ -40,30 +41,39 @@ export class TransactionListComponent {
             });
             this.transactions = this.transactionsFromAllAccount;
             console.log(this.transactions);
-
             this.navService.account.subscribe(ac => {
+                console.log(ac.id);
+                
                 if (ac) {
-                    this.transactions = TransactionStorage.filterByAccount(this.transactionsFromAllAccount, [ac]);
+                    this.transactions = this.transactionsFromAllAccount
+                    .filter(tr => tr.accountId == ac.id);
+                    console.log(this.transactions);
+                    
                 }
             });
         });
         this.navService.groupBy.subscribe(a => this.groupByFilter = a);
         this.navService.viewBy.subscribe(a => this.viewByFilter = a);
+        // this.viewByFilter = this.navService.viewBy;
+        console.log(this.viewByFilter);
+        
         this.updateTimerange();
 
     }
     updateTimerange() {
-        this.navService.viewBy.subscribe(a => {
+        this.navService.viewBy.subscribe(range => {
             const tr = new Timerange();
-            this.timerange = tr.getTimeRanges(this.viewByFilter);
-            this.selectedIndex = this.timerange.length - 2;
+            this.timerangeList = tr.getTimeRangeList(this.viewByFilter);
+            // console.log(this.timerangeList);
+            
+            this.selectedIndex = this.timerangeList.length - 2;
         });
     }
     swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT) {
 
-        if (currentIndex > this.timerange.length - 1 || currentIndex < 0) return;
+        if (currentIndex > this.timerangeList.length - 1 || currentIndex < 0) return;
         if (action === this.SWIPE_ACTION.LEFT) {
-            this.selectedIndex += currentIndex < this.timerange.length - 1 ? 1 : 0;
+            this.selectedIndex += currentIndex < this.timerangeList.length - 1 ? 1 : 0;
         }
         if (action === this.SWIPE_ACTION.RIGHT) {
             this.selectedIndex -= currentIndex > 0 ? 1 : 0;

@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as moment from 'moment';
+import transaction from '../../storage/transaction';
 
 @Pipe({
     name: 'viewBy'
@@ -8,7 +9,6 @@ export class ViewByPipe implements PipeTransform {
 
     transform(value: any, args?: any): any {
         let filteredData = [];
-        // console.log(args);
         if (value) {
             filteredData = value.filter(transaction => {
                 if (args.isFuture) {

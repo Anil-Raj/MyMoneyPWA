@@ -11,6 +11,7 @@ import { Location } from '@angular/common';
 import { SidebarService } from '../../../services/sidebar.service';
 import Currency from '../../../Models/Currency';
 import { Account } from '../../../Models/Account';
+import TransactionStorage from '../../../storage/transaction';
 
 @Component({
     selector: 'app-transaction-add',
@@ -45,12 +46,11 @@ export class TransactionAddComponent implements OnInit {
             console.log(this.selectedAccount);
 
         });
-
     }
 
     ngOnInit() {
         this.addTransactionForm = new FormGroup({
-            Note: new FormControl(),
+            note: new FormControl(),
             amount: new FormControl('0', Validators.required),
             category: new FormControl('', Validators.required),
             time: new FormControl(Date(), Validators.required)
@@ -63,7 +63,7 @@ export class TransactionAddComponent implements OnInit {
             value.accountId = this.selectedAccount.id;
             let tr = Transaction.fromForm(value);
             console.log(tr);
-            this.database.put('transaction_' + new Date().valueOf(), tr).then((a) => {
+            TransactionStorage.save(tr).then((a) => {
                 console.log(a);
                 this.router.navigate(['/transaction/']);
 
@@ -85,7 +85,6 @@ export class TransactionAddComponent implements OnInit {
                 amount: tr.amount,
                 currency: 'USD'
             }
-
             const acc = this.database.mutateBalance(mutation);
             console.log('mutated acc', acc);
 
@@ -95,5 +94,4 @@ export class TransactionAddComponent implements OnInit {
     back() {
         this.location.back();
     }
-
 }

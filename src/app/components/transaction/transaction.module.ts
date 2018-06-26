@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionAddComponent } from './transaction-add/transaction-add.component';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
@@ -42,35 +42,30 @@ export class MyHammerConfig extends HammerGestureConfig {
     }
 }
 
+
 @NgModule({
     imports: [
-
-        // AutoSizeModule,
+        CommonModule,
+        RouterModule,
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
         MatDatepickerModule,
         MatInputModule,
         MatNativeDateModule,
-        ReactiveFormsModule,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        RouterModule,
-        CategoryModule,
         MatButtonModule,
         MatListModule,
         MatToolbarModule,
         MatInputModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        GroupByModule,
         MatRippleModule,
         MatCardModule,
         MatTabsModule,
         MatIconModule,
+        ReactiveFormsModule,
+        CategoryModule,
+        GroupByModule,
         AccountModule
 
     ],
@@ -83,7 +78,7 @@ export class MyHammerConfig extends HammerGestureConfig {
         DayPipe,
         MonthPipe,
         YearPipe,
-        FormFieldComponent,
+        // FormFieldComponent,
         AmountInputComponent
     ],
     exports: [
@@ -97,4 +92,5 @@ export class MyHammerConfig extends HammerGestureConfig {
         useClass: MyHammerConfig
     }],
 })
+
 export class TransactionModule { }

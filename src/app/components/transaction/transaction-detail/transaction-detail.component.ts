@@ -6,6 +6,7 @@ import { PouchDBService } from '../../../services/pouchdb.service';
 import { Location } from '@angular/common';
 import { Transaction } from '../../../Models/Transaction';
 import { KindEnum } from '../../../Models/Kind';
+import TransactionStorage from '../../../storage/transaction';
 
 
 @Component({
@@ -40,18 +41,14 @@ export class TransactionDetailComponent implements OnInit {
 
     getTransaction(): void {
         const id = this.route.snapshot.paramMap.get('id');
-        console.log(id);
-
-        this.service.getDoc(id).subscribe(a => {
-            this.transaction = Transaction.toForm(a.rows[0].doc);
-            console.log(this.transaction);
+        TransactionStorage.load(id).then(tr => {
+            this.transaction = Transaction.toForm(tr);
         });
     }
     edit() {
     }
-    del(tr) {
-        this.service.del(tr).then((a) => {
-            console.log(a);
+    remove(tr) {
+        TransactionStorage.remove(tr._id).then((a) => {
             this.router.navigate(['/transaction/']);
         });
     }

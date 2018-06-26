@@ -1,43 +1,3 @@
-<!-- <div [@slideUp] class="add-category">
-    <form [formGroup]="editTransactionForm" (ngSubmit)="onSubmit(editTransactionForm)">
-        <mat-toolbar>
-            <i class="material-icons" (click)="back()">arrow_back</i>
-            <span class="fill-space"></span>
-            <button mat-button (click)="onSubmit(editTransactionForm)">Save</button>
-        </mat-toolbar>
-        <div>
-            <div style="width:100%;">
-                <div style="width:50%; min-width:250px; max-width:300px;padding: 20px 0px 20px 75px;">
-                    <app-amount-input [ngClass]="{'red': editTransactionForm.value.category.Kind == kindEnum.EXPENSE,
-                        'blue': editTransactionForm.value.category.Kind == kindEnum.INCOME} " matInput formControlName="amount"
-                        placeholder="amount">
-                    </app-amount-input>
-                </div>
-            </div>
-            <div style="padding-top:20px; ">
-                <app-cat-input formControlName="category" [category]="editTransactionForm.controls" required></app-cat-input>
-            </div>
-            <div class="text">
-                <i style="font-size: 40px; " class="material-icons">short_text</i>
-                <textarea autosize name="comment" id="comment"></textarea>
-            </div>
-            <mat-list>
-                <mat-list-item class=" category" style="padding-top:20px; ">
-                    <i style="font-size: 40px;" class="material-icons">date_range</i>
-                    <mat-form-field style="width:50%; min-width:250px; max-width:300px;padding-left: 20px;">
-                        <input matInput type="date" formControlName="time">
-                    </mat-form-field>
-                </mat-list-item>
-            </mat-list>
-        </div>
-    </form>
-
-</div>
-
- -->
-
-
-
 <div [@slideUp] class="add-category">
     <mat-toolbar>
         <i class="material-icons" (click)="back()">arrow_back</i>
@@ -58,7 +18,7 @@
                 <mat-list-item style="height: 96px;">
                     <i style="font-size: 40px;" class="material-icons">short_text</i>
                     <mat-form-field style="width:50%; min-width:250px; max-width:300px;padding-left: 20px;">
-                        <textarea matInput type="text" formControlName="Note"></textarea>
+                        <textarea matInput type="text" formControlName="note"></textarea>
                     </mat-form-field>
                 </mat-list-item>
             </mat-list>
@@ -68,7 +28,6 @@
             <mat-list>
                 <mat-list-item class=" category">
                     <i style="font-size: 40px;" class="material-icons">date_range</i>
-                    <!-- <img mat-list-avatar src="category.Icon"> -->
                     <mat-form-field style="width:50%; min-width:250px; max-width:300px;padding-left: 20px;">
                         <input matInput type="date" formControlName="time">
                     </mat-form-field>

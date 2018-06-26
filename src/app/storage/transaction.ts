@@ -79,6 +79,7 @@ export function load(id) {
  * @return {array}
  */
 export function filterByAccount(docs, accounts) {
+    console.log(docs);
     console.log(accounts);
     
     return docs.filter(

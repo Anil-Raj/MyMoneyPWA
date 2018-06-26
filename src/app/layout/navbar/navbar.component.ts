@@ -19,7 +19,9 @@ export class NavbarComponent {
         private navService: SidebarService,
         private database: PouchDBService,
         private router: Router) {
-        this.navService.viewBy.subscribe(a => this.viewByFilter = a.range);
+        // this.navService.viewBy.subscribe(a => this.viewByFilter = a.range);
+        this.viewByFilter = this.navService.viewBy.range;
+
         console.log(this.viewByFilter);
     }
 

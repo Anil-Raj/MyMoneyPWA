@@ -1,12 +1,10 @@
 import { Component, AfterViewInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { PouchDBService } from '../../services/pouchdb.service';
 declare const gapi: any;
-// import {GoogleSignInSuccess} from 'angular-google-signin';
-import { ICON_REGISTRY_PROVIDER_FACTORY } from '@angular/material';
 
 export class GoogleSignInSuccess {
+  
     public googleUser: any;
-
     constructor(googleUser: any) {
         this.googleUser = googleUser;
     }
@@ -78,6 +76,7 @@ export class GoogleSignInComponent implements AfterViewInit {
         // this.googleSignInFailure.next(new GoogleSignInFailure());
     }
 
+
     private handleSuccess(googleUser: any) {
         // this.googleSignInSuccess.next(new GoogleSignInSuccess(googleUser));
         const id: string = googleUser.getId();
@@ -101,6 +100,7 @@ export class GoogleSignInComponent implements AfterViewInit {
                 // height: this._height,
                 // longtitle: this._longTitle,
                 // theme: this.theme,
+
                 onsuccess: (googleUser:any) => this.handleSuccess(googleUser),
                 onfailure: () => this.handleFailure()
             });

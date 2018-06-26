@@ -1,7 +1,8 @@
 <app-account-select ></app-account-select>
-<mat-tab-group  [(selectedIndex)]="selectedIndex" >
-    <mat-tab *ngFor="let timerange of timerangeList" [label]="timerange.Label">
-        <mat-card *ngIf="(transactions | viewBy:timerange).length > 0">
+
+<mat-tab-group  [(selectedIndex)]="selectedIndex"  (swipeleft)="swipe(selectedIndex, $event.type)" (swiperight)="swipe(selectedIndex, $event.type)" >
+    <mat-tab *ngFor="let val of timerange" [label]="val.Label">
+        <mat-card *ngIf="(transactions | viewBy:val).length > 0">
             <div class="overview">
                 <div class="day bold-24">Overview</div>
                 <div class="sub-header">Tap to view full report</div>

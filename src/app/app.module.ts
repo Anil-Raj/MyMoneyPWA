@@ -8,6 +8,8 @@ import { MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule } from 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+
 
 
 import { environment } from '../environments/environment';
@@ -35,6 +37,13 @@ import { GoogleSignInComponent } from './components/google-signin/google-signin.
 import { AppRoutingModule } from './routing/app-routing.module';
 
 
+
+export class MyHammerConfig extends HammerGestureConfig {
+    overrides = <any>{
+        'swipe': { velocity: 0.4, threshold: 20 } // override default settings
+    }
+}
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -60,7 +69,15 @@ import { AppRoutingModule } from './routing/app-routing.module';
         MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule,
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
     ],
-    providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+    providers: [{
+        provide: LocationStrategy,
+        useClass: HashLocationStrategy
+    }
+    // , {
+    //     provide: HAMMER_GESTURE_CONFIG,
+    //     useClass: MyHammerConfig
+    // }
+],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

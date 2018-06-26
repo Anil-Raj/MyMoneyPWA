@@ -33,6 +33,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AmountInputComponent } from './amount-input/amount-input.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AutoSizeModule } from '../../directives/auto-size.directive';
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+
+
+export class MyHammerConfig extends HammerGestureConfig {
+    overrides = <any>{
+        'swipe': { velocity: 0.4, threshold: 20 } // override default settings
+    }
+}
 
 
 @NgModule({
@@ -78,7 +86,11 @@ import { AutoSizeModule } from '../../directives/auto-size.directive';
         TransactionAddComponent,
         TransactionDetailComponent,
         TransactionEditComponent
-    ]
+    ],
+    providers: [{
+        provide: HAMMER_GESTURE_CONFIG,
+        useClass: MyHammerConfig
+    }],
 })
 
 export class TransactionModule { }

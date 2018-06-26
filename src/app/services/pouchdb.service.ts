@@ -10,6 +10,7 @@ import { Transaction } from '../Models/Transaction';
 import { Category } from '../Models/Category';
 import { transactionsDB, categoriesDB, accountsDB } from '../Models/storage/pouchdb';
 import { environment } from '../../environments/environment';
+import { Account } from '../Models/Account';
 
 
 
@@ -54,8 +55,17 @@ export class PouchDBService {
             });
 
             this.acc_database.bulkDocs([
-                { _id: 'account_1', Name: 'HDFC A/C', amount: 0 },
-                { _id: 'account_2', Name: 'Cash', amount: 0 }
+                {
+                    id: 'A12345',
+                    name: 'Test',
+                    group: 'cash',
+                    balance: {
+                        USD: 10095,
+                        JPY: 2200
+                    },
+                    currencies: ["USD", "EUR", "JPY"]
+                }
+                // { _id: 'account_2', Name: 'Cash', amount: 0 }
             ]).then(function (result) {
                 // handle result
             }).catch(function (err) {
@@ -122,49 +132,108 @@ export class PouchDBService {
             }
         });
     }
+    // public put_acc(id: string, document: any) {
+    //     document._id = document.id;
+    //     console.log(document);
+    //     return this.acc_database.get(id).then(result => {
+    //         document._rev = result._rev;
+    //         return this.database.put(document);
+    //     });
+
+    // }
+    public put_acc(account) {
+        return this.acc_database
+            .get(account.id)
+            .then(doc => {
+                console.log(doc);
+
+                this.acc_database.put({ ...doc, ...Account.toStorage(account) });
+            })
+            .catch(err => {
+                console.log(err);
+                if (err.status !== 404) {
+                    throw err
+                }
+                return this.acc_database.put({
+                    _id: account.id,
+                    ...Account.toStorage(account)
+                })
+            })
+    }
+
+    public mutateBalance({ accountId, currency, amount }) {
+        this.acc_database
+            .get(accountId)
+            .then((doc) => {
+                console.log(doc);
+                console.log(Account.mutateBalance(doc, currency, amount));
+                return this.acc_database.put(Account.mutateBalance(doc, currency, amount));
+            }).then((rev ) => {
+                console.log(rev);
+                return this.acc_database.get(accountId, rev.rev);
+            })
+            .then(doc => {
+                console.log(doc);
+                return Account.fromStorage(doc)
+            })
+    }
+
+    public save(account) {
+        return accountsDB()
+            .get(account.id)
+            .then(doc => accountsDB().put({ ...doc, ...Account.toStorage(account) }))
+            .catch(err => {
+                if (err.status !== 404) throw err
+                return accountsDB().put({
+                    _id: account.id,
+                    ...Account.toStorage(account)
+                })
+            })
+    }
+
     public put(id: string, document: any) {
         document._id = document.id;
         console.log(document);
         return this.database.get(id).then(result => {
-            document._rev = result._rev;
-            return this.database.put(document).then(() => {
-                const db = this.acc_database;
-                db.get(document.accountId).then(function (res) {
-                    console.log(res);
-                    res.amount += document.amount;
-                    db.put(res).then((re) => {
-                        console.log('asdkljfkasdbfjasbhfjkasdfbjasbdh');
+            result = document;
+            return this.database.put(document);
+            // .then(() => {
+            //     const db = this.acc_database;
+            //     db.get(document.accountId).then(function (res) {
+            //         console.log(res);
+            //         res.amount += document.amount;
+            //         db.put(res).then((re) => {
+            //             console.log('asdkljfkasdbfjasbhfjkasdfbjasbdh');
 
-                        console.log(res);
-                    });
-                });
-            });
+            //             console.log(res);
+            //         });
+            //     });
+            // });
         }, error => {
             console.log(error);
             if (error.status === 404) {
-                return this.database.put(document).then(() => {
-                    console.log('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
-                    console.log(document.accountId);
-                    let result;
-                    this.acc_database.get(document.accountId).then(function (res) {
-                        console.log('bbbbbbbbbbbbbbbb');
-                        console.log('vvvvvv');
-                        console.log(res);
-                        res.amount += document.amount;
-                        this.acc_database.put(res).then((re) => {
-                            result = re;
+                return this.database.put(document);
+                // .then(() => {
+                //     let result;
+                //     this.acc_database.get(document.accountId).then(function (res) {
+                //         console.log('bbbbbbbbbbbbbbbb');
+                //         console.log('vvvvvv');
+                //         console.log(res);
+                //         res.amount += document.amount;
+                //         this.acc_database.put(res).then((re) => {
+                //             result = re;
 
-                            console.log(res);
-                        });
-                    }, err => {
-                        console.log(err);
-                        if (err.status === 404) {
-                            return this.acc_database.put(result).then(() => {
+                //             console.log(res);
+                //         });
+                //     }, err => {
+                //         console.log(err);
+                //         if (err.status === 404) {
+                //             return this.acc_database.put(result).then(() => {
 
-                            });
-                        }
-                    });
-                });
+                //             });
+                //         }
+                //     });
+                // });
             } else {
                 return new Promise((resolve, reject) => {
                     reject(error);

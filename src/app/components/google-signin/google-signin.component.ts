@@ -3,7 +3,7 @@ import { PouchDBService } from '../../services/pouchdb.service';
 // import { ICON_REGISTRY_PROVIDER_FACTORY } from '@angular/material';
 // import * as gapi from '@types/gapi';
 // import {aut2} from '@types/gapi.auth2';
-// declare const gapi: any;
+ declare const gapi: any;
 // import {GoogleSignInSuccess} from 'angular-google-signin';
 
 

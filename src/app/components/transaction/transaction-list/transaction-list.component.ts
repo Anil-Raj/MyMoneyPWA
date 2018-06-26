@@ -9,16 +9,7 @@ import { SidebarService } from '../../../services/sidebar.service';
 import * as moment from 'moment';
 import 'hammerjs';
 
-import {
-    sync,
-    load,
-    loadRecent,
-    loadFiltered,
-    save,
-    remove,
-    removeByAccount,
-    destroy
-} from '../../../Models/storage/transaction';
+import TransactionStorage from '../../../storage/transaction';
 import { Timerange } from './Timerange';
 
 
@@ -30,7 +21,6 @@ import { Timerange } from './Timerange';
 })
 export class TransactionListComponent {
     SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
-
     timerange: any[] = [];
     selectedIndex = 1;
     transactionsFromAllAccount: any[];
@@ -46,14 +36,14 @@ export class TransactionListComponent {
 
         this.database.get().subscribe((transactions) => {
             this.transactionsFromAllAccount = transactions.rows.map(row => {
-                const transaction = new Transaction();
-                return transaction.toForm(row.doc);
+                return Transaction.toForm(row.doc);
             });
             this.transactions = this.transactionsFromAllAccount;
+            console.log(this.transactions);
+
             this.navService.account.subscribe(ac => {
                 if (ac) {
-                    this.transactions = this.transactionsFromAllAccount
-                        .filter(tr => tr.accountId === ac._id);
+                    this.transactions = TransactionStorage.filterByAccount(this.transactionsFromAllAccount, [ac]);
                 }
             });
         });
@@ -65,50 +55,25 @@ export class TransactionListComponent {
     updateTimerange() {
         this.navService.viewBy.subscribe(a => {
             const tr = new Timerange();
-            console.log(tr.getTimeRanges(a, this.viewByFilter));
-
-            this.timerange = tr.getTimeRanges(a, this.viewByFilter);
-            console.log(this.timerange);
-
+            this.timerange = tr.getTimeRanges(this.viewByFilter);
             this.selectedIndex = this.timerange.length - 2;
         });
     }
-    swipe(currentIndex: number, action: number = this.SWIPE_ACTION.RIGHT) {
-        console.log(currentIndex, typeof (currentIndex));
-        console.log(this.timerange.length - 1, typeof (this.timerange.length));
-        console.log(currentIndex > this.timerange.length - 1);
-
+    swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT) {
 
         if (currentIndex > this.timerange.length - 1 || currentIndex < 0) return;
-
-        let nextIndex = 0;
-
-        // next
         if (action === this.SWIPE_ACTION.LEFT) {
-            // const isLast = currentIndex === this.avatars.length - 1;
-            // nextIndex = isLast ? 0 : currentIndex + 1;
-            if (this.selectedIndex + 1 <= this.timerange.length - 1) {
-                this.selectedIndex += 1;
-            }
+            this.selectedIndex += currentIndex < this.timerange.length - 1 ? 1 : 0;
         }
-
-        // previous
         if (action === this.SWIPE_ACTION.RIGHT) {
-            // const isFirst = currentIndex === 0;
-            // nextIndex = isFirst ? this.avatars.length - 1 : currentIndex - 1;
-            if (this.selectedIndex > 0) {
-                this.selectedIndex -= 1;
-            }
+            this.selectedIndex -= currentIndex > 0 ? 1 : 0;
         }
-
-        // toggle avatar visibility
-        // this.avatars.forEach((x, i) => x.visible = (i === nextIndex));
     }
 
     sum(items) {
         let sum = 0;
         items.map(item => {
-            sum += (parseInt(item.amount, 10) * (item.kind === KindEnum.INCOME ? 1 : -1));
+            sum += (parseInt(item.amount, 10) * (item.category.Kind === KindEnum.INCOME ? 1 : -1));
         });
         return sum;
     }
@@ -131,14 +96,7 @@ export class TransactionListComponent {
         return sum;
     }
     netamount(transactions) {
-        return this.income(transactions) + this.expense(transactions);
+        return this.income(transactions) - this.expense(transactions);
     }
 
-    updateTr(val) {
-        this.viewByFilter = {
-            range: this.navService.viewBy.getValue().range,
-            start: this.timerange[val.index].start
-        };
-        this.viewByFilter.isFuture = val.tab.textLabel === 'Future' ? true : false;
-    }
 }

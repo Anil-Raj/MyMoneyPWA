@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { SidebarService } from '../../../services/sidebar.service';
 import Currency from '../../../Models/Currency';
+import { Account } from '../../../Models/Account';
 
 @Component({
     selector: 'app-transaction-add',
@@ -31,7 +32,7 @@ import Currency from '../../../Models/Currency';
 export class TransactionAddComponent implements OnInit {
 
     selectedAccount: any;
-    private transaction: Transaction;
+    private transaction;
     addTransactionForm: FormGroup;
     kindEnum = KindEnum;
     constructor(private service: TransactionService,
@@ -57,31 +58,42 @@ export class TransactionAddComponent implements OnInit {
     }
     onSubmit({ valid, value }: { valid: any, value: any }) {
         if (valid) {
-            const transaction = new Transaction();
-            value.currency = 'USD';
-            const tran = value;
-            console.log(value);
-            tran.kind = value.category.Kind;
-            console.log(KindEnum.EXPENSE, tran.kind);
-
             console.log(this.selectedAccount);
-            tran.amount = tran.amount;
-            tran.categoryId = value.category._id;
-            let tr: any;
-            tr = transaction.fromForm(tran);
-            if (value.category.Kind === KindEnum.TRANSFER) {
-                tr.linkedAccountId = value.linkedAccound._id;
-            }
-
-            tr.kind = tran.category.Kind;
+            value.currency = 'USD';
+            value.accountId = this.selectedAccount.id;
+            let tr = Transaction.fromForm(value);
             console.log(tr);
             this.database.put('transaction_' + new Date().valueOf(), tr).then((a) => {
                 console.log(a);
                 this.router.navigate(['/transaction/']);
+
             });
+            const data = {
+                id: 'A12345',
+                name: 'Test',
+                group: 'cash',
+                balance: {
+                    USD: 10095,
+                    JPY: 2200
+                },
+                currencies: ["USD", "EUR", "JPY"]
+            }
+            // const acc1 = Account.toStorage(data);
+            // console.log(this.database.put_acc(acc1));
+            const mutation = {
+                accountId: 'A12345',
+                amount: tr.amount,
+                currency: 'USD'
+            }
+
+            const acc = this.database.mutateBalance(mutation);
+            console.log('mutated acc', acc);
+
+            // this.database.put_acc(acc);
         }
     }
     back() {
         this.location.back();
     }
+
 }

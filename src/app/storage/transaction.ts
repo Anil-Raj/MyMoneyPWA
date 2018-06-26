@@ -3,18 +3,17 @@ import {
     remoteTransactionsDB,
     destroyTransactionsDB
 } from './pouchdb';
-import { Transaction } from '../../Models/Transaction';
+import { Transaction } from '../Models/Transaction';
 import intersection from 'lodash/intersection';
 // import { read, readdir } from 'fs';
 
 export default {
     sync,
     load,
-    loadRecent,
-    loadFiltered,
     save,
     remove,
     removeByAccount,
+    filterByAccount,
     destroy
 };
 
@@ -72,33 +71,6 @@ export function load(id) {
         });
 }
 
-export function loadRecent(limit = this.recentListLimit) {
-    return transactionsDB()
-        .allDocs({
-            include_docs: true,
-            descending: true,
-            startkey: 'T\uffff',
-            endkey: 'T',
-            // limit
-        })
-        .then(response => response.rows.map(row => { console.log(row); return row.doc; }))
-        .then(docs => docs.map(a => this.fromStorage(a)));
-}
-
-export function loadFiltered(filters: any = {}) {
-    return transactionsDB()
-        .allDocs({
-            include_docs: true,
-            descending: true,
-            startkey: filters.date ? `T${filters.date.end}-\uffff` : 'T\uffff',
-            endkey: filters.date ? `T${filters.date.start}-` : 'T'
-        })
-        .then(response => response.rows.map(row => row.doc))
-        .then(docs => filterByAccount(docs, filters.accounts))
-        .then(docs => filterByTags(docs, filters.tags))
-        .then(docs => docs.map(doc => this.fromStorage(doc)));
-}
-
 /**
  * Filter transactions by account.
  *
@@ -106,42 +78,26 @@ export function loadFiltered(filters: any = {}) {
  * @param {Set} accounts
  * @return {array}
  */
-function filterByAccount(docs, accounts) {
-    if (!accounts || !accounts.size) { return docs; }
-
+export function filterByAccount(docs, accounts) {
+    console.log(accounts);
+    
     return docs.filter(
-        tx => accounts.has(tx.accountId) || accounts.has(tx.linkedAccountId)
+        tx => tx.accountId == accounts.map(ac=>ac.id)
     );
-}
-
-/**
- * Filter transactions by tag.
- *
- * @param {array} docs
- * @param {array} tags
- * @return {array}
- */
-function filterByTags(docs, tags) {
-    return tags && tags.length > 0
-        ? docs.filter(tx => intersection(tx.tags, tags).length > 0)
-        : docs;
 }
 
 export function save(transaction) {
     return transactionsDB()
         .get(transaction.id)
         .then(doc => {
-            const tr = new Transaction();
-            transactionsDB().put({ ...doc, ...tr.toStorage(transaction) });
+            transactionsDB().put({ ...doc, ...transaction });
         }
         )
         .catch(err => {
             if (err.status !== 404) { throw err; }
-            const tr = new Transaction();
             return transactionsDB().put({
                 _id: transaction.id,
-
-                ...tr.toStorage(transaction)
+                ...transaction
             });
         });
 }

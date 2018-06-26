@@ -53,7 +53,7 @@
                         <mat-divider></mat-divider>
 
                         <mat-list>
-                            <mat-list-item *ngFor="let transaction of item.value" routerLink="{{transaction._id}}" class="wrapper no-outline" matRipple
+                            <mat-list-item *ngFor="let transaction of item.value" routerLink="{{transaction.id}}" class="wrapper no-outline" matRipple
                                 style="position:relative">
                                 <div class="left">
                                     <div class="date">{{transaction.time | date}}</div>
@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="right">
-                                    <div class=" font-24">{{getSum(item.value)}}</div>
+                                    <div class=" font-24">{{sum(item.value)}}</div>
                                 </div>
                             </mat-list-item>
 

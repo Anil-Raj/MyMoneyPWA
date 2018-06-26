@@ -43,8 +43,7 @@ export class TransactionDetailComponent implements OnInit {
         console.log(id);
 
         this.service.getDoc(id).subscribe(a => {
-            const tr = new Transaction();
-            this.transaction = tr.toForm(a.rows[0].doc);
+            this.transaction = Transaction.toForm(a.rows[0].doc);
             console.log(this.transaction);
         });
     }

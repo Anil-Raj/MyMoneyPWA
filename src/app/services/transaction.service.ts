@@ -92,33 +92,33 @@ export class TransactionService {
     //     return this.http.get<Category>(url);
     // }
 
-    getTransaction(id: number): Observable<Transaction> {
-        // if("indexedDB" in window) {
-        //     console.log("YES!!! I CAN DO IT!!! WOOT!!!");
-        // } else {
-        //     console.log("I has a sad.");
-        // }
-        const url = `${this.transactionUrl}/${id}`;
-        return this.http.get<Transaction>(url);
-    }
-    getTransactions(): Observable<Transaction[]> {
-        return this.http.get<Transaction[]>(this.transactionUrl);
-    }
+    // getTransaction(id: number): Observable<Transaction> {
+    //     // if("indexedDB" in window) {
+    //     //     console.log("YES!!! I CAN DO IT!!! WOOT!!!");
+    //     // } else {
+    //     //     console.log("I has a sad.");
+    //     // }
+    //     const url = `${this.transactionUrl}/${id}`;
+    //     return this.http.get<Transaction>(url);
+    // }
+    // getTransactions(): Observable<Transaction[]> {
+    //     return this.http.get<Transaction[]>(this.transactionUrl);
+    // }
 
-    updateTransaction (transaction: Transaction) {
-      const url = `${this.transactionUrl}/${transaction.id}`;
-      this.http.put(url, transaction).subscribe(a => {
-        console.log(a);
-      });
-    }
+    // updateTransaction (transaction: Transaction) {
+    //   const url = `${this.transactionUrl}/${transaction.id}`;
+    //   this.http.put(url, transaction).subscribe(a => {
+    //     console.log(a);
+    //   });
+    // }
 
-    newTransaction (transaction: any) {
-      const header = {'Content-Type': 'application/json'};
-      this.http.post(this.transactionUrl, JSON.stringify(transaction), {headers: header}
-      ).subscribe(a => {
-        console.log(a);
-      });
-    }
+    // newTransaction (transaction: any) {
+    //   const header = {'Content-Type': 'application/json'};
+    //   this.http.post(this.transactionUrl, JSON.stringify(transaction), {headers: header}
+    //   ).subscribe(a => {
+    //     console.log(a);
+    //   });
+    // }
 
 
 }

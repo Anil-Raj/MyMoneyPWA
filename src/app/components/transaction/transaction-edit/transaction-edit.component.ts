@@ -11,6 +11,7 @@ import { PouchDBService } from '../../../services/pouchdb.service';
 import { Transaction } from '../../../Models/Transaction';
 import { Category } from '../../../Models/Category';
 import { KindEnum } from '../../../Models/Kind';
+import TransactionStorage from '../../../storage/transaction';
 
 @Component({
     selector: 'app-transaction-edit',
@@ -31,8 +32,6 @@ import { KindEnum } from '../../../Models/Kind';
 })
 export class TransactionEditComponent implements OnInit {
 
-    selectedAccount: any;
-    id;
     private transaction: any;
     editTransactionForm: FormGroup;
     kindEnum = KindEnum;
@@ -42,8 +41,6 @@ export class TransactionEditComponent implements OnInit {
         private route: ActivatedRoute,
         private location: Location,
         private navService: SidebarService) {
-        this.navService.account.subscribe(ac => this.selectedAccount = ac);
-
     }
 
     ngOnInit() {
@@ -57,47 +54,18 @@ export class TransactionEditComponent implements OnInit {
     }
 
     getTransaction(): void {
-        this.id = this.route.snapshot.paramMap.get('id');
-        this.database.getDoc(this.id).subscribe((categories) => {
-            this.transaction = categories.rows.map(row => {
-                const tr = new Transaction();
-                return tr.toForm(row.doc);
+        const id = this.route.snapshot.paramMap.get('id');
+        TransactionStorage.load(id).subscribe((transaction) => {
+            this.transaction = transaction.rows.map(row => {
+                return Transaction.toForm(row.doc);
             });
-            console.log(this.transaction);
-            this.editTransactionForm.patchValue({
-                Note: this.transaction[0].Note,
-                amount: this.transaction[0].amount,
-                category: this.transaction[0].category,
-                time: this.transaction[0].time
-            });
-
+            this.editTransactionForm.patchValue(this.transaction[0]);
         });
     }
     onSubmit({ value }: { value: any }) {
-        const transaction = new Transaction();
-        const tran = value;
-        console.log(value);
-        tran.kind = value.category.Kind;
-        console.log(KindEnum.EXPENSE, tran.kind);
-
-        console.log(this.selectedAccount);
-        tran.amount = tran.amount;
-        // tran.accountId = this.selectedAccount._id;
-        tran.categoryId = value.category._id;
-        value.currency = 'USD';
-        let tr: any;
-        tr = transaction.fromForm(tran);
-        // tr.accountId = this.selectedAccount._id;
-        tr.id = this.transaction[0].id;
-        console.log(tr);
-
-
-        // const transaction = value;
-        // console.log(transaction);
-        // transaction.amount = transaction.category.Type == 'Expense' && ? transaction.amount * -1 : transaction.amount;
-        // transaction.accountId = this.selectedAccount._id;
-        // this.service.newTransaction(transaction);
-        this.database.put(this.id, tr).then(() => {
+        value = { ...this.transaction[0], ...value };
+        let tr = Transaction.fromForm(value);
+        TransactionStorage.save(tr).then(() => {
             this.router.navigate(['/transaction/']);
         });
     }

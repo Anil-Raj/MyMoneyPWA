@@ -5,8 +5,10 @@ const instancePool = {};
 function instance(name) {
     if (instancePool[name] === undefined) {
         instancePool[name] = new PouchDB(name, { auto_compaction: true });
+       console.log('new');
+        
     }
-
+    console.log('created new instance',instancePool[name]);
     return instancePool[name];
 }
 
@@ -36,8 +38,8 @@ function destroyInstance(name) {
     }
 }
 
-export const accountsDB = () => instance('accounts');
-export const transactionsDB = () => instance('transactions');
+export const accountsDB = () => instance('account');
+export const transactionsDB = () => instance('transaction');
 export const categoriesDB = () => instance('category');
 export const remoteAccountsDB = () => remoteInstance('accounts');
 export const remoteTransactionsDB = () => remoteInstance('transactions');

@@ -16,55 +16,55 @@ export class CategoryService {
 
     constructor(private http: HttpClient) { }
 
-    private getCategories() {
-        return this.categoriesSubject.asObservable();
-    }
-    awaiCategories() {
-        if (!this.categoriesSubject.value && !this.fetching) {
-            this.refreshCategories();
-        }
-        return this.getCategories();
-    }
+//     private getCategories() {
+//         return this.categoriesSubject.asObservable();
+//     }
+//     awaiCategories() {
+//         if (!this.categoriesSubject.value && !this.fetching) {
+//             this.refreshCategories();
+//         }
+//         return this.getCategories();
+//     }
 
-    /* GET categories from server */
-    refreshCategories() {
-        this.fetching = true;
-        return this.http.get<Transaction[]>(this.categoryUrl).subscribe(data => {
-            this.fetching = false;
-            this.categoriesSubject.next(data);
-        }, err => {
-            this.fetching = false;
-            this.categoriesSubject.error(err);
-        });
-    }
-    getCategory(id) {
-      if (!this.categoriesSubject.value) {
-        return this.refreshCategory(id);
-      }
-     return this.categoriesSubject.value.filter(a => a.id === id)[0];
-   }
+//     /* GET categories from server */
+//     refreshCategories() {
+//         this.fetching = true;
+//         return this.http.get<Transaction[]>(this.categoryUrl).subscribe(data => {
+//             this.fetching = false;
+//             this.categoriesSubject.next(data);
+//         }, err => {
+//             this.fetching = false;
+//             this.categoriesSubject.error(err);
+//         });
+//     }
+//     getCategory(id) {
+//       if (!this.categoriesSubject.value) {
+//         return this.refreshCategory(id);
+//       }
+//      return this.categoriesSubject.value.filter(a => a.id === id)[0];
+//    }
 
-   awaitCategory(id): Observable<Category>  {
-       if (!this.categoriesSubject.value ) {
-         // console.log('refresh');
-         return this.refreshCategory(id);
-           // return this.refreshCategory(id);
-       }
-       return this.getCategory(id);
-   }
+//    awaitCategory(id): Observable<Category>  {
+//        if (!this.categoriesSubject.value ) {
+//          // console.log('refresh');
+//          return this.refreshCategory(id);
+//            // return this.refreshCategory(id);
+//        }
+//        return this.getCategory(id);
+//    }
 
-   /* GET transactions from server */
-   refreshCategory(id):  Observable<Category> {
-     const url = `${this.categoryUrl}/${id}`;
-         return this.http.get<Category>(url);
-   }
-
-
+//    /* GET transactions from server */
+//    refreshCategory(id):  Observable<Category> {
+//      const url = `${this.categoryUrl}/${id}`;
+//          return this.http.get<Category>(url);
+//    }
 
 
-    isDef(val) {
-      return val !== void 0;
-  }
+
+
+//     isDef(val) {
+//       return val !== void 0;
+//   }
 
 
 

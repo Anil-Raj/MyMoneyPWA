@@ -21,8 +21,12 @@ export class AccountSelectComponent implements OnInit {
     ngOnInit() {
 
         this.database.get_acc().subscribe((acc) => {
-            console.log(this.accounts);
-            this.accounts = acc;
+            console.log(acc);
+            this.accounts =  acc.rows.map(row => {
+                return row.doc;
+            });
+            this.selectedAccount = this.accounts[0];
+            
             this.navService.account.subscribe(a => this.selectedAccount = a);
             this.navService.confirmAccountValue(this.accounts[0]);
         });

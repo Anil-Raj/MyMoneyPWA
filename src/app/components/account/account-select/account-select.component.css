@@ -23,3 +23,6 @@
 .amount{
     padding:10px;
 }
+.mat-list, .mat-nav-list, .mat-selection-list {
+    padding-top: 0px;
+}

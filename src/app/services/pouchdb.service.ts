@@ -5,10 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import PouchDB from 'pouchdb';
 PouchDB.plugin(PouchFind);
 import PouchFind from 'pouchdb-find';
-
-import { Transaction } from '../Models/Transaction';
-import { Category } from '../Models/Category';
-import { transactionsDB, categoriesDB, accountsDB } from '../Models/storage/pouchdb';
+import { transactionsDB, categoriesDB, accountsDB } from '../storage/pouchdb';
 import { environment } from '../../environments/environment';
 import { Account } from '../Models/Account';
 
@@ -21,7 +18,7 @@ export class PouchDBService {
     private cat_database: any;
     private acc_database: any;
     private database: any;
-    private remote = environment.remote;
+    private remote = environment.REMOTE;
 
     private listener: EventEmitter<any> = new EventEmitter();
     public constructor() {
@@ -30,22 +27,30 @@ export class PouchDBService {
             this.acc_database = new PouchDB('account');
             this.database = new PouchDB('transaction');
             this.isInstantiated = true;
-            const cat = new Category();
             this.cat_database.bulkDocs([
                 {
-                    Name: 'Cloth', Kind: 0, Type: 'Expense', _id: 'C0',
+                    Name: 'Other', Kind: 0, Type: 'Expense', _id: 'C0',
+                    Icon: '/assets/myicons/ml/ic_category_other_expense.png'
+                },
+                {
+                    Name: 'Other', Kind: 1, Type: 'Income', _id: 'C1',
+                    Icon: '/assets/myicons/ml/ic_category_other_income.png'
+
+                },
+                {
+                    Name: 'Cloth', Kind: 0, Type: 'Expense', _id: 'C2',
                     Icon: '/assets/myicons/ml/icon_17.png'
                 },
                 {
-                    Name: 'Travel', Kind: 0, Type: 'Expense', _id: 'C1',
+                    Name: 'Travel', Kind: 0, Type: 'Expense', _id: 'C3',
                     Icon: '/assets/myicons/ml/ic_category_travel.png'
                 },
                 {
-                    Name: 'Salary', Kind: 1, Type: 'Income', _id: 'C3',
+                    Name: 'Salary', Kind: 1, Type: 'Income', _id: 'C4',
                     Icon: '/assets/myicons/ml/ic_category_salary.png'
                 },
                 {
-                    Name: 'Interest Money', Kind: 1, Type: 'Income', _id: 'C4',
+                    Name: 'Interest Money', Kind: 1, Type: 'Income', _id: 'C5',
                     Icon: '/assets/myicons/ml/ic_category_interestmoney.png',
                 }
             ]).then(function (result) {
@@ -54,23 +59,23 @@ export class PouchDBService {
                 console.log(err);
             });
 
-            this.acc_database.bulkDocs([
-                {
-                    id: 'A12345',
-                    name: 'Test',
-                    group: 'cash',
-                    balance: {
-                        USD: 10095,
-                        JPY: 2200
-                    },
-                    currencies: ["USD", "EUR", "JPY"]
-                }
-                // { _id: 'account_2', Name: 'Cash', amount: 0 }
-            ]).then(function (result) {
-                // handle result
-            }).catch(function (err) {
-                console.log(err);
-            });
+            // this.acc_database.bulkDocs([
+            //     {
+            //         id: 'A12345',
+            //         name: 'Test',
+            //         group: 'cash',
+            //         balance: {
+            //             USD: 10095,
+            //             JPY: 2200
+            //         },
+            //         currencies: ["USD", "EUR", "JPY"]
+            //     }
+            //     // { _id: 'account_2', Name: 'Cash', amount: 0 }
+            // ]).then(function (result) {
+            //     // handle result
+            // }).catch(function (err) {
+            //     console.log(err);
+            // });
         }
     }
 
@@ -141,25 +146,25 @@ export class PouchDBService {
     //     });
 
     // }
-    public put_acc(account) {
-        return this.acc_database
-            .get(account.id)
-            .then(doc => {
-                console.log(doc);
+    // public put_acc(account) {
+    //     return this.acc_database
+    //         .get(account.id)
+    //         .then(doc => {
+    //             console.log(doc);
 
-                this.acc_database.put({ ...doc, ...Account.toStorage(account) });
-            })
-            .catch(err => {
-                console.log(err);
-                if (err.status !== 404) {
-                    throw err
-                }
-                return this.acc_database.put({
-                    _id: account.id,
-                    ...Account.toStorage(account)
-                })
-            })
-    }
+    //             this.acc_database.put({ ...doc, ...Account.toStorage(account) });
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //             if (err.status !== 404) {
+    //                 throw err
+    //             }
+    //             return this.acc_database.put({
+    //                 _id: account.id,
+    //                 ...Account.toStorage(account)
+    //             })
+    //         })
+    // }
 
     public mutateBalance({ accountId, currency, amount }) {
         this.acc_database
@@ -168,7 +173,7 @@ export class PouchDBService {
                 console.log(doc);
                 console.log(Account.mutateBalance(doc, currency, amount));
                 return this.acc_database.put(Account.mutateBalance(doc, currency, amount));
-            }).then((rev ) => {
+            }).then((rev) => {
                 console.log(rev);
                 return this.acc_database.get(accountId, rev.rev);
             })
@@ -255,7 +260,7 @@ export class PouchDBService {
             auth: {
                 username: 'admin',
                 password: 'admin'
-              }
+            }
         };
         // remote = ''
         this.cat_database.sync(this.remote + 'category' + remote, options);

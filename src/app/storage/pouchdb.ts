@@ -5,10 +5,7 @@ const instancePool = {};
 function instance(name) {
     if (instancePool[name] === undefined) {
         instancePool[name] = new PouchDB(name, { auto_compaction: true });
-       console.log('new');
-        
     }
-    console.log('created new instance',instancePool[name]);
     return instancePool[name];
 }
 

@@ -159,7 +159,8 @@ export const Currency = {
             key: code,
             value: code,
             flag: CURRENCY[code].flag,
-            text: `${code}, ${CURRENCY[code].name}`
+            text: `${code}, ${CURRENCY[code].name}`,
+            exp:CURRENCY[code].exp
         }));
     },
     name(code) {
@@ -178,7 +179,7 @@ export const Currency = {
      * @param {number} value
      * @param {string} code
      */
-    toInt(value, code) {
+    toInt(value, code) {        
         console.log(value, code, CURRENCY[code], `${value}e${CURRENCY[code].exp}`);
 
         return Math.round(Number(`${value}e${CURRENCY[code].exp}`));
@@ -203,6 +204,9 @@ export const Currency = {
     },
     convert(value, rate, from, to) {
         return value / rate * Math.pow(10, CURRENCY[from].exp - CURRENCY[to].exp);
+    },
+    getAll(){
+        return CURRENCY;
     }
 };
 

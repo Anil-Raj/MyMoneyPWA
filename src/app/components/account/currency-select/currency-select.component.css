@@ -1,0 +1,31 @@
+.currency-list{
+    position: fixed;
+    top:0;
+    right: 0;
+    z-index: 400;
+    width: 100%;
+    background: white;
+    max-height: 100%;
+    overflow-y: scroll;
+
+}
+
+.currency{
+    width:50%;
+    float:left;
+}
+
+.mat-list{
+    padding-top: 0px;
+}
+
+.currency {
+    padding: 20px 0px;
+    transition: 0.3s;
+    background: white;
+    font-size: .8em;
+    width: 100%;
+}
+.currency-name{
+    padding-left: 20px;
+}

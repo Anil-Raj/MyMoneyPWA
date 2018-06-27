@@ -1,9 +1,6 @@
 import Currency from './Currency';
-import pick from 'lodash/pick';
-import { Category } from './Category';
 import { format } from 'date-fns';
 import { KindEnum } from './Kind';
-
 
 const offset = new Date().getTimezoneOffset();
 

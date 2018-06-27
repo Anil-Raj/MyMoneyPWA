@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PouchDBService } from '../../../services/pouchdb.service';
+import { CategoryService } from '../../../storage/category';
 
 @Component({
     selector: 'app-category-list',
@@ -7,18 +8,13 @@ import { PouchDBService } from '../../../services/pouchdb.service';
     styleUrls: ['./category-list.component.css'],
 })
 export class CategoryListComponent implements OnInit {
-
     categories_data;
     groupByFilter = 'Type';
-    constructor(private database: PouchDBService) { }
+    constructor(private categoriesService: CategoryService) { }
 
     ngOnInit() {
-        this.database.get_cat().subscribe((categories) => {
-            console.log(categories);
-            this.categories_data = categories.rows.map(row => {
-                return row.doc;
-            });
-            console.log(this.categories_data);
+        this.categoriesService.loadAll().then((categories) => {
+            this.categories_data = categories;
         });
     }
 

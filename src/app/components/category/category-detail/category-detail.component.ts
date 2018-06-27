@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PouchDBService } from '../../../services/pouchdb.service';
 import { Location } from '@angular/common';
 import { MetaDefinition, Meta } from '@angular/platform-browser';
+import { CategoryService } from '../../../storage/category';
 
 @Component({
     selector: 'app-category-detail',
@@ -13,7 +14,7 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
     id;
     category;
     constructor(
-        private database: PouchDBService,
+        private categoryService: CategoryService,
         private router: Router,
         private route: ActivatedRoute,
         private location: Location,
@@ -25,15 +26,10 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
         this.meta.updateTag(metaDef);
         this.id = this.route.snapshot.paramMap.get('id');
         console.log(this.id);
-        this.database.get_cat().subscribe((categories) => {
-            console.log(categories);
-
-            const category_list = categories.rows.map(row => {
-                return row.doc;
-            });
-            console.log(category_list);
-            this.category = category_list.filter(c => c._id === this.id);
+        this.categoryService.load(this.id).then((category) => {
+            this.category = category[0];
             console.log(this.category);
+            
 
         });
     }
@@ -45,7 +41,7 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
         this.meta.updateTag(metaDef);
     }
     del(tr) {
-        this.database.del_cat(tr).then((a) => {
+        this.categoryService.remove(tr.id).then((a) => {
             console.log(a);
             this.router.navigate(['/category/']);
         });

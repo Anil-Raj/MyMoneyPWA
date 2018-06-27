@@ -1,5 +1,4 @@
 import { Component, AfterViewInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { PouchDBService } from '../../services/pouchdb.service';
 declare const gapi: any;
 
 export class GoogleSignInSuccess {

@@ -12,8 +12,18 @@ const GROUP = {
 // export const DELETE_STRATEGY_CLEANUP = 1
 // export const DELETE_STRATEGY_MOVE = 2
 
-export const Account =  {
-  fromForm(data) {
+export const Account = {
+  fromForm(value) {
+    let cur = value.currency.value;
+    let balance = new Object;
+    balance[cur] = value.balance;
+    let data  = new Object;
+    data = {
+      name: value.name,
+      balance: balance,
+      currencies: [cur],
+      Icon: value.icon
+    }
     return {
       ...data,
       id: data.id || `A${Date.now()}`,
@@ -42,17 +52,32 @@ export const Account =  {
     }
   },
   toStorage(data) {
-    return data;
+    return {
+      id: data._id,
+      ...data
+    }
   },
 
   mutateBalance(account, currency, amount) {
+    let currencies = [];
+    if (account.currencies.indexOf(currency) == -1) {
+      account.currencies.push(currency);
+    }
+    console.log(...account.currencies);
+
     return {
       ...account,
-      currencies: [...account.currencies, currency],
+      currencies: [...account.currencies],
       balance: {
         ...account.balance,
         [currency]: parseInt(account.balance[currency] || 0, 10) + amount
       }
     }
+  },
+  net(account, base_currency) {
+    console.log(account)
+    account.currencies.map(currency => {
+      console.log(currency, account.balance[currency]);
+    })
   }
 }

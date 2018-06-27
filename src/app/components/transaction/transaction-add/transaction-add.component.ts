@@ -1,34 +1,22 @@
 import { Component, OnInit, trigger, style, transition, state, animate } from '@angular/core';
 import { Transaction } from '../../../Models/Transaction';
 import { KindEnum } from '../../../Models/Kind';
-import { Category } from '../../../Models/Category';
 import { CategoryService } from '../../../services/category.service';
 import { TransactionService } from '../../../services/transaction.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { PouchDBService } from '../../../services/pouchdb.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { SidebarService } from '../../../services/sidebar.service';
 import Currency from '../../../Models/Currency';
 import { Account } from '../../../Models/Account';
-import TransactionStorage from '../../../storage/transaction';
+import AccountStorage from '../../../storage/accounts'
+import { Animations } from '../../../animations/animations';
 
 @Component({
     selector: 'app-transaction-add',
     templateUrl: './transaction-add.component.html',
     styleUrls: ['./transaction-add.component.css'],
-    animations: [
-        trigger('slideUp', [
-            state('in', style({ transform: 'translateY(0)' })),
-            transition('void => *', [
-                style({ transform: 'translateY(100%)' }),
-                animate('.3s ease-out')
-            ]),
-            transition('* => void', [
-                animate(500, style({ transform: 'translateY(-100%)' }))
-            ])
-        ])
-    ],
+    animations: [Animations.slideUp],
 })
 export class TransactionAddComponent implements OnInit {
 
@@ -36,15 +24,14 @@ export class TransactionAddComponent implements OnInit {
     private transaction;
     addTransactionForm: FormGroup;
     kindEnum = KindEnum;
-    constructor(private service: TransactionService,
-        private database: PouchDBService,
-        private router: Router,
+    constructor(private router: Router,
         private location: Location,
-        private navService: SidebarService) {
+        private navService: SidebarService,
+        private transactionService: TransactionService
+    ) {
         this.navService.account.subscribe(ac => {
             this.selectedAccount = ac;
             console.log(this.selectedAccount);
-
         });
     }
 
@@ -58,37 +45,19 @@ export class TransactionAddComponent implements OnInit {
     }
     onSubmit({ valid, value }: { valid: any, value: any }) {
         if (valid) {
-            console.log(this.selectedAccount);
             value.currency = 'USD';
             value.accountId = this.selectedAccount.id;
             let tr = Transaction.fromForm(value);
-            console.log(tr);
-            TransactionStorage.save(tr).then((a) => {
-                console.log(a);
-                this.router.navigate(['/transaction/']);
-
-            });
-            const data = {
-                id: 'A12345',
-                name: 'Test',
-                group: 'cash',
-                balance: {
-                    USD: 10095,
-                    JPY: 2200
-                },
-                currencies: ["USD", "EUR", "JPY"]
-            }
-            // const acc1 = Account.toStorage(data);
-            // console.log(this.database.put_acc(acc1));
             const mutation = {
-                accountId: 'A12345',
+                accountId: this.selectedAccount.id,
                 amount: tr.amount,
                 currency: 'USD'
             }
-            const acc = this.database.mutateBalance(mutation);
-            console.log('mutated acc', acc);
+            AccountStorage.mutateBalance(mutation);
+            this.transactionService.save(tr).then((a) => {
+                this.router.navigate(['/transaction/']);
 
-            // this.database.put_acc(acc);
+            });
         }
     }
     back() {

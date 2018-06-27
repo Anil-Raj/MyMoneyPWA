@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Category } from '../../../Models/Category';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PouchDBService } from '../../../services/pouchdb.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Meta, MetaDefinition } from '@angular/platform-browser';
+import { CategoryService } from '../../../storage/category';
 
 @Component({
     selector: 'app-category-edit',
@@ -13,14 +12,12 @@ import { Meta, MetaDefinition } from '@angular/platform-browser';
 })
 export class CategoryEditComponent implements OnInit, OnDestroy {
 
-
-    id;
-    category: any;
-
     addCategoryForm: FormGroup;
-
-    constructor(private database: PouchDBService, private router: Router, private route: ActivatedRoute,
-        private location: Location, private meta: Meta) { }
+    constructor(private categoriesService: CategoryService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private location: Location,
+        private meta: Meta) { }
 
     ngOnInit() {
         const metaDef: MetaDefinition = { name: 'theme-color', content: 'white' };
@@ -39,26 +36,21 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
         this.meta.updateTag(metaDef);
     }
     getCategory() {
-        this.id = this.route.snapshot.paramMap.get('id');
-        this.database.get_cat().subscribe((categories) => {
-            const category_list = categories.rows.map(row => {
-                return row.doc;
-            });
-            this.category = category_list.filter(c => c._id === this.id);
+        const id = this.route.snapshot.paramMap.get('id');
+        this.categoriesService.load(id).then((category) => {           
             this.addCategoryForm.patchValue({
-                Icon: this.category[0].Icon,
-                Note: this.category[0].Note,
-                Name: this.category[0].Name,
-                Type: this.category[0].Type
+                Icon: category[0].Icon,
+                Note: category[0].Note,
+                Name: category[0].Name,
+                Type: category[0].Type
             });
-
         });
     }
     onSubmit({ valid, value }: { valid: any, value: any }) {
         if (valid) {
-            const transaction = value;
-            console.log(transaction);
-            this.database.put(this.id, transaction).then(() => {
+            const category = value;
+            console.log(category);
+            this.categoriesService.save(category).then(() => {
                 this.router.navigate(['/category/']);
             });
         }

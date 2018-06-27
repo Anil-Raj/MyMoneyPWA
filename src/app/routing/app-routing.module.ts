@@ -13,12 +13,16 @@ import { CategoryDetailComponent } from './../components/category/category-detai
 import { CategoryEditComponent } from './../components/category/category-edit/category-edit.component';
 import { FitnessComponent } from './../components/fitness/fitness.component';
 import { GoogleSignInComponent } from './../components/google-signin/google-signin.component';
+import { AccountListComponent } from '../components/account/account-list/account-list.component';
+import { AccountAddComponent } from '../components/account/account-add/account-add.component';
 
 const routes: Routes = [
   { path: 'transaction', component: TransactionListComponent },
+  { path: 'account', component: AccountListComponent },
   { path: 'transaction/:id', component: TransactionDetailComponent },
   { path: 'transaction/edit/:id', component: TransactionEditComponent },
   { path: 'transaction-add', component: TransactionAddComponent },
+  { path: 'account/add', component: AccountAddComponent },
   { path: 'debt', component: DebtComponent },
   { path: 'trend', component: TrendComponent },
   { path: 'category', component: CategoryListComponent },

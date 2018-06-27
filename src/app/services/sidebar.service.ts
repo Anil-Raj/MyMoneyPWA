@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { PouchDBService } from '../services/pouchdb.service';
+import AccountStorage from '../storage/accounts'
 
 export enum GroupBy {
     Category,
@@ -26,7 +27,18 @@ export class SidebarService {
     // viewBy: any = { value: 0, range: 'week' };
 
 
-    account = new BehaviorSubject<any>({});
+    account = new BehaviorSubject<any>({adfasd:1121}); 
+    //constructor(private database: PouchDBService) {
+     
+    //}
+    constructor(){
+           this.visible = false;
+        AccountStorage.loadAll().then(ac => {
+            console.log(ac);
+            this.account.next(ac[0]);
+            console.log(this.account.getValue());
+        });
+    }
     confirmGroupBy(groupBy: string) {
         this.groupBy.next(groupBy);
     }
@@ -56,9 +68,7 @@ export class SidebarService {
         this.account.next(value);
     }
 
-    constructor(private database: PouchDBService) {
-        this.visible = false;
-    }
+    
 
     hide() { this.visible = false; }
 

@@ -1,0 +1,29 @@
+<div class="add-account">
+  <mat-toolbar>
+    <i class="material-icons" (click)="back()">arrow_back</i>
+    <!-- <span class="fill-space"></span> -->
+    <button mat-button (click)="onSubmit(addAccountForm)">Save</button>
+
+  </mat-toolbar>
+  <form [formGroup]="addAccountForm" (ngSubmit)="onSubmit(addAccountForm)">
+    <div>
+
+      <mat-list>
+        <mat-list-item>
+          <app-category-icon-input formControlName="icon"></app-category-icon-input>
+          <mat-form-field class="row" style="padding-left: 20px;">
+            <input matInput type="text" formControlName="name" />
+          </mat-form-field>
+        </mat-list-item>
+
+        <app-currency-select formControlName="currency"></app-currency-select>
+        <mat-list-item>
+          <div class="row" style="padding-left:  70px;    height: 48px; font-size:36px;">
+            <app-amount-input matInput formControlName="balance" placeholder="0">
+            </app-amount-input>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </form>
+</div>

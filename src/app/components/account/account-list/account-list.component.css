@@ -1,0 +1,71 @@
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    margin: 15px 0px;
+    background: #fff;
+    width: 100%;
+}
+.mat-list{
+    padding-top: 0px;
+}
+
+.account {
+    transition: 0.3s;
+    background: white;
+    font-size: .8em;
+    width: 100%;
+}
+.account-name{
+    padding-left: 20px;
+}
+.account-list{
+    position: absolute;
+    top:0;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+}
+.amount{
+    padding:10px;
+}
+.featured-image {
+    max-width: 150px;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    z-index: 100;
+    padding: 3%;
+}
+
+.round-button {
+    width: 100%;
+}
+
+.round-button-circle {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: lightgreen;
+    box-shadow: 0 0 3px gray;
+}
+
+.round-button-circle:hover {
+    background: #30588e;
+}
+
+.round-button a {
+    display: block;
+    float: left;
+    width: 100%;
+    text-align: center;
+    color: #e2eaf3;
+    font-family: Verdana;
+    font-size: 1em;
+    text-decoration: none;
+}
+.selected-account{
+      background: darkseagreen;
+}

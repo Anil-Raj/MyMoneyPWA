@@ -1,17 +1,14 @@
-import { Component, OnInit, NgZone, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Transaction } from '../../../Models/Transaction';
 import { KindEnum } from '../../../Models/Kind';
-import { TransactionService } from '../../../services/transaction.service';
-import { CategoryService } from '../../../services/category.service';
-import { PouchDBService } from '../../../services/pouchdb.service';
 import { ActivatedRoute } from '@angular/router';
 import { SidebarService } from '../../../services/sidebar.service';
 import * as moment from 'moment';
 
 import 'hammerjs';
 
-import TransactionStorage from '../../../storage/transaction';
 import { Timerange } from './Timerange';
+import { TransactionService } from '../../../storage/transaction';
 
 
 @Component({
@@ -23,54 +20,42 @@ import { Timerange } from './Timerange';
 export class TransactionListComponent {
     SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
     timerangeList: any[] = [];
-    selectedIndex = 1;
+    selectedIndex;
     transactionsFromAllAccount: any[];
     transactions: any[];
     groupByFilter = 'categoryId';
     viewByFilter;
     kindEnum = KindEnum;
+    selecctedAccount: any;
 
-    constructor(private service: TransactionService,
-        private database: PouchDBService,
-        private zone: NgZone, private route: ActivatedRoute,
-        private navService: SidebarService) {
+    constructor(private route: ActivatedRoute,
+        private navService: SidebarService,
+        private transactionService: TransactionService) {
+        this.transactionService.loadAll().then((transactions) => {
+            console.log(transactions);
 
-        this.database.get().subscribe((transactions) => {
-            this.transactionsFromAllAccount = transactions.rows.map(row => {
-                return Transaction.toForm(row.doc);
-            });
-            this.transactions = this.transactionsFromAllAccount;
-            console.log(this.transactions);
+            this.transactionsFromAllAccount = transactions
+                .map(row => Transaction.toForm(row));
             this.navService.account.subscribe(ac => {
-                console.log(ac.id);
-                
-                if (ac) {
-                    this.transactions = this.transactionsFromAllAccount
-                    .filter(tr => tr.accountId == ac.id);
-                    console.log(this.transactions);
-                    
-                }
+                this.selecctedAccount = ac;
+                console.log(ac);
+
+                this.transactions = this.transactionsFromAllAccount
+                    .filter(tr => tr.accountId == ac.id)
             });
         });
         this.navService.groupBy.subscribe(a => this.groupByFilter = a);
         this.navService.viewBy.subscribe(a => this.viewByFilter = a);
-        // this.viewByFilter = this.navService.viewBy;
-        console.log(this.viewByFilter);
-        
         this.updateTimerange();
-
     }
     updateTimerange() {
         this.navService.viewBy.subscribe(range => {
             const tr = new Timerange();
             this.timerangeList = tr.getTimeRangeList(this.viewByFilter);
-            // console.log(this.timerangeList);
-            
             this.selectedIndex = this.timerangeList.length - 2;
         });
     }
     swipe(currentIndex: number, action = this.SWIPE_ACTION.RIGHT) {
-
         if (currentIndex > this.timerangeList.length - 1 || currentIndex < 0) return;
         if (action === this.SWIPE_ACTION.LEFT) {
             this.selectedIndex += currentIndex < this.timerangeList.length - 1 ? 1 : 0;
@@ -79,7 +64,6 @@ export class TransactionListComponent {
             this.selectedIndex -= currentIndex > 0 ? 1 : 0;
         }
     }
-
     sum(items) {
         let sum = 0;
         items.map(item => {

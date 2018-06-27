@@ -10,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { GroupByModule } from '../../pipes/group-by/group-by.module';
 import { CategoryInputComponent } from './cat-input/cat-input.component';
-import { CategoryIconInputComponent } from './category-icon-input/category-icon-input.component';
 import {
     MatInputModule,
     MatRadioModule,
@@ -20,6 +19,7 @@ import {
     MatButtonModule,
     MatGridListModule } from '@angular/material';
 import { CategoryItemComponent } from './category-item/category-item.component';
+import { InputModule } from '../input/input.module';
 
 @NgModule({
     imports: [
@@ -35,7 +35,8 @@ import { CategoryItemComponent } from './category-item/category-item.component';
         MatMenuModule,
         MatToolbarModule,
         MatGridListModule,
-        GroupByModule
+        GroupByModule,
+        InputModule
     ],
     declarations: [
         CategoryAddComponent,
@@ -43,7 +44,6 @@ import { CategoryItemComponent } from './category-item/category-item.component';
         CategoryEditComponent,
         CategoryListComponent,
         CategoryInputComponent,
-        CategoryIconInputComponent,
         CategoryItemComponent
     ],
     exports: [
@@ -52,7 +52,6 @@ import { CategoryItemComponent } from './category-item/category-item.component';
         CategoryEditComponent,
         CategoryListComponent,
         CategoryInputComponent,
-        CategoryIconInputComponent,
         CategoryItemComponent
     ]
 })

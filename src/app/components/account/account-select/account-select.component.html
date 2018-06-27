@@ -1,31 +1,15 @@
 <div  (click)="displaySelectAccount()" class="account">
+    
     <div *ngIf="selectedAccount">
         <mat-list>
             <mat-list-item class=" category">
-                <!-- <img mat-list-avatar [src]="selectedAccount.Icon"> -->
+                <img mat-list-avatar [src]="selectedAccount.Icon">
                 <span class="name">
-                    {{selectedAccount.name}}
+                    {{selectedAccount?.name}}
                 </span >
-                <span class="amount">{{selectedAccount.amount}}</span>
+                <span class="amount">{{selectedAccount?.balance['USD']/100}}</span>
             </mat-list-item>
         </mat-list>
     </div>
-</div>
-<div *ngIf="isSelectAccount" class="account-list" [@flyInOut]>
-    <mat-toolbar>
-        <i class="material-icons" (click)="back()">arrow_back</i>
-    </mat-toolbar>
-    <div mat-button *ngFor="let account of accounts" (click)="select(account)" class=" category">
-        <mat-list>
-            <mat-list-item class=" category">
-                <!-- <img mat-list-avatar [src]="account.Icon"> -->
-                <span class="name">
-                    {{account.name}}
-                </span>
-                <span class="amount">
-                    {{account.amount}}
-                </span>
-            </mat-list-item>
-        </mat-list>
-    </div>
+    <div *ngIf="!selectedAccount">acc</div>
 </div>

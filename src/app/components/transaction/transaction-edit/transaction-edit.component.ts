@@ -6,28 +6,22 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
 import PouchDB from 'pouchdb';
 
 import { SidebarService } from '../../../services/sidebar.service';
-import { TransactionService } from '../../../services/transaction.service';
-import { CategoryService } from '../../../services/category.service';
-import { PouchDBService } from '../../../services/pouchdb.service';
 import { Transaction } from '../../../Models/Transaction';
-import { Category } from '../../../Models/Category';
 import { KindEnum } from '../../../Models/Kind';
-import TransactionStorage from '../../../storage/transaction';
 import { Animations } from '../../../animations/animations';
+import { TransactionService } from '../../../storage/transaction';
 
 @Component({
     selector: 'app-transaction-edit',
     templateUrl: './transaction-edit.component.html',
     styleUrls: ['./transaction-edit.component.css'],
-    animations: [Animations.slideUp],
+    animations: [Animations.slideLeft],
 })
 export class TransactionEditComponent implements OnInit {
-
     private transaction: any;
     editTransactionForm: FormGroup;
     kindEnum = KindEnum;
-    constructor(private service: TransactionService,
-        private database: PouchDBService,
+    constructor(private transactionService: TransactionService,
         private router: Router,
         private route: ActivatedRoute,
         private location: Location,
@@ -46,16 +40,15 @@ export class TransactionEditComponent implements OnInit {
 
     getTransaction(): void {
         const id = this.route.snapshot.paramMap.get('id');
-        TransactionStorage.load(id).then((transaction) => {
-            console.log(transaction);
-            this.transaction = Transaction.toForm(transaction);
-            this.editTransactionForm.patchValue(this.transaction);
+        this. transactionService.load(id).then((transaction) => {
+            Transaction.toForm(transaction);
+            this.editTransactionForm.patchValue(transaction);
         });
     }
     onSubmit({ value }: { value: any }) {
         value = { ...this.transaction, ...value };
         let tr = Transaction.fromForm(value);
-        TransactionStorage.save(tr).then(() => {
+        this. transactionService.save(tr).then(() => {
             this.router.navigate(['/transaction/']);
         });
     }

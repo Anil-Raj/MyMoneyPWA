@@ -1,0 +1,30 @@
+<div class="account-list">
+    <mat-toolbar>
+        <i class="material-icons" (click)="back()">arrow_back</i>
+    </mat-toolbar>
+    <div>
+        <div mat-button *ngFor="let account of accounts_data" class=" account" (click)="select(account)">
+
+            <mat-list>
+
+                <mat-list-item class=" account" [ngClass]="{'selected-account': account.id == selectedAccount.id}">
+                    <img mat-list-avatar [src]="account.Icon">
+                    <span class="account-name">
+                        {{account.name}}
+                    </span>
+                    <span class="amount">{{account.balance['USD']/100}}</span>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+    <div class="featured-image">
+        <div class="round-button">
+            <div class="round-button-circle">
+                <a routerLink="/account/add" class="round-button">
+                    <i class="material-icons md-36 md-light">add</i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>

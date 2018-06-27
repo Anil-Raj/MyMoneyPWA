@@ -3,6 +3,9 @@ import { SidebarService } from '../../../services/sidebar.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { PouchDBService } from '../../../services/pouchdb.service';
 import { Animations } from '../../../animations/animations';
+import AccountStorage from '../../../storage/accounts'
+import { Account } from '../../../Models/Account';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,24 +18,21 @@ export class AccountSelectComponent implements OnInit {
     accounts = [];
     isSelectAccount = false;
     selectedAccount: any;
-    constructor(private navService: SidebarService, private database: PouchDBService) {
+    constructor(private navService: SidebarService, private database: PouchDBService, private router: Router) {
     }
 
     ngOnInit() {
-
-        this.database.get_acc().subscribe((acc) => {
-            console.log(acc);
-            this.accounts =  acc.rows.map(row => {
-                return row.doc;
-            });
-            this.selectedAccount = this.accounts[0];
+        AccountStorage.loadAll().then((acc) => {
+            this.accounts = acc;
+            this.selectedAccount = this.accounts.find(ac=>ac.id == this.selectedAccount.id)
+            console.log(  this.selectedAccount.currencies[0]);
+            console.log(this.selectedAccount.balance[this.selectedAccount.currencies[0]]);
             
-            this.navService.account.subscribe(a => this.selectedAccount = a);
-            this.navService.confirmAccountValue(this.accounts[0]);
         });
+        this.navService.account.subscribe(ac=> this.selectedAccount = ac);
     }
     displaySelectAccount() {
-        this.isSelectAccount = true;
+        this.router.navigate(['/account/']);
     }
     select(account) {
         this.navService.confirmAccountValue(account);
@@ -42,5 +42,4 @@ export class AccountSelectComponent implements OnInit {
     back() {
         this.isSelectAccount = false;
     }
-
 }

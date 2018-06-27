@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 
 import { CoreModule } from './core-module/core.module';
 import { TransactionModule } from './components/transaction/transaction.module';
+import { AccountModule } from './components/account/account.module'
 import { CategoryModule } from './components/category/category.module';
 import { FitnessModule } from './components/fitness/fitness.module';
 import { LayoutModule } from './layout/layout.module';
@@ -27,7 +28,6 @@ import { TrendComponent } from './components/trend/trend.component';
 import { SettingComponent } from './components/setting/setting.component';
 
 
-import { AutoSizeDirective } from './directives/auto-size.directive';
 import { AutosizeDirective } from './components/autosize.directive';
 
 
@@ -64,6 +64,7 @@ export class MyHammerConfig extends HammerGestureConfig {
         AppRoutingModule,
         LayoutModule,
         TransactionModule,
+        AccountModule,
         CategoryModule,
         FitnessModule,
         MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule,

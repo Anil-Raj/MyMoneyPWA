@@ -26,7 +26,6 @@ import { DatePipe } from '../../pipes/date/date.pipe';
 import { DayPipe } from '../../pipes/day/day.pipe';
 import { MonthPipe } from '../../pipes/month/month.pipe';
 import { YearPipe } from '../../pipes/year/year.pipe';
-import { FormFieldComponent } from './form-field/form-field.component';
 import { GroupByModule } from '../../pipes/group-by/group-by.module';
 import { AccountModule } from '../account/account.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,6 +33,7 @@ import { AmountInputComponent } from './amount-input/amount-input.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AutoSizeModule } from '../../directives/auto-size.directive';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { InputModule } from '../input/input.module';
 
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -66,7 +66,8 @@ export class MyHammerConfig extends HammerGestureConfig {
         ReactiveFormsModule,
         CategoryModule,
         GroupByModule,
-        AccountModule
+        AccountModule,
+        InputModule
 
     ],
     declarations: [
@@ -78,14 +79,12 @@ export class MyHammerConfig extends HammerGestureConfig {
         DayPipe,
         MonthPipe,
         YearPipe,
-        // FormFieldComponent,
-        AmountInputComponent
     ],
     exports: [
         TransactionListComponent,
         TransactionAddComponent,
         TransactionDetailComponent,
-        TransactionEditComponent
+        TransactionEditComponent,
     ],
     providers: [{
         provide: HAMMER_GESTURE_CONFIG,

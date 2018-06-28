@@ -1,0 +1,113 @@
+.welcome{
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background: white;
+    width: 100%;
+    height: 100%;
+}
+.center{
+       margin-top: 30vh;
+       display: flex;
+       justify-content: center;
+}
+.row_content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 16px;
+    position: relative;
+    height: inherit;
+}
+.header_text{
+    font-size: 24px;
+    margin:0 10%;
+    text-align: center;
+    font-family: monospace;
+}
+.subheader_text{
+    font-size: 18px;
+    margin:0 10%;
+    text-align: center;
+    font-family: monospace;
+}
+
+.button_row {
+    position: absolute;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    margin-top: 30vh;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 10vh;
+}
+.amount_button_row {
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.button{
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+
+}
+
+
+.amount-input-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 400;
+    width: 100%;
+    background: white;
+    height: 100%;
+}
+
+.mat-button,
+.mat-icon-button,
+.mat-raised-button {
+    min-width: 64px;
+    min-height: 64px;
+    padding: 0;
+    margin: 2px;
+    font-size: 32px;
+    line-height: 32px;
+}
+
+.mat-button.spacer,
+.mat-icon-button.spacer,
+.mat-raised-button.spacer {
+    background-color: transparent;
+}
+.mat-list .mat-list-item .mat-list-item-content {
+    padding: 0!important;
+}
+
+.keyboard {
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+}
+
+.row {
+    width: 100vw;
+}
+
+.key {
+    width: 31vw;
+}

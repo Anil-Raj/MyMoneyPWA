@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule } from '@angular/material';
+import { MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule, MatFormField, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -35,6 +35,8 @@ import { GoogleSignInComponent } from './components/google-signin/google-signin.
 
 
 import { AppRoutingModule } from './routing/app-routing.module';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { InputModule } from './components/input/input.module';
 
 
 
@@ -52,6 +54,7 @@ export class MyHammerConfig extends HammerGestureConfig {
         SettingComponent,
         GoogleSignInComponent,
         AutosizeDirective,
+        WelcomeComponent,
     ],
     imports: [
         CommonModule,
@@ -60,6 +63,7 @@ export class MyHammerConfig extends HammerGestureConfig {
         BrowserModule,
         FormsModule,
         CoreModule,
+        MatFormFieldModule,
         ReactiveFormsModule,
         AppRoutingModule,
         LayoutModule,
@@ -67,7 +71,12 @@ export class MyHammerConfig extends HammerGestureConfig {
         AccountModule,
         CategoryModule,
         FitnessModule,
+        InputModule,
         MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule,
+        CommonModule,
+        MatListModule,
+        MatInputModule,
+        MatButtonModule,
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [{

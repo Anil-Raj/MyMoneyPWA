@@ -1,0 +1,68 @@
+<div class="welcome">
+  <form [formGroup]="addAccountForm">
+    <div>
+
+      <div *ngIf="step == 0">
+        <div class="header_text">Choose a default currency</div>
+        <app-currency-select class="center" [(ngModel)]="currency" formControlName="currency"></app-currency-select>
+        <div class="button_row" (click)="next(step)">
+          <div class="button">Continue</div>
+        </div>
+      </div>
+
+      <div *ngIf="step == 1">
+
+        <div class="header_text">Choose wallet</div>
+        <div class="center row_content">
+          <mat-list>
+            <mat-list-item>
+              <app-category-icon-input formControlName="icon"></app-category-icon-input>
+              <mat-form-field class="row_content" style="padding-left: 20px;">
+                <input matInput type="text" formControlName="name" />
+              </mat-form-field>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div class="button_row" (click)="next(step)">
+          <div class="button">Continue</div>
+        </div>
+      </div>
+
+      <div *ngIf="step ==2">
+        <div class="header_text">Balance</div>
+        <div class="subheader_text">How much do you have in wallet
+          <b>{{addAccountForm.value.name}}</b>
+        </div>
+        <mat-list>
+          <mat-list-item class="balance">{{ addAccountForm.value.balance}} </mat-list-item>
+        </mat-list>
+        <div style="position: absolute; bottom: 230px;">
+          <div>
+            <div>
+              <div style=" height: 48px; font-size:36px;">
+                <div class="keypad">
+                  <div *ngFor="let row of phoneKeyboard" class="row">
+                    <button type="button" color="white" *ngFor="let item of row" class="key" mat-raised-button (click)="key(item)">
+                      <span *ngIf="item!='back_space'">{{item}}</span>
+                      <img *ngIf="item=='back_space'" src="/assets/myicons/ml/back_space.png" height="36px" width="36px" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="amount_button_row" (click)="onSubmit(addAccountForm)">
+          <div class="button">Done</div>
+        </div>
+      </div>
+      <!-- <div *ngIf="step==3">
+          <app-category-icon-input formControlName="icon"></app-category-icon-input>
+          <div class="button_row" (click)="onSubmit(addAccountForm)">
+              <div class="button">Done</div>
+            </div>
+      </div> -->
+    </div>
+  </form>
+</div>

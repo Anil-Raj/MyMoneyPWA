@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import AccountStorage from '../../../storage/accounts'
+import  { AccountService } from '../../../storage/accounts'
 import { CurrencyService } from '../../../services/currency.service';
 import { SidebarService } from '../../../services/sidebar.service';
 import { Router } from '@angular/router';
@@ -17,12 +17,13 @@ export class AccountListComponent implements OnInit {
     constructor(
         private currService: CurrencyService,
         private navService: SidebarService,
-        private router: Router) { }
+        private router: Router,
+    private accountService:AccountService) { }
 
     ngOnInit() {
         this.navService.account.subscribe(ac=> this.selectedAccount = ac);
 
-        AccountStorage.loadAll().then((accounts) => {
+        this.accountService.loadAll().then((accounts) => {
             console.log(accounts);
             this.accounts_data = accounts;
             accounts.map(a =>{

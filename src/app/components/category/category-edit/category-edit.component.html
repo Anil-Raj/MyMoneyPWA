@@ -1,26 +1,29 @@
-<div [@flyUp] class="add-category">
-        <mat-toolbar>
-            <i class="material-icons" (click)="back()">arrow_back</i>
-            <span class="fill-space"></span>
-            <!-- <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid"><i class="material-icons">save</i></button> -->
-            <button mat-button (click)="onSubmit(addCategoryForm)">Save</button>
-        </mat-toolbar>
-        <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit(addCategoryForm)">
-            <div>
-                <mat-form-field>
-                    <input matInput formControlName="Name" placeholder="Name">
-                </mat-form-field>
-                <mat-form-field>
-                    <input matInput formControlName="Note" placeholder="Note">
-                </mat-form-field>
-                <mat-radio-group formControlName="Type">
-                    <mat-radio-button checked=true value="Income">Income</mat-radio-button>
-                    <mat-radio-button value="Expense">Expense</mat-radio-button>
-                </mat-radio-group>
-                <app-category-icon-input formControlName="Icon"></app-category-icon-input>
+<div [@slideUp] class="add-category">
+    <mat-toolbar>
+        <i class="material-icons" (click)="back()">arrow_back</i>
+        <span class="fill-space"></span>
+        <!-- <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid"><i class="material-icons">save</i></button> -->
+        <button mat-button (click)="onSubmit(addCategoryForm)">Save</button>
+    </mat-toolbar>
+    <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit(addCategoryForm)">
+        <div>
+            <mat-list>
+                <mat-list-item>
+                    <app-category-icon-input formControlName="Icon"></app-category-icon-input>
+                    <mat-form-field class="row name">
+                        <input matInput type="text" placeholder="Category Name" formControlName="Name" />
+                    </mat-form-field>
+                </mat-list-item>
+                <mat-list-item>
+                    <div class="type">
+                        <mat-radio-group formControlName="Type">
+                            <mat-radio-button checked=true value="Income">Income</mat-radio-button>
+                            <mat-radio-button value="Expense">Expense</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </form>
 
-                <!-- <button type="submit" class="btn btn-success" [disabled]="!addCategoryForm.valid">Submit</button> -->
-            </div>
-        </form>
-
-    </div>
+</div>

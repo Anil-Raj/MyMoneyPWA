@@ -33,7 +33,7 @@ import { InputModule } from '../input/input.module';
         InputModule
     ],
     declarations: [AccountSelectComponent, AccountListComponent, AccountAddComponent,CurrencySelectComponent],
-    exports: [AccountSelectComponent, AccountListComponent],
+    exports: [AccountSelectComponent, AccountListComponent,CurrencySelectComponent],
     providers: [CurrencyService]
 })
 export class AccountModule { }

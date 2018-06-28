@@ -15,9 +15,11 @@ import { FitnessComponent } from './../components/fitness/fitness.component';
 import { GoogleSignInComponent } from './../components/google-signin/google-signin.component';
 import { AccountListComponent } from '../components/account/account-list/account-list.component';
 import { AccountAddComponent } from '../components/account/account-add/account-add.component';
+import { WelcomeComponent } from '../components/welcome/welcome.component';
 
 const routes: Routes = [
   { path: 'transaction', component: TransactionListComponent },
+  { path: 'welcome', component: WelcomeComponent },
   { path: 'account', component: AccountListComponent },
   { path: 'transaction/:id', component: TransactionDetailComponent },
   { path: 'transaction/edit/:id', component: TransactionEditComponent },

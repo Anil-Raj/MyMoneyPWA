@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PouchDBService } from '../../../services/pouchdb.service';
 import { CategoryService } from '../../../storage/category';
 
 @Component({

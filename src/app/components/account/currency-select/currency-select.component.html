@@ -1,34 +1,39 @@
-<div *ngIf="!isSelectCurrency" (click)="displaySelectCurrency()" >
-  <div *ngIf="selectedCurrency">
-      <mat-list>
-          <mat-list-item class=" currency">
-              <img mat-list-avatar [src]="selectedCurrency.Icon">
-              <span class="currency-name">
-                  {{selectedCurrency.text}}
-              </span>
-          </mat-list-item>
-      </mat-list>
-  </div>
-  <div *ngIf="!selectedCurrency">
-      <mat-list>
-          <mat-list-item class=" currency">
-              <img mat-list-avatar [src]="icon_not_selected">
-              <span class="currency-name">
-                  Select Currency
-              </span>
-          </mat-list-item>
-      </mat-list>
-  </div>
+<div *ngIf="!isSelectCurrency" (click)="displaySelectCurrency()">
+    <div *ngIf="selectedCurrency">
+        <mat-list>
+            <mat-list-item class=" currency">
+                <img mat-list-avatar [src]="icon_currency">
+                <span class="currency-name">
+                    {{selectedCurrency.text}}
+                </span>
+            </mat-list-item>
+        </mat-list>
+    </div>
+    <div *ngIf="!selectedCurrency">
+        <mat-list>
+            <mat-list-item class=" currency">
+                <img mat-list-avatar [src]="icon_currency">
+                <span class="currency-name">
+                    Select Currency
+                </span>
+            </mat-list-item>
+        </mat-list>
+    </div>
 </div>
 <div *ngIf="isSelectCurrency" class="currency-list" [@flyInOut]>
-  <div mat-button *ngFor="let currency of currencies" (click)="select(currency)" >
-      <mat-list>
-          <mat-list-item class=" currency">
-              <img mat-list-avatar [src]="currency.Icon">
-              <span class="currency-name">
-                  {{currency.text}}
-              </span>
-          </mat-list-item>
-      </mat-list>
-  </div>
+    <mat-list>
+        <mat-list-item class=" currency">
+            <input #myInput placeholder="Item name..." [(ngModel)]="name" (input)="filterItem(myInput.value)" />
+        </mat-list-item>
+    </mat-list>
+    <div mat-button *ngFor="let currency of filteredItems" (click)="select(currency)">
+        <mat-list>
+            <mat-list-item class=" currency">
+                <img mat-list-avatar [src]="currency.flag">
+                <span class="currency-name">
+                    {{currency.text}}
+                </span>
+            </mat-list-item>
+        </mat-list>
+    </div>
 </div>

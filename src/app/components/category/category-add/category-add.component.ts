@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Animations } from '../../../animations/animations';
 import { CategoryService } from '../../../storage/category';
+import { Category } from '../../../Models/Category';
 
 
 @Component({

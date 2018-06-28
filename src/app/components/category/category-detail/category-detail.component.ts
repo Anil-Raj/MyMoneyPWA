@@ -1,14 +1,15 @@
 import { Component, OnInit, OnDestroy, trigger, style, transition, state, animate } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PouchDBService } from '../../../services/pouchdb.service';
 import { Location } from '@angular/common';
 import { MetaDefinition, Meta } from '@angular/platform-browser';
 import { CategoryService } from '../../../storage/category';
+import { Animations } from '../../../animations/animations';
 
 @Component({
     selector: 'app-category-detail',
     templateUrl: './category-detail.component.html',
     styleUrls: ['./category-detail.component.css'],
+    animations:[Animations.slideLeft]
 })
 export class CategoryDetailComponent implements OnInit, OnDestroy {
     id;
@@ -27,7 +28,7 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
         this.id = this.route.snapshot.paramMap.get('id');
         console.log(this.id);
         this.categoryService.load(this.id).then((category) => {
-            this.category = category[0];
+            this.category = category;
             console.log(this.category);
             
 

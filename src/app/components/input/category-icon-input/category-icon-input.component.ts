@@ -1,6 +1,5 @@
 import { Component, OnInit, forwardRef, Input, OnChanges } from '@angular/core';
 import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
-import { PouchDBService } from '../../../services/pouchdb.service';
 import { Animations } from '../../../animations/animations';
 
 

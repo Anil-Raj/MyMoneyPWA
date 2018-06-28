@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PouchDBService } from '../../../services/pouchdb.service';
-import { Currency } from '../../../Models/Currency';
 import { Location } from '@angular/common';
 import AccountStorage from '../../../storage/accounts';
 import { TransactionService } from '../../../storage/transaction';
@@ -33,13 +31,22 @@ export class AccountAddComponent implements OnInit {
       name: new FormControl('', Validators.required),
       currency: new FormControl('', Validators.required),
       balance: new FormControl('0'),
-      icon: new FormControl()
+      icon: new FormControl('/assets/myicons/ml/icon_59.png')
 
     });
   }
   onSubmit({ valid, value }: { valid: boolean, value: any }) {
     if (valid) {
-      let account = Account.fromForm(value);
+          let cur = value.currency.value;
+    let balance = new Object;
+    balance[cur] = value.balance;
+    let data = {
+      name: value.name,
+      balance: balance,
+      currencies: [cur],
+      Icon: value.icon
+    }
+      let account = Account.fromForm(data);
       console.log(account);
       
       AccountStorage.save(account);

@@ -7,7 +7,7 @@
                 <span class="name">
                     {{selectedAccount?.name}}
                 </span >
-                <span class="amount">{{selectedAccount?.balance['USD']/100}}</span>
+                <span class="amount">{{selectedAccount?.balance[selectedAccount?.currencies[0]]/100}}</span>
             </mat-list-item>
         </mat-list>
     </div>

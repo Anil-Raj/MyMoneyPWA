@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PouchDBService } from '../../../services/pouchdb.service';
 import AccountStorage from '../../../storage/accounts'
 import { CurrencyService } from '../../../services/currency.service';
 import { SidebarService } from '../../../services/sidebar.service';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,7 +15,6 @@ export class AccountListComponent implements OnInit {
     groupByFilter = 'Type';
     selectedAccount: any;
     constructor(
-        private database: PouchDBService, 
         private currService: CurrencyService,
         private navService: SidebarService,
         private router: Router) { }

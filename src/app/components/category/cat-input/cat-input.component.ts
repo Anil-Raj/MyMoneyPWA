@@ -1,7 +1,7 @@
 import { Component, OnInit, forwardRef, Input, OnChanges } from '@angular/core';
 import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
-import { PouchDBService } from '../../../services/pouchdb.service';
 import { Animations } from '../../../animations/animations';
+import { CategoryService } from '../../../storage/category';
 
 
 @Component({
@@ -22,13 +22,10 @@ export class CategoryInputComponent implements ControlValueAccessor, OnChanges, 
     categories: any = [];
     selectedCategory: any;
     icon_not_selected = '/assets/myicons/ml/icon_not_selected.png';
-    constructor( private database: PouchDBService) {
-        this.categories = this.database.get_cat().subscribe((categories) => {
-            this.categories = categories.rows.map(row => {
-                return row.doc;
-            });
-            console.log(this.categories);
-
+    constructor(private categoriesService: CategoryService) {
+        this.categories = this.categoriesService.loadAll().then((categories) => {
+            this.categories = categories;
+            console.log(categories);
         });
     }
 

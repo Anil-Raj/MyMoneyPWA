@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { Currency } from '../../../Models/Currency';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
-import { PouchDBService } from '../../../services/pouchdb.service';
 
 @Component({
   selector: 'app-currency-select',
@@ -16,21 +15,16 @@ import { PouchDBService } from '../../../services/pouchdb.service';
 export class CurrencySelectComponent implements OnInit, ControlValueAccessor {
   @Input() currency: any;
   isSelectCurrency = false;
-  currencies: any = [];
   selectedCurrency: any;
-  icon_not_selected = '/assets/myicons/ml/icon_not_selected.png';
-  constructor(private database: PouchDBService) {
-      // this.currencyServie.awaiCategories().subscribe(a => this.currencies  = a);
-      this.currencies = Currency.options();
-          console.log(this.currencies[0]);
-
+  icon_currency = '/assets/myicons/ml/currency.png';
+    filteredItems: any;
+  constructor() {
+      this.filteredItems = Currency.options();
   }
 
   ngOnInit() {
 
-    console.log(Currency.getAll());
-
-  }
+}
   
   propagateChange: any = () => { };
   validateFn: any = () => { };
@@ -69,7 +63,14 @@ export class CurrencySelectComponent implements OnInit, ControlValueAccessor {
       this.isSelectCurrency = false;
   }
 
-  validate(c: FormControl) {
+  validate(c) {
       return this.validateFn(c);
+  }
+  filterItem(value){
+    if(!value)  this.filteredItems = Currency.options();; //when nothing has typed
+    this.filteredItems =  Currency.options().filter(
+       item => item.text.toLowerCase().indexOf(value.toLowerCase()) > -1
+    )
+
   }
 }

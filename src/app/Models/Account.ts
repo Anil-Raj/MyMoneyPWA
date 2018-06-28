@@ -13,17 +13,7 @@ const GROUP = {
 // export const DELETE_STRATEGY_MOVE = 2
 
 export const Account = {
-  fromForm(value) {
-    let cur = value.currency.value;
-    let balance = new Object;
-    balance[cur] = value.balance;
-    let data  = new Object;
-    data = {
-      name: value.name,
-      balance: balance,
-      currencies: [cur],
-      Icon: value.icon
-    }
+  fromForm(data) {
     return {
       ...data,
       id: data.id || `A${Date.now()}`,

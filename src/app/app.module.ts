@@ -4,40 +4,29 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule, MatFormField, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { AppComponent } from './app.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-
-
+import { HammerGestureConfig } from '@angular/platform-browser';
 
 import { environment } from '../environments/environment';
-
-
 
 import { CoreModule } from './core-module/core.module';
 import { TransactionModule } from './components/transaction/transaction.module';
 import { AccountModule } from './components/account/account.module'
 import { CategoryModule } from './components/category/category.module';
-import { FitnessModule } from './components/fitness/fitness.module';
 import { LayoutModule } from './layout/layout.module';
+import { InputModule } from './components/input/input.module';
+import { AppRoutingModule } from './routing/app-routing.module';
 
+import { AppComponent } from './app.component';
 import { DebtComponent } from './components/debt/debt.component';
 import { TrendComponent } from './components/trend/trend.component';
 import { SettingComponent } from './components/setting/setting.component';
-
-
-import { AutosizeDirective } from './components/autosize.directive';
-
-
 import { GoogleSignInComponent } from './components/google-signin/google-signin.component';
-
-
-import { AppRoutingModule } from './routing/app-routing.module';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { InputModule } from './components/input/input.module';
-
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModules } from './core-module/material-modules';
 
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -53,7 +42,6 @@ export class MyHammerConfig extends HammerGestureConfig {
         TrendComponent,
         SettingComponent,
         GoogleSignInComponent,
-        AutosizeDirective,
         WelcomeComponent,
     ],
     imports: [
@@ -61,33 +49,26 @@ export class MyHammerConfig extends HammerGestureConfig {
         HttpModule,
         HttpClientModule,
         BrowserModule,
+        RouterModule, 
+        BrowserAnimationsModule,
         FormsModule,
         CoreModule,
-        MatFormFieldModule,
         ReactiveFormsModule,
+        MaterialModules,
         AppRoutingModule,
         LayoutModule,
         TransactionModule,
         AccountModule,
         CategoryModule,
-        FitnessModule,
         InputModule,
-        MatButtonModule, MatListModule, MatToolbarModule, MatMenuModule,
-        CommonModule,
-        MatListModule,
-        MatInputModule,
-        MatButtonModule,
+
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [{
         provide: LocationStrategy,
         useClass: HashLocationStrategy
     }
-    // , {
-    //     provide: HAMMER_GESTURE_CONFIG,
-    //     useClass: MyHammerConfig
-    // }
-],
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

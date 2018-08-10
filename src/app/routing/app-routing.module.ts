@@ -11,7 +11,6 @@ import { SettingComponent } from './../components/setting/setting.component';
 import { CategoryAddComponent } from './../components/category/category-add/category-add.component';
 import { CategoryDetailComponent } from './../components/category/category-detail/category-detail.component';
 import { CategoryEditComponent } from './../components/category/category-edit/category-edit.component';
-import { FitnessComponent } from './../components/fitness/fitness.component';
 import { GoogleSignInComponent } from './../components/google-signin/google-signin.component';
 import { AccountListComponent } from '../components/account/account-list/account-list.component';
 import { AccountAddComponent } from '../components/account/account-add/account-add.component';
@@ -32,7 +31,6 @@ const routes: Routes = [
   { path: 'category/edit/:id', component: CategoryEditComponent },
   { path: 'category-add', component: CategoryAddComponent },
   { path: 'settings', component: SettingComponent },
-  { path: 'fitness', component: FitnessComponent },
   { path: '', redirectTo: 'transaction', pathMatch: 'full' },
   { path: 'sign-in', component: GoogleSignInComponent },
 

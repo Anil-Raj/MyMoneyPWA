@@ -28,7 +28,6 @@ const TEMPLATE_DATA = [
   }
 ]
 
-import Currency from './Currency'
 
 export const Category =  {
     fromForm(data) {

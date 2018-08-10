@@ -1,14 +1,42 @@
-<div  (click)="displaySelectAccount()" class="account">
-    
-    <div *ngIf="selectedAccount">
+<div *ngIf="this.router.url === '/transaction'" class="account">
+
+    <div *ngIf="selectedAccount" (click)="displaySelectAccount()">
         <mat-list>
-            <mat-list-item class=" category">
+            <mat-list-item>
                 <img mat-list-avatar [src]="selectedAccount.Icon">
                 <span class="name">
                     {{selectedAccount?.name}}
-                </span >
+                </span>
                 <span class="amount">{{selectedAccount?.balance[selectedAccount?.currencies[0]]/100}}</span>
+                <span class="fill-space"></span>
+
+
             </mat-list-item>
         </mat-list>
+        <span class="white option" [matMenuTriggerFor]="appMenu">
+            <mat-icon> more_vert</mat-icon>
+        </span>
+        <mat-menu #appMenu="matMenu">
+            <button *ngIf="groupByFilter == 'categoryId'" mat-menu-item (click)="groupByTransaction()">View By Transaction </button>
+            <button *ngIf="groupByFilter == 'time'" mat-menu-item (click)="groupByCategory()"> View By Category </button>
+            <button mat-menu-item [matMenuTriggerFor]="subMenu"> Select Time Range </button>
+
+
+
+        </mat-menu>
+        <mat-menu #subMenu="matMenu">
+            <button mat-menu-item (click)="groupByMonth()"> Month
+                <i class="material-icons" *ngIf="viewByFilter == 'month'">done</i>
+            </button>
+            <button mat-menu-item (click)="groupByWeek()"> Week
+                <i class="material-icons" *ngIf="viewByFilter == 'week'">done</i>
+            </button>
+            <button mat-menu-item (click)="groupByDay()"> Day
+                <i class="material-icons" *ngIf="viewByFilter == 'day'">done</i>
+            </button>
+        </mat-menu>
     </div>
+
+
+
 </div>

@@ -1,7 +1,6 @@
 import { Component, OnInit, trigger, style, transition, state, animate } from '@angular/core';
 import { Transaction } from '../../../Models/Transaction';
 import { KindEnum } from '../../../Models/Kind';
-import { CategoryService } from '../../../services/category.service';
 import { TransactionService } from '../../../storage/transaction';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -27,8 +26,9 @@ export class TransactionAddComponent implements OnInit {
     constructor(private router: Router,
         private location: Location,
         private navService: SidebarService,
-        private transactionService: TransactionService,
-        private accountService:AccountService
+        private accountService:AccountService,
+        private transactionService: TransactionService
+
     ) {
         this.navService.account.subscribe(ac => {
             this.selectedAccount = ac;

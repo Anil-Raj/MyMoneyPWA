@@ -1,13 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { PouchDBService } from '../services/pouchdb.service';
-import { AccountService } from '../storage/accounts'
-
-export enum GroupBy {
-    Category,
-    Transaction
-}
-
+import { AccountService } from '../storage/accounts';
 
 export enum ViewBy {
     Day,
@@ -15,7 +8,6 @@ export enum ViewBy {
     Month,
     Year
 }
-
 
 @Injectable()
 export class SidebarService {
@@ -25,8 +17,8 @@ export class SidebarService {
     viewBy = new BehaviorSubject<any>({ value: 0, range: 'week' });
     account = new BehaviorSubject<any>({
         Icon: "/assets/myicons/ml/icon_59.png",
-        balance: { INR: 63400, USD: 7900 },
-        currencies: ["INR", "USD"],
+        balance: { INR: 63400},
+        currencies: ["INR"],
         name: "Wallet"
     });
     constructor(private accountService: AccountService) {
@@ -42,34 +34,13 @@ export class SidebarService {
     confirmViewBy(range: string) {
         this.viewBy.next({ value: this.viewBy.getValue().value, range: range });
     }
-
     confirmViewByValue(value) {
         this.viewBy.next({ value: value, range: this.viewBy.getValue().range });
     }
-
     confirmAccountValue(value) {
         this.account.next(value);
     }
-
     hide() { this.visible = false; }
-
     show() { this.visible = true; }
-
     toggle() { this.visible = !this.visible; }
-
-    doSomethingElseUseful() { }
-
-    getGroupByOptions() {
-        const gb = GroupBy;
-        if (this.groupBy.getValue() === 'categoryId') {
-            return gb.Transaction;
-        } else {
-            return gb.Category;
-        }
-    }
-    getViewByOptions() {
-        const vb = ViewBy;
-        return this.viewBy.getValue().range === 'week' ? vb.Week : (this.viewBy.getValue().range === 'month' ? vb.Month : vb.Day);
-    }
-
 }

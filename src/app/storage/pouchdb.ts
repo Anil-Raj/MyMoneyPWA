@@ -1,10 +1,17 @@
 import PouchDB from 'pouchdb';
+import { Category } from '../Models/Category';
 
 const instancePool = {};
 
 function instance(name) {
     if (instancePool[name] === undefined) {
         instancePool[name] = new PouchDB(name, { auto_compaction: true });
+        if(name === 'category') instancePool[name].bulkDocs(Category.getTemplateData()).then(function (result) {
+            // handle result
+        }).catch(function (err) {
+            console.log(err);
+        });
+
     }
     return instancePool[name];
 }

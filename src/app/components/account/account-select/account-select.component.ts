@@ -15,9 +15,16 @@ export class AccountSelectComponent implements OnInit {
     accounts = [];
     isSelectAccount = false;
     selectedAccount: any;
-    constructor(private navService: SidebarService, private router: Router,
+    viewByFilter;
+    groupByFilter;
+
+    constructor(public navService: SidebarService,
+        private router: Router,
         private accountService: AccountService) {
+        this.navService.viewBy.subscribe(a => this.viewByFilter = a.range);
+        this.navService.groupBy.subscribe(a => this.groupByFilter = a);
     }
+
 
     ngOnInit() {
         this.accountService.loadAll().then((acc) => {
@@ -36,5 +43,20 @@ export class AccountSelectComponent implements OnInit {
     }
     back() {
         this.isSelectAccount = false;
+    }
+    groupByTransaction() {
+        this.navService.confirmGroupBy('time');
+    }
+    groupByCategory() {
+        this.navService.confirmGroupBy('categoryId');
+    }
+    groupByMonth() {
+        this.navService.confirmViewBy('month');
+    }
+    groupByDay() {
+        this.navService.confirmViewBy('day');
+    }
+    groupByWeek() {
+        this.navService.confirmViewBy('week');
     }
 }

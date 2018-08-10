@@ -1,4 +1,4 @@
-<div *ngIf="!isSelectCategory" (click)="displaySelectCategory()" >
+<div *ngIf="!isSelectCategory" (click)="displaySelectCategory()">
     <div *ngIf="selectedCategory">
         <mat-list>
             <mat-list-item class=" category">
@@ -20,15 +20,22 @@
         </mat-list>
     </div>
 </div>
-<div *ngIf="isSelectCategory" class="category-list" [@flyInOut10]>
-    <div mat-button *ngFor="let category of categories" (click)="select(category)" >
-        <mat-list>
-            <mat-list-item class=" category">
-                <img mat-list-avatar [src]="category.Icon">
-                <span class="category-name">
-                    {{category.Name}}
-                </span>
-            </mat-list-item>
-        </mat-list>
-    </div>
+<div *ngIf="isSelectCategory"   class="category-list">
+    <mat-tab-group class="group">
+        <mat-tab *ngFor="let tab of tabs" [label]="tab">
+                <div mat-button *ngFor="let category of categories" >
+                    <div *ngIf="category.Type == tab" (click)="select(category)">
+                        <mat-list>
+                            <mat-list-item >
+                                <img mat-list-avatar [src]="category.Icon">
+                                <span class="category-name">
+                                    {{category.Name}}
+                                </span>
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                    </div>
+        </mat-tab>
+    </mat-tab-group>
 </div>
+

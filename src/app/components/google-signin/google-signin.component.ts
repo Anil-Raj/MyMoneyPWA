@@ -87,6 +87,7 @@ export class GoogleSignInComponent implements AfterViewInit {
                 .getId()); // Do not send to your backend! Use an ID token instead.
         console.log('Name: ' + profile.getName());
         localStorage.setItem('user', 'googleuser_' + profile.getId());
+        // localStorage.setItem('user_image', profile.getImageUrl() );
         this.email = profile.getName();
 
     }

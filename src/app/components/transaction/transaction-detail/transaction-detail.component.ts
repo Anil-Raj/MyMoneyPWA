@@ -1,6 +1,5 @@
-import { Component, OnInit, trigger, style, transition, state, animate } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CategoryService } from '../../../services/category.service';
 import { Location } from '@angular/common';
 import { Transaction } from '../../../Models/Transaction';
 import { KindEnum } from '../../../Models/Kind';

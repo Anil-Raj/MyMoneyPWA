@@ -21,6 +21,7 @@ export class CategoryInputComponent implements ControlValueAccessor, OnChanges, 
     isSelectCategory = false;
     categories: any = [];
     selectedCategory: any;
+    tabs=['Income','Expense'];
     icon_not_selected = '/assets/myicons/ml/icon_not_selected.png';
     constructor(private categoriesService: CategoryService) {
         this.categories = this.categoriesService.loadAll().then((categories) => {

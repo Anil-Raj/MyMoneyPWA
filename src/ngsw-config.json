@@ -22,7 +22,9 @@
       "fonts":[
         "/assets/*.woff2"
       ]
-    }
+    },
+    "maxAge":"1d",
+    "timeOut":"2s"
   }, {
     "name": "assets",
     "installMode": "lazy",
@@ -32,6 +34,8 @@
         "/assets/**"
 
       ]
-    }
+    },
+    "maxAge":"1d",
+    "timeOut":"2s"
   }]
 }

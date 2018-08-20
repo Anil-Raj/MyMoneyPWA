@@ -30,16 +30,18 @@ export class TransactionListComponent {
     constructor(private route: ActivatedRoute,
         private navService: SidebarService,
         private transactionService: TransactionService) {
-        this.transactionService.loadAll().then((transactions) => {
-            this.navService.account.subscribe(ac => {
-                this.selectedAccount = ac;
-                console.log(ac);
+            this.selectedAccount = this.route.snapshot.data['account'];
+            this.transactions = this.route.snapshot.data['transactions'];
+        // this.transactionService.loadAll().then((transactions) => {
+        //     this.navService.account.subscribe(ac => {
+        //         this.selectedAccount = ac;
+        //         console.log(ac);
 
-                this.transactions = transactions
-                    .map(row => Transaction.toForm(row))
-                    .filter(tr => tr.accountId == ac.id)
-            });
-        });
+        //         this.transactions = transactions
+        //             .map(row => Transaction.toForm(row))
+        //             .filter(tr => tr.accountId == ac.id)
+        //     });
+        // });
         this.navService.groupBy.subscribe(a => this.groupByFilter = a);
         this.navService.viewBy.subscribe(a => this.viewByFilter = a);
         this.updateTimerange();

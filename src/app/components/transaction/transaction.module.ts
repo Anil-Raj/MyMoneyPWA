@@ -15,6 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { InputModule } from '../input/input.module';
 import { CustomPipeModule } from '../../pipes/custom-pipe.module';
+import { TransactionRoutingModule} from './transaction-routing.module';
 
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -28,6 +29,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     imports: [
         CommonModule,
         RouterModule,
+        TransactionRoutingModule,
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,

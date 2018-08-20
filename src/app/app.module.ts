@@ -27,6 +27,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModules } from './core-module/material-modules';
+import { TransactionsResolver } from './routing/transaction.resolver';
+import { AccountResolver } from './routing/account.resolver';
 
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -67,7 +69,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     providers: [{
         provide: LocationStrategy,
         useClass: HashLocationStrategy
-    }
+    },TransactionsResolver,AccountResolver
     ],
     bootstrap: [AppComponent]
 })

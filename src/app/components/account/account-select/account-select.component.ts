@@ -19,7 +19,7 @@ export class AccountSelectComponent implements OnInit {
     groupByFilter;
 
     constructor(public navService: SidebarService,
-        private router: Router,
+        public router: Router,
         private accountService: AccountService) {
         this.navService.viewBy.subscribe(a => this.viewByFilter = a.range);
         this.navService.groupBy.subscribe(a => this.groupByFilter = a);

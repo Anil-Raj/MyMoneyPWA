@@ -58,7 +58,7 @@ export class TransactionService {
                 include_docs: true
             })
             .then(response => {
-                console.log('res', response.rows);
+                // console.log('res', response.rows);
                 return response.rows.map(row => row.doc);
             })
         //   .then(docs => docs.map(Transaction.fromStorage))

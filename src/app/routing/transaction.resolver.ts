@@ -20,12 +20,16 @@ export class TransactionsResolver implements Resolve<any> {
     this.navService.account.subscribe(ac => {
 
          this.transactionService.loadAll().then((transactions) =>{
+           console.log(transactions);
+           
              tran = transactions
              .map(row => Transaction.toForm(row))
             .filter(tr => tr.accountId == ac.id);
         });
 
     });
+    console.log(tran);
+    
     return tran;
   }
 }

@@ -1,41 +1,40 @@
 {
   "index": "/index.html",
-  "assetGroups": [{
-    "name": "app",
-    "installMode": "prefetch",
-    "resources": {
-      "files": [
-        "/favicon.ico",
-        "/index.html"
-      ],
-      "versionedFiles": [
-        "/*.bundle.css",
-        "/*.bundle.js",
-        "/*.chunk.js",
-        "/main.*.js",
-        "/polyfills.*.js",
-        "/styles.*.css",
-        "/runtime.*.js",
-        "https://apis.google.com/js/platform.js",
-        "https://cdn.rawgit.com/hammerjs/touchemulator/master/touch-emulator.js"
-      ],
-      "fonts":[
-        "/assets/*.woff2"
-      ]
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html"
+        ],
+        "versionedFiles": [
+          "/*.bundle.css",
+          "/*.bundle.js",
+          "/*.chunk.js",
+          "/main.*.js",
+          "/polyfills.*.js",
+          "/styles.*.css",
+          "/runtime.*.js",
+          "https://apis.google.com/js/platform.js",
+          "https://cdn.rawgit.com/hammerjs/touchemulator/master/touch-emulator.js"
+        ],
+        "fonts": [
+          "/assets/*.woff2"
+        ]
+      }
     },
-    "maxAge":"1d",
-    "timeOut":"2s"
-  }, {
-    "name": "assets",
-    "installMode": "lazy",
-    "updateMode": "prefetch",
-    "resources": {
-      "files": [
-        "/assets/**"
-
-      ]
-    },
-    "maxAge":"1d",
-    "timeOut":"2s"
-  }]
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**"
+        ]
+      }
+    }
+  ]
+  
 }

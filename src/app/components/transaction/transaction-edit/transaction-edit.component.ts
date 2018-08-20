@@ -10,6 +10,7 @@ import { Transaction } from '../../../Models/Transaction';
 import { KindEnum } from '../../../Models/Kind';
 import { Animations } from '../../../animations/animations';
 import { TransactionService } from '../../../storage/transaction';
+import { AccountService } from '../../../storage/accounts';
 
 @Component({
     selector: 'app-transaction-edit',
@@ -22,6 +23,7 @@ export class TransactionEditComponent implements OnInit {
     editTransactionForm: FormGroup;
     kindEnum = KindEnum;
     constructor(private transactionService: TransactionService,
+        private accountService:AccountService,
         private router: Router,
         private route: ActivatedRoute,
         private location: Location,
@@ -41,13 +43,19 @@ export class TransactionEditComponent implements OnInit {
     getTransaction(): void {
         const id = this.route.snapshot.paramMap.get('id');
         this. transactionService.load(id).then((transaction) => {
-            Transaction.toForm(transaction);
-            this.editTransactionForm.patchValue(transaction);
+            this.transaction = Transaction.toForm(transaction);
+            this.editTransactionForm.patchValue(this.transaction);
         });
     }
     onSubmit({ value }: { value: any }) {
         value = { ...this.transaction, ...value };
         let tr = Transaction.fromForm(value);
+        const mutation = {
+            accountId: tr.accountId,
+            amount: tr.amount,
+            currency: tr.currency
+        }
+        this.accountService.mutateBalance(mutation);
         this. transactionService.save(tr).then(() => {
             this.router.navigate(['/transaction/']);
         });

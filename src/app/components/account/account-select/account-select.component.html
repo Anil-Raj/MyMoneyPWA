@@ -3,7 +3,7 @@
     <div *ngIf="selectedAccount" (click)="displaySelectAccount()">
         <mat-list>
             <mat-list-item>
-                <img mat-list-avatar [src]="selectedAccount.Icon">
+                <img mat-list-avatar [src]="selectedAccount.Icon" [alt] ="selectedAccount?.name">
                 <span class="name">
                     {{selectedAccount?.name}}
                 </span>

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, PathLocationStrategy } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -68,7 +68,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     ],
     providers: [{
         provide: LocationStrategy,
-        useClass: HashLocationStrategy
+        useClass: PathLocationStrategy
     },TransactionsResolver,AccountResolver
     ],
     bootstrap: [AppComponent]

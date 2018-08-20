@@ -44,7 +44,7 @@
                         <div>
                             <mat-list>
                                 <mat-list-item>
-                                    <img mat-list-avatar [src]="item.value[0].category.Icon">
+                                    <img mat-list-avatar [src]="item.value[0].category.Icon" [alt]="item.value[0].category.Icon">
                                     <h3 mat-line>
                                         {{item.value[0].category.Name}}
                                     </h3>
@@ -89,7 +89,7 @@
                         <mat-divider></mat-divider>
                         <mat-list>
                             <mat-list-item *ngFor="let transaction of item.value" routerLink="{{transaction.id}}" class="no-outline" matRipple style="position:relative">
-                                <img mat-list-avatar [src]="transaction.category.Icon" alt="aasdf">
+                                <img mat-list-avatar [src]="transaction.category.Icon" alt="transaction.category.Icon">
                                 <h3 mat-line>
                                     {{transaction.category.Name}}
                                 </h3>

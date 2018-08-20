@@ -2,7 +2,7 @@
     <div *ngIf="selectedCategory">
         <mat-list>
             <mat-list-item class=" category">
-                <img mat-list-avatar [src]="selectedCategory.Icon">
+                <img mat-list-avatar [src]="selectedCategory.Icon" [alt]="selectedCategory.Name">
                 <span class="category-name">
                     {{selectedCategory.Name}}
                 </span>
@@ -12,7 +12,7 @@
     <div *ngIf="!selectedCategory">
         <mat-list>
             <mat-list-item class=" category">
-                <img mat-list-avatar [src]="icon_not_selected">
+                <img mat-list-avatar [src]="icon_not_selected" alt="Select Category">
                 <span class="category-name">
                     Select Category
                 </span>
@@ -27,7 +27,7 @@
                     <div *ngIf="category.Type == tab" (click)="select(category)">
                         <mat-list>
                             <mat-list-item >
-                                <img mat-list-avatar [src]="category.Icon">
+                                <img mat-list-avatar [src]="category.Icon" [alt]="category.Name">
                                 <span class="category-name">
                                     {{category.Name}}
                                 </span>

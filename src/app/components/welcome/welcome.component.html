@@ -44,7 +44,7 @@
                   <div *ngFor="let row of phoneKeyboard" class="row">
                     <button type="button" color="white" *ngFor="let item of row" class="key" mat-raised-button (click)="key(item)">
                       <span *ngIf="item!='back_space'">{{item}}</span>
-                      <img *ngIf="item=='back_space'" src="/assets/myicons/ml/back_space.png" height="36px" width="36px" />
+                      <img *ngIf="item=='back_space'" src="/assets/myicons/ml/back_space.png" height="36px" width="36px" alt="Backspace"/>
                     </button>
                   </div>
                 </div>

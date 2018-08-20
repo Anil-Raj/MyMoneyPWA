@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {TransactionListComponent} from './../components/transaction/transaction-list/transaction-list.component';
-import {TransactionDetailComponent} from './../components/transaction/transaction-detail/transaction-detail.component';
+import { TransactionListComponent } from './../components/transaction/transaction-list/transaction-list.component';
+import { TransactionDetailComponent } from './../components/transaction/transaction-detail/transaction-detail.component';
 import { TransactionAddComponent } from './../components/transaction/transaction-add/transaction-add.component';
 import { TransactionEditComponent } from './../components/transaction/transaction-edit/transaction-edit.component';
 import { CategoryListComponent } from './../components/category/category-list/category-list.component';
@@ -11,13 +11,22 @@ import { SettingComponent } from './../components/setting/setting.component';
 import { CategoryAddComponent } from './../components/category/category-add/category-add.component';
 import { CategoryDetailComponent } from './../components/category/category-detail/category-detail.component';
 import { CategoryEditComponent } from './../components/category/category-edit/category-edit.component';
-import { FitnessComponent } from './../components/fitness/fitness.component';
 import { GoogleSignInComponent } from './../components/google-signin/google-signin.component';
 import { AccountListComponent } from '../components/account/account-list/account-list.component';
 import { AccountAddComponent } from '../components/account/account-add/account-add.component';
+import { WelcomeComponent } from '../components/welcome/welcome.component';
+import { TransactionsResolver } from './transaction.resolver';
+import { AccountResolver } from './account.resolver';
 
 const routes: Routes = [
-  { path: 'transaction', component: TransactionListComponent },
+  {
+    path: 'transaction', component: TransactionListComponent,
+    resolve: {
+      transactions: TransactionsResolver, // first resolve
+      accounts: AccountResolver
+    }
+  },
+  { path: 'welcome', component: WelcomeComponent },
   { path: 'account', component: AccountListComponent },
   { path: 'transaction/:id', component: TransactionDetailComponent },
   { path: 'transaction/edit/:id', component: TransactionEditComponent },
@@ -30,8 +39,7 @@ const routes: Routes = [
   { path: 'category/edit/:id', component: CategoryEditComponent },
   { path: 'category-add', component: CategoryAddComponent },
   { path: 'settings', component: SettingComponent },
-  { path: 'fitness', component: FitnessComponent },
-  { path: '', redirectTo: 'transaction', pathMatch: 'full' },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: 'sign-in', component: GoogleSignInComponent },
 
 ];

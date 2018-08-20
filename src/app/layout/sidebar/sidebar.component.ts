@@ -32,5 +32,8 @@ export class SidebarComponent implements OnInit {
   closeSidebar() {
     this.nav.hide();
   }
+  navOpen() {
+    this.nav.show();
+}
 
 }

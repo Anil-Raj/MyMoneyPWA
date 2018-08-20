@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import AccountStorage from '../../../storage/accounts';
+import { AccountService } from '../../../storage/accounts';
 import { TransactionService } from '../../../storage/transaction';
 import { Account } from '../../../Models/Account';
 import { Transaction } from '../../../Models/Transaction';
@@ -18,6 +18,7 @@ export class AccountAddComponent implements OnInit {
   addAccountForm: FormGroup;
   constructor(
     private transactionService: TransactionService,
+    private accountService: AccountService,
     private categoryService: CategoryService,
     private router: Router,
     private location: Location,
@@ -37,19 +38,19 @@ export class AccountAddComponent implements OnInit {
   }
   onSubmit({ valid, value }: { valid: boolean, value: any }) {
     if (valid) {
-          let cur = value.currency.value;
-    let balance = new Object;
-    balance[cur] = value.balance;
-    let data = {
-      name: value.name,
-      balance: balance,
-      currencies: [cur],
-      Icon: value.icon
-    }
+      let cur = value.currency.value;
+      let balance = new Object;
+      balance[cur] = value.balance;
+      let data = {
+        name: value.name,
+        balance: balance,
+        currencies: [cur],
+        Icon: value.icon
+      }
       let account = Account.fromForm(data);
       console.log(account);
-      
-      AccountStorage.save(account);
+
+      this.accountService.save(account);
       let otherCategory;
       if (value.balance != 0) {
         let categoryId = value.balance < 0 ? 'C0' : 'C1';
@@ -71,7 +72,7 @@ export class AccountAddComponent implements OnInit {
         });
 
       }
-      
+
 
 
     }

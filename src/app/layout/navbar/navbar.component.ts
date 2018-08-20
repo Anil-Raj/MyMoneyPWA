@@ -1,8 +1,5 @@
 import { Component, OnInit, ElementRef, EventEmitter, Output } from '@angular/core';
-import { ROUTES } from '../sidebar/sidebar.component';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { SidebarService, GroupBy } from '../../services/sidebar.service';
-import { PouchDBService } from '../../services/pouchdb.service';
+import { SidebarService } from '../../services/sidebar.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,46 +8,41 @@ import { Router } from '@angular/router';
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-    gb = GroupBy;
     viewByFilter;
+    groupByFilter;
 
-
-    constructor(public nav: SidebarService,
-        private navService: SidebarService,
-        private database: PouchDBService,
+    constructor(public navService: SidebarService,
         private router: Router) {
         this.navService.viewBy.subscribe(a => this.viewByFilter = a.range);
-        // this.viewByFilter = this.navService.viewBy.getValue().range;
-
-        console.log(this.viewByFilter);
+        this.navService.groupBy.subscribe(a => this.groupByFilter = a);
     }
 
     navOpen() {
-        this.nav.show();
+        this.navService.show();
     }
     groupByTransaction() {
-        this.nav.confirmGroupBy('time');
+        this.navService.confirmGroupBy('time');
     }
     groupByCategory() {
-        this.nav.confirmGroupBy('categoryId');
+        this.navService.confirmGroupBy('categoryId');
     }
     groupByMonth() {
-        this.nav.confirmViewBy('month');
+        this.navService.confirmViewBy('month');
     }
     groupByDay() {
-        this.nav.confirmViewBy('day');
+        this.navService.confirmViewBy('day');
     }
     groupByWeek() {
-        this.nav.confirmViewBy('week');
+        this.navService.confirmViewBy('week');
     }
     sync() {
-        if (localStorage.getItem('user') === null) {
-            this.router.navigate(['/sign-in/']);
-            // this.database.sync(localStorage.getItem('user'));
+        // if (localStorage.getItem('user') === null) {
+        //     this.router.navigate(['/sign-in/']);
+        //      this.database.sync(localStorage.getItem('user'));
 
-        } else {
-            this.database.sync(localStorage.getItem('user'));
-        }
+        // } else {
+        //     this.database.sync(localStorage.getItem('user'));
+        // }
 
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarService } from '../../../services/sidebar.service';
 import { Animations } from '../../../animations/animations';
-import AccountStorage from '../../../storage/accounts'
+import { AccountService } from '../../../storage/accounts'
 import { Router } from '@angular/router';
 
 
@@ -15,19 +15,23 @@ export class AccountSelectComponent implements OnInit {
     accounts = [];
     isSelectAccount = false;
     selectedAccount: any;
-    constructor(private navService: SidebarService, private router: Router) {
+    viewByFilter;
+    groupByFilter;
+
+    constructor(public navService: SidebarService,
+        private router: Router,
+        private accountService: AccountService) {
+        this.navService.viewBy.subscribe(a => this.viewByFilter = a.range);
+        this.navService.groupBy.subscribe(a => this.groupByFilter = a);
     }
 
+
     ngOnInit() {
-        AccountStorage.loadAll().then((acc) => {
+        this.accountService.loadAll().then((acc) => {
             this.accounts = acc;
-            this.selectedAccount = this.accounts.find(ac=>ac.id == this.selectedAccount.id)
-            console.log(this.selectedAccount);
-            console.log(  this.selectedAccount.currencies);
-            console.log(this.selectedAccount.balance[this.selectedAccount.currencies[0]]);
-            
+            this.selectedAccount = this.accounts.find(ac => ac.id == this.selectedAccount.id)
         });
-        this.navService.account.subscribe(ac=> this.selectedAccount = ac);
+        this.navService.account.subscribe(ac => this.selectedAccount = ac);
     }
     displaySelectAccount() {
         this.router.navigate(['/account/']);
@@ -39,5 +43,20 @@ export class AccountSelectComponent implements OnInit {
     }
     back() {
         this.isSelectAccount = false;
+    }
+    groupByTransaction() {
+        this.navService.confirmGroupBy('time');
+    }
+    groupByCategory() {
+        this.navService.confirmGroupBy('categoryId');
+    }
+    groupByMonth() {
+        this.navService.confirmViewBy('month');
+    }
+    groupByDay() {
+        this.navService.confirmViewBy('day');
+    }
+    groupByWeek() {
+        this.navService.confirmViewBy('week');
     }
 }

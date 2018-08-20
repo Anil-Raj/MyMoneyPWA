@@ -4,15 +4,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Meta, MetaDefinition } from '@angular/platform-browser';
 import { CategoryService } from '../../../storage/category';
+import { Category } from '../../../Models/Category';
+import { Animations } from '../../../animations/animations';
 
 @Component({
     selector: 'app-category-edit',
     templateUrl: './category-edit.component.html',
     styleUrls: ['./category-edit.component.css'],
+    animations:[Animations.slideUp]
 })
 export class CategoryEditComponent implements OnInit, OnDestroy {
 
     addCategoryForm: FormGroup;
+    category: any;
     constructor(private categoriesService: CategoryService,
         private router: Router,
         private route: ActivatedRoute,
@@ -37,10 +41,10 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
     }
     getCategory() {
         const id = this.route.snapshot.paramMap.get('id');
-        this.categoriesService.load(id).then((category) => {           
+        this.categoriesService.load(id).then((category) => {
+            this.category = Category.fromStorage(category);
             this.addCategoryForm.patchValue({
                 Icon: category.Icon,
-                Note: category.Note,
                 Name: category.Name,
                 Type: category.Type
             });
@@ -48,7 +52,8 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
     }
     onSubmit({ valid, value }: { valid: any, value: any }) {
         if (valid) {
-            const category = value;
+            
+            const category = { ...Category.toStorage(this.category), ...value };
             console.log(category);
             this.categoriesService.save(category).then(() => {
                 this.router.navigate(['/category/']);

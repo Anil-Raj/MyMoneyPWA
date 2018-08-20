@@ -1,15 +1,14 @@
 import { Component, OnInit, trigger, style, transition, state, animate } from '@angular/core';
 import { Transaction } from '../../../Models/Transaction';
 import { KindEnum } from '../../../Models/Kind';
-import { CategoryService } from '../../../services/category.service';
-import { TransactionService } from '../../../services/transaction.service';
+import { TransactionService } from '../../../storage/transaction';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { SidebarService } from '../../../services/sidebar.service';
 import Currency from '../../../Models/Currency';
 import { Account } from '../../../Models/Account';
-import AccountStorage from '../../../storage/accounts'
+import  { AccountService } from '../../../storage/accounts'
 import { Animations } from '../../../animations/animations';
 
 @Component({
@@ -27,7 +26,9 @@ export class TransactionAddComponent implements OnInit {
     constructor(private router: Router,
         private location: Location,
         private navService: SidebarService,
+        private accountService:AccountService,
         private transactionService: TransactionService
+
     ) {
         this.navService.account.subscribe(ac => {
             this.selectedAccount = ac;
@@ -45,15 +46,15 @@ export class TransactionAddComponent implements OnInit {
     }
     onSubmit({ valid, value }: { valid: any, value: any }) {
         if (valid) {
-            value.currency = 'USD';
+            value.currency = this.selectedAccount.currencies[0];
             value.accountId = this.selectedAccount.id;
             let tr = Transaction.fromForm(value);
             const mutation = {
                 accountId: this.selectedAccount.id,
                 amount: tr.amount,
-                currency: 'USD'
+                currency: this.selectedAccount.currencies[0]
             }
-            AccountStorage.mutateBalance(mutation);
+            this.accountService.mutateBalance(mutation);
             this.transactionService.save(tr).then((a) => {
                 this.router.navigate(['/transaction/']);
 

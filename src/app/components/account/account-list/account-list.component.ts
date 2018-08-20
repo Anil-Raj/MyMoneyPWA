@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import AccountStorage from '../../../storage/accounts'
-import { CurrencyService } from '../../../services/currency.service';
+import  { AccountService } from '../../../storage/accounts'
 import { SidebarService } from '../../../services/sidebar.service';
 import { Router } from '@angular/router';
 
@@ -15,39 +14,16 @@ export class AccountListComponent implements OnInit {
     groupByFilter = 'Type';
     selectedAccount: any;
     constructor(
-        private currService: CurrencyService,
         private navService: SidebarService,
-        private router: Router) { }
+        private router: Router,
+    private accountService:AccountService) { }
 
     ngOnInit() {
         this.navService.account.subscribe(ac=> this.selectedAccount = ac);
 
-        AccountStorage.loadAll().then((accounts) => {
+        this.accountService.loadAll().then((accounts) => {
             console.log(accounts);
             this.accounts_data = accounts;
-            accounts.map(a =>{
-                let sum =0;
-                a.currencies.map(currency => {
-                
-                    if(currency == 'USD') {
-                        sum+=a.balance[currency];
-                        console.log('us',sum);
-                        
-                        return;
-                    }
-                    console.log(currency, a.balance[currency]);
-                    // console.log(this.currService.fetchExchangeRates('USD', Currency));
-                    
-                    this.currService.fetchExchangeRates('USD', currency).subscribe(rate=>{
-                        console.log(rate);
-                        sum+=a.balance[currency]*rate.value;
-                                                
-                    });
-                });
-                console.log(sum);
-                
-            });
-
         });
     }
     isSelectedAccount(ac){

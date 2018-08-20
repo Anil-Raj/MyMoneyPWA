@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarService } from '../services/sidebar.service';
-// import { CategoryService } from '../services/category.service';
-import { PouchDBService } from '../services/pouchdb.service';
 import { TransactionService } from '../storage/transaction';
 import { CategoryService } from '../storage/category';
+import { AccountService } from '../storage/accounts';
 
 @NgModule({
   imports: [
@@ -12,9 +11,9 @@ import { CategoryService } from '../storage/category';
   ],
   providers: [
       SidebarService,
-      PouchDBService,
       CategoryService,
-      TransactionService
+      TransactionService,
+      AccountService
     ]
 })
 export class CoreModule { }

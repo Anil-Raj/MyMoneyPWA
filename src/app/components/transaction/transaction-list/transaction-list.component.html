@@ -1,11 +1,11 @@
-<app-account-select ></app-account-select>
+
 <!-- <div style="position: absolute;top: 0;z-index: 10000;">{{selectedAccount?.name+'asdfasd'}}</div> -->
 <mat-tab-group  [(selectedIndex)]="selectedIndex"  (swipeleft)="swipe(selectedIndex, $event.type)" (swiperight)="swipe(selectedIndex, $event.type)" >
     <mat-tab *ngFor="let timerange of timerangeList" [label]="timerange.Label">
         <mat-card *ngIf="(transactions | viewBy:timerange).length > 0">
             <div class="overview">
                 <div class="day bold-24">Overview</div>
-                <div class="sub-header">Tap to view full report</div>
+                <!-- <div class="sub-header">Tap to view full report</div> -->
             </div>
             <mat-divider></mat-divider>
             <div class="wrapper">

@@ -2,38 +2,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionAddComponent } from './transaction-add/transaction-add.component';
 import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 import { TransactionEditComponent } from './transaction-edit/transaction-edit.component';
+import { MaterialModules } from '../../core-module/material-modules';
 import { CategoryModule } from '../category/category.module';
-import {
-    MatButtonModule,
-    MatListModule,
-    MatToolbarModule,
-    MatInputModule,
-    MatRipple,
-    MatRippleModule,
-    MatCardModule,
-    MatTabsModule,
-    MatIcon,
-    MatNativeDateModule,
-    MatDatepickerModule
-} from '@angular/material';
-import { MatIconModule } from '@angular/material/icon';
-import { DatePipe } from '../../pipes/date/date.pipe';
-import { DayPipe } from '../../pipes/day/day.pipe';
-import { MonthPipe } from '../../pipes/month/month.pipe';
-import { YearPipe } from '../../pipes/year/year.pipe';
-import { GroupByModule } from '../../pipes/group-by/group-by.module';
 import { AccountModule } from '../account/account.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AmountInputComponent } from './amount-input/amount-input.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { AutoSizeModule } from '../../directives/auto-size.directive';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { InputModule } from '../input/input.module';
+import { CustomPipeModule } from '../../pipes/custom-pipe.module';
+import { TransactionRoutingModule} from './transaction-routing.module';
 
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -47,25 +29,14 @@ export class MyHammerConfig extends HammerGestureConfig {
     imports: [
         CommonModule,
         RouterModule,
+        TransactionRoutingModule,
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
-        MatDatepickerModule,
-        MatInputModule,
-        MatNativeDateModule,
-        MatButtonModule,
-        MatListModule,
-        MatToolbarModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatRippleModule,
-        MatCardModule,
-        MatTabsModule,
-        MatIconModule,
         ReactiveFormsModule,
+        MaterialModules,
         CategoryModule,
-        GroupByModule,
+        CustomPipeModule,
         AccountModule,
         InputModule
 
@@ -75,10 +46,6 @@ export class MyHammerConfig extends HammerGestureConfig {
         TransactionAddComponent,
         TransactionDetailComponent,
         TransactionEditComponent,
-        DatePipe,
-        DayPipe,
-        MonthPipe,
-        YearPipe,
     ],
     exports: [
         TransactionListComponent,

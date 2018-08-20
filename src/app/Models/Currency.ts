@@ -205,9 +205,6 @@ export const Currency = {
     convert(value, rate, from, to) {
         return value / rate * Math.pow(10, CURRENCY[from].exp - CURRENCY[to].exp);
     },
-    getAll(){
-        return CURRENCY;
-    }
 };
 
 export default Currency;

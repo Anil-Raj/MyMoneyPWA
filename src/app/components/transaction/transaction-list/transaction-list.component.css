@@ -2,6 +2,22 @@
     display: none!important;
 }
 
+.fill-space {
+    flex: 1 1 auto;
+  }
+.options{
+  float: right;
+  padding: 1vh;
+}
+
+
+.nav{
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+}
+
 .container {
     padding: 2px 0px;
 }

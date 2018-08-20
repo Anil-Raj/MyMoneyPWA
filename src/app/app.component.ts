@@ -1,5 +1,7 @@
 import { Component} from '@angular/core';
 import { Transaction } from './Models/Transaction';
+import { AccountService } from './storage/accounts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,16 @@ import { Transaction } from './Models/Transaction';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  {
-constructor() {}
+constructor(
+  private accountService: AccountService,
+  private route: Router
+) {
+  this.accountService.loadAll().then(accounts=>{
+    console.log(accounts);
+    if(accounts.length == 0){
+      this.route.navigate(['/welcome'])
+    }
+    
+  })
+}
 }                                                                                     

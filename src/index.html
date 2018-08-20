@@ -11,38 +11,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="http://cdn.rawgit.com/hammerjs/touchemulator/master/touch-emulator.js"></script>
+    <script src="https://cdn.rawgit.com/hammerjs/touchemulator/master/touch-emulator.js" async defer></script>
 </head>
 
 <body>
-    <!-- <div class="g-signin2" data-onsuccess="onSignIn" ></div> -->
 
     <app-root>
-        <img src="/assets/myicons/ml/giphy.gif" alt="" style="
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        margin-top: -50px;
-        margin-left: -100px;
-      "> </app-root>
+    <div class="roller-container">
+        <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    </app-root>
 
 </body>
-
-<script>
-    // function onSignIn(googleUser) {
-    //     var profile = googleUser.getBasicProfile();
-    //     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    //     console.log('Name: ' + profile.getName());
-    //     console.log('Image URL: ' + profile.getImageUrl());
-    //     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    // }
-    // if ('serviceWorker' in navigator) {
-    //     // sw.js can literally be empty, but must exist
-    //     // navigator.serviceWorker.register('/ngsw-worker.js');
-    //     //test
-    //     //test 2
-    // }
-
-</script>
 
 </html>

@@ -21,29 +21,27 @@ export class TransactionListComponent {
     SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
     timerangeList: any[] = [];
     selectedIndex;
-    transactionsFromAllAccount: any[];
     transactions: any[];
     groupByFilter = 'categoryId';
     viewByFilter;
     kindEnum = KindEnum;
-    selecctedAccount: any;
+    selectedAccount: any;
 
     constructor(private route: ActivatedRoute,
         private navService: SidebarService,
         private transactionService: TransactionService) {
-        this.transactionService.loadAll().then((transactions) => {
-            console.log(transactions);
+            this.selectedAccount = this.route.snapshot.data['account'];
+            this.transactions = this.route.snapshot.data['transactions'];
+        // this.transactionService.loadAll().then((transactions) => {
+        //     this.navService.account.subscribe(ac => {
+        //         this.selectedAccount = ac;
+        //         console.log(ac);
 
-            this.transactionsFromAllAccount = transactions
-                .map(row => Transaction.toForm(row));
-            this.navService.account.subscribe(ac => {
-                this.selecctedAccount = ac;
-                console.log(ac);
-
-                this.transactions = this.transactionsFromAllAccount
-                    .filter(tr => tr.accountId == ac.id)
-            });
-        });
+        //         this.transactions = transactions
+        //             .map(row => Transaction.toForm(row))
+        //             .filter(tr => tr.accountId == ac.id)
+        //     });
+        // });
         this.navService.groupBy.subscribe(a => this.groupByFilter = a);
         this.navService.viewBy.subscribe(a => this.viewByFilter = a);
         this.updateTimerange();

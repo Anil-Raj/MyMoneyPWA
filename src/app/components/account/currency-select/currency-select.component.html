@@ -2,7 +2,7 @@
     <div *ngIf="selectedCurrency">
         <mat-list>
             <mat-list-item class=" currency">
-                <img mat-list-avatar [src]="icon_currency">
+                <img mat-list-avatar [src]="icon_currency" [alt]="selectedCurrency.text">
                 <span class="currency-name">
                     {{selectedCurrency.text}}
                 </span>
@@ -12,7 +12,7 @@
     <div *ngIf="!selectedCurrency">
         <mat-list>
             <mat-list-item class=" currency">
-                <img mat-list-avatar [src]="icon_currency">
+                <img mat-list-avatar [src]="icon_currency" [alt]="Select Currency">
                 <span class="currency-name">
                     Select Currency
                 </span>
@@ -29,7 +29,7 @@
     <div mat-button *ngFor="let currency of filteredItems" (click)="select(currency)">
         <mat-list>
             <mat-list-item class=" currency">
-                <img mat-list-avatar [src]="currency.flag">
+                <img mat-list-avatar [src]="currency.flag" [alt]="currency.text">
                 <span class="currency-name">
                     {{currency.text}}
                 </span>

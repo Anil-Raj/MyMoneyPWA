@@ -54,7 +54,6 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
         if (valid) {
             
             const category = { ...Category.toStorage(this.category), ...value };
-            console.log(category);
             this.categoriesService.save(category).then(() => {
                 this.router.navigate(['/category/']);
             });

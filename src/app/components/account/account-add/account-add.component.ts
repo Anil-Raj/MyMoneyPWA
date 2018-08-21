@@ -48,14 +48,12 @@ export class AccountAddComponent implements OnInit {
         Icon: value.icon
       }
       let account = Account.fromForm(data);
-      console.log(account);
 
       this.accountService.save(account);
       let otherCategory;
       if (value.balance != 0) {
         let categoryId = value.balance < 0 ? 'C0' : 'C1';
         this.categoryService.load(categoryId).then((category) => {
-          console.log(category);
           let tran = {
             accountId: account.id,
             amount: value.balance,
@@ -65,7 +63,6 @@ export class AccountAddComponent implements OnInit {
           }
           let tr = Transaction.fromForm(tran);
           this.transactionService.save(tr).then((a) => {
-            console.log(a);
             this.navbarService.account.next(account);
             this.router.navigate(['/account/']);
           });

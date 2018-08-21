@@ -26,12 +26,8 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
         const metaDef: MetaDefinition = { name: 'theme-color', content: 'white' };
         this.meta.updateTag(metaDef);
         this.id = this.route.snapshot.paramMap.get('id');
-        console.log(this.id);
         this.categoryService.load(this.id).then((category) => {
             this.category = category;
-            console.log(this.category);
-            
-
         });
     }
     back() {
@@ -43,7 +39,6 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
     }
     del(tr) {
         this.categoryService.remove(tr.id).then((a) => {
-            console.log(a);
             this.router.navigate(['/category/']);
         });
     }

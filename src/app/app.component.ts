@@ -14,7 +14,6 @@ constructor(
   private route: Router
 ) {
   this.accountService.loadAll().then(accounts=>{
-    console.log(accounts);
     if(accounts.length == 0){
       this.route.navigate(['/welcome'])
     }

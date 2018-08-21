@@ -22,13 +22,10 @@ export class AccountListComponent implements OnInit {
         this.navService.account.subscribe(ac=> this.selectedAccount = ac);
 
         this.accountService.loadAll().then((accounts) => {
-            console.log(accounts);
             this.accounts_data = accounts;
         });
     }
     isSelectedAccount(ac){
-        console.log(ac,this.selectedAccount);
-        
         return ac.id == this.selectedAccount.id; 
     }
     select(ac){

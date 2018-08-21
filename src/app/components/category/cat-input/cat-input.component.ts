@@ -26,7 +26,6 @@ export class CategoryInputComponent implements ControlValueAccessor, OnChanges, 
     constructor(private categoriesService: CategoryService) {
         this.categories = this.categoriesService.loadAll().then((categories) => {
             this.categories = categories;
-            console.log(categories);
         });
     }
 

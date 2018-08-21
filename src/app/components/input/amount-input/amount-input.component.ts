@@ -76,14 +76,12 @@ export class AmountInputComponent implements ControlValueAccessor {
 
     select(key) {
         this.animateInvelidInput = false;
-        console.log(key);
         try {
             if (key === 'keyboard_arrow_right') {
 
                 this.close();
             } else if (key === '=') {
                 if (Infinity === mathjs.eval(this.innerValue)) {
-                    console.log('infinity');
                     throw Infinity;
                 } else {
                     this.value = mathjs.eval(this.innerValue);
@@ -107,7 +105,6 @@ export class AmountInputComponent implements ControlValueAccessor {
                 }
                 this.computekey = true;
             } else {
-                console.log(this.value);
                 this.value = this.value === '0' ? key : this.value + key;
                 console.log(parseFloat(this.value));
             }
@@ -115,11 +112,8 @@ export class AmountInputComponent implements ControlValueAccessor {
 
         } catch (ex) {
             console.log(ex);
-
             console.log('invalid');
             console.log(this.value);
-
-            // this.value = 0;
             this.computekey = true;
             this.animateInvelidInput = true;
 

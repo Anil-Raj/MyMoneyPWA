@@ -20,8 +20,6 @@ export class CurrencySelectComponent implements OnInit, ControlValueAccessor {
     filteredItems: any;
   constructor() {
       this.filteredItems = Currency.options();
-      console.log(this.filteredItems);
-      
   }
 
   ngOnInit() {
@@ -49,8 +47,6 @@ export class CurrencySelectComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(value) {
-      console.log(value);
-      
       if (value) {
           this.selectedCurrency = value;
       }

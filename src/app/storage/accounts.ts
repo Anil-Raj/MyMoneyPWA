@@ -34,9 +34,7 @@ export class AccountService {
       })
       .then(response => {
         return response.rows.map(row => row.doc);
-        // Promise.all(response.rows.map(resolveConflicts)))
       })
-    // .then(docs => docs.map(Account.fromStorage))
   }
 
   public save(account) {

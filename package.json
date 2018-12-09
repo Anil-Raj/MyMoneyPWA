@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "pwa": "ng build --prod && http-server ./dist -p 3030",
-    "gitBuild": "ng build -prod --base-href /MyMoneyPWA/dist --deploy-url /MyMoneyPWA/dist"
+    "gitBuild": "ng build --prod --base-href /MyMoneyPWA/dist "
   },
   "private": true,
   "dependencies": {

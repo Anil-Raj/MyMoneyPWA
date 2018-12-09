@@ -68,8 +68,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     ],
     providers: [{
         provide: LocationStrategy,
-        useClass: HashLocationStrategy
-    },TransactionsResolver,AccountResolver
+        useClass: PathLocationStrategy
+    }, TransactionsResolver, AccountResolver
     ],
     bootstrap: [AppComponent]
 })

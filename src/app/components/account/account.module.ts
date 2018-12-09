@@ -18,13 +18,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
     ],
     declarations: [
-        AccountSelectComponent, 
-        AccountListComponent, 
+        AccountSelectComponent,
+        AccountListComponent,
         AccountAddComponent,
         CurrencySelectComponent
     ],
     exports: [
-        AccountSelectComponent, 
+        AccountSelectComponent,
         AccountListComponent,
         CurrencySelectComponent
     ],

@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'transaction/:id', component: TransactionDetailComponent },
   { path: 'transaction/edit/:id', component: TransactionEditComponent },
   { path: 'transaction-add', component: TransactionAddComponent },
-  { path: 'account/add', component: AccountAddComponent },
+  { path: 'account-add', component: AccountAddComponent },
   { path: 'debt', component: DebtComponent },
   { path: 'trend', component: TrendComponent },
   { path: 'category', component: CategoryListComponent },
